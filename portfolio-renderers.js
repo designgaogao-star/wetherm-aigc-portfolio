@@ -511,12 +511,14 @@
 
   function brandFilmHeroMedia() {
     const videoSource = videoAssets.brandFilmVideo ? img(videoAssets.brandFilmVideo) : "";
+    const videoPoster = videoAssets.brandFilmPoster ? img(videoAssets.brandFilmPoster) : "";
     const videoType = videoSource.endsWith(".webm") ? "video/webm" : "video/mp4";
     return `
       <video
         class="portfolio-video-stage__film-video"
         data-brand-film-video
         ${videoSource ? `data-src="${videoSource}"` : ""}
+        ${videoPoster ? `poster="${videoPoster}"` : ""}
         playsinline
         preload="metadata"
         aria-label="点击播放横版品牌广告片"

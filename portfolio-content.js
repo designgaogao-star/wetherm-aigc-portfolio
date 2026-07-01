@@ -105,7 +105,8 @@
       scenes: refreshAssets.fusionCoreLuxuryScene,
     },
     video: {
-      brandFilmVideo: "03-commercial-film/video/03A-black-gold-skincare-placeholder-t304.mp4",
+      brandFilmVideo: "03-commercial-film/video/03A-black-gold-skincare-3840-t311.mp4",
+      brandFilmPoster: "03-commercial-film/video/03A-black-gold-skincare-first-frame-t311.webp",
       mainFrames: [
         refreshAssets.storyboardHook,
         refreshAssets.storyboardReveal,
