@@ -1,0 +1,1757 @@
+﻿/*
+  Portfolio Typography System
+  4K-first luxury typography lock.
+*/
+
+:root {
+  --font-sans: "MiSans VF", "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+
+  --type-hero: 4.5rem;
+  --type-section: 3.25rem;
+  --type-panel: 2.75rem;
+  --type-title: 1.375rem;
+  --type-titleline: 1rem;
+  --type-title-copy: 0.9375rem;
+  --type-body: 1rem;
+  --type-caption: 0.8125rem;
+  --type-micro: 0.75rem;
+
+  --type-line-tight: 0.98;
+  --type-line-title: 1.08;
+  --type-line-lead: 1.46;
+  --type-line-body: 1.66;
+  --type-line-caption: 1.36;
+
+  --weight-hero: 600;
+  --weight-section: 570;
+  --weight-panel: 540;
+  --weight-title: 520;
+  --weight-line: 430;
+  --weight-title-copy: 400;
+  --weight-body: 380;
+  --weight-caption: 430;
+  --weight-nav: 430;
+
+  --type-color-title: rgba(250, 242, 226, 0.92);
+  --type-color-title-soft: rgba(244, 234, 216, 0.86);
+  --type-color-line: rgba(226, 202, 156, 0.72);
+  --type-color-body: rgba(239, 229, 211, 0.68);
+  --type-color-muted: rgba(239, 229, 211, 0.52);
+  --type-color-caption: rgba(196, 170, 122, 0.58);
+  --type-color-nav: rgba(239, 229, 211, 0.66);
+  --type-color-gold: rgba(226, 202, 156, 0.84);
+
+  --title-rhythm-kicker-to-title: 12px;
+  --title-rhythm-main-to-line: 12px;
+  --title-rhythm-line-to-copy: 10px;
+  --titleline-width: min(100%, 36em);
+  --hero-titleline-width: min(100%, 42em);
+
+  --portfolio-ink: var(--type-color-title);
+  --portfolio-muted: var(--type-color-body);
+  --text-title: var(--type-color-title);
+  --text-subtitle: var(--type-color-line);
+  --text-body: var(--type-color-body);
+  --text-muted: var(--type-color-muted);
+  --text-meta: var(--type-color-caption);
+  --text-gold: var(--type-color-gold);
+
+  --font-hero: var(--type-hero);
+  --font-section: var(--type-section);
+  --font-lead: var(--type-titleline);
+  --font-body: var(--type-body);
+  --font-card-title: var(--type-title);
+  --font-emphasis: var(--type-title);
+  --font-method: var(--type-body);
+  --font-caption: var(--type-caption);
+  --font-nav: var(--type-caption);
+  --leading-tight: var(--type-line-tight);
+  --leading-title: var(--type-line-title);
+  --leading-body: var(--type-line-body);
+  --leading-caption: var(--type-line-caption);
+
+  --hierarchy-kicker-size: var(--type-caption);
+  --hierarchy-kicker-weight: var(--weight-caption);
+  --hierarchy-kicker-line: var(--type-line-caption);
+  --hierarchy-title-size: var(--type-section);
+  --hierarchy-title-weight: var(--weight-section);
+  --hierarchy-title-line: var(--type-line-tight);
+  --hierarchy-titleline-size: var(--type-titleline);
+  --hierarchy-titleline-weight: var(--weight-line);
+  --hierarchy-titleline-line: var(--type-line-lead);
+  --hierarchy-kicker-color: var(--type-color-caption);
+  --hierarchy-title-color: var(--type-color-title);
+  --hierarchy-titleline-color: var(--type-color-line);
+  --hierarchy-titleline-width: var(--titleline-width);
+  --hierarchy-gap-kicker-title: var(--title-rhythm-kicker-to-title);
+  --hierarchy-gap-title-line: var(--title-rhythm-main-to-line);
+  --hierarchy-hero-title-size: var(--type-hero);
+  --hierarchy-hero-titleline-size: var(--type-titleline);
+  --hierarchy-ow-hero-title-size: var(--type-section);
+}
+
+@media (min-width: 2400px) {
+  :root {
+    --type-hero: 6rem;
+    --type-section: 4.25rem;
+    --type-panel: 3.25rem;
+    --type-title: 1.5rem;
+    --type-titleline: 1.125rem;
+    --type-title-copy: 1rem;
+    --type-body: 1.125rem;
+    --type-caption: 0.875rem;
+    --type-micro: 0.75rem;
+    --title-rhythm-kicker-to-title: 14px;
+    --title-rhythm-main-to-line: 14px;
+    --title-rhythm-line-to-copy: 12px;
+  }
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --type-hero: 3.25rem;
+    --type-section: 2.375rem;
+    --type-panel: 2rem;
+    --type-title: 1.125rem;
+    --type-titleline: 0.9375rem;
+    --type-title-copy: 0.875rem;
+    --type-body: 0.875rem;
+    --type-caption: 0.75rem;
+    --type-micro: 0.6875rem;
+    --title-rhythm-kicker-to-title: 8px;
+    --title-rhythm-main-to-line: 8px;
+    --title-rhythm-line-to-copy: 7px;
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --type-hero: 2.375rem;
+    --type-section: 1.875rem;
+    --type-panel: 1.625rem;
+    --type-title: 1rem;
+    --type-titleline: 0.8125rem;
+    --type-title-copy: 0.75rem;
+    --type-body: 0.8125rem;
+    --type-caption: 0.6875rem;
+    --type-micro: 0.625rem;
+    --title-rhythm-kicker-to-title: 7px;
+    --title-rhythm-main-to-line: 7px;
+    --title-rhythm-line-to-copy: 6px;
+  }
+}
+
+body,
+button,
+input,
+textarea,
+select,
+.portfolio-page,
+.portfolio-fallback,
+.portfolio-intro {
+  font-family: var(--font-sans) !important;
+  font-optical-sizing: auto;
+  font-kerning: normal;
+  font-synthesis-weight: none;
+  letter-spacing: 0;
+}
+
+.portfolio-page {
+  color: var(--type-color-title);
+  font-size: var(--type-body);
+  font-weight: var(--weight-body);
+}
+
+.portfolio-kicker,
+.portfolio-hero .portfolio-kicker,
+.portfolio-work--dark .portfolio-kicker,
+.portfolio-ai .portfolio-kicker,
+.portfolio-section__intro > .portfolio-kicker,
+.portfolio-work__copy > .portfolio-kicker,
+.portfolio-video-feature__copy > .portfolio-kicker,
+.xiaomi-color-stage__title > .portfolio-kicker,
+.xiaomi-carousel__intro > .portfolio-kicker,
+.xiaomi-detail-carousel__intro > .portfolio-kicker,
+.xiaomi-dual-gallery__copy > .portfolio-kicker,
+.xiaomi-accordion-stage__copy > .portfolio-kicker,
+#other-works .portfolio-other-works__hero-copy .portfolio-kicker,
+#other-works .portfolio-other-works__scene-copy .portfolio-kicker,
+#other-works .portfolio-other-works__finale-copy .portfolio-kicker {
+  display: block !important;
+  margin: 0 0 var(--title-rhythm-kicker-to-title) !important;
+  color: var(--type-color-caption) !important;
+  font-size: var(--type-caption) !important;
+  font-weight: var(--weight-caption) !important;
+  line-height: var(--type-line-caption) !important;
+  letter-spacing: 0 !important;
+}
+
+.portfolio-hero h1 {
+  margin: 0 !important;
+  color: var(--type-color-title) !important;
+  font-size: var(--type-hero) !important;
+  font-weight: var(--weight-hero) !important;
+  line-height: var(--type-line-tight) !important;
+  letter-spacing: 0 !important;
+  text-wrap: balance;
+}.portfolio-section__intro h2,
+.portfolio-video-feature__copy h2,
+#support .portfolio-support-panel .portfolio-section__intro h2,
+#other-works .portfolio-other-works__hero h2 {
+  margin: 0 !important;
+  color: var(--type-color-title) !important;
+  font-size: var(--type-section) !important;
+  font-weight: var(--weight-section) !important;
+  line-height: var(--type-line-title) !important;
+  letter-spacing: 0 !important;
+  text-wrap: balance;
+}
+
+.xiaomi-color-stage__title h2,
+.xiaomi-carousel__intro h2,
+.xiaomi-detail-carousel__intro h2,
+.xiaomi-dual-gallery__copy h2,
+.xiaomi-accordion-stage__copy h2,
+.portfolio-work__copy h2,
+.portfolio-material-stage__copy h2,
+.portfolio-photo-spec__copy h2,
+#other-works .portfolio-other-works__scene-copy h3,
+#other-works .portfolio-other-works__finale-copy h3 {
+  margin: 0 !important;
+  color: var(--type-color-title-soft) !important;
+  font-size: var(--type-panel) !important;
+  font-weight: var(--weight-panel) !important;
+  line-height: var(--type-line-title) !important;
+  letter-spacing: 0 !important;
+  text-wrap: balance;
+}.portfolio-titleline,
+.portfolio-hero__titleline,
+.portfolio-section__intro > p.portfolio-titleline,
+.portfolio-work__copy > p.portfolio-titleline,
+.portfolio-video-feature__copy p.portfolio-titleline,
+.xiaomi-color-stage__title > p.portfolio-titleline,
+.xiaomi-carousel__intro > p.portfolio-titleline,
+.xiaomi-detail-carousel__intro > p.portfolio-titleline,
+.xiaomi-dual-gallery__copy > p.portfolio-titleline,
+.xiaomi-accordion-stage__copy > p.portfolio-titleline,
+#aigc-design .xiaomi-accordion-stage__copy > p.portfolio-titleline,
+#support .portfolio-support-panel .portfolio-section__intro > p.portfolio-titleline,
+#other-works .portfolio-other-works__hero .portfolio-titleline,
+#other-works .portfolio-other-works__scene-copy > p.portfolio-titleline,
+#other-works .portfolio-other-works__finale-copy > p.portfolio-titleline {
+  display: block !important;
+  max-width: var(--titleline-width) !important;
+  margin: var(--title-rhythm-main-to-line) 0 0 !important;
+  color: var(--type-color-line) !important;
+  font-size: var(--type-titleline) !important;
+  font-weight: var(--weight-line) !important;
+  line-height: var(--type-line-lead) !important;
+  letter-spacing: 0 !important;
+  text-wrap: balance;
+}
+
+.portfolio-hero__titleline,
+#other-works .portfolio-other-works__hero .portfolio-titleline {
+  max-width: var(--hero-titleline-width) !important;
+}
+
+.portfolio-subtitle,
+p.portfolio-subtitle,
+.portfolio-hero .portfolio-hero__lead,
+.portfolio-section__intro > p:not(.portfolio-kicker):not(.portfolio-titleline):not(.portfolio-proof),
+.portfolio-work__copy > p:not(.portfolio-kicker):not(.portfolio-titleline):not(.portfolio-proof),
+.portfolio-video-feature__copy p:not(.portfolio-kicker):not(.portfolio-titleline):not(.portfolio-proof),
+.xiaomi-color-stage__title > p:not(.portfolio-kicker):not(.portfolio-titleline):not(.portfolio-proof),
+.xiaomi-carousel__intro > p:not(.portfolio-kicker):not(.portfolio-titleline):not(.portfolio-proof),
+.xiaomi-detail-carousel__intro > p:not(.portfolio-kicker):not(.portfolio-titleline):not(.portfolio-proof),
+.xiaomi-dual-gallery__copy > p:not(.portfolio-kicker):not(.portfolio-titleline):not(.portfolio-proof),
+.xiaomi-accordion-stage__copy > p:not(.portfolio-kicker):not(.portfolio-titleline):not(.portfolio-proof),
+#other-works .portfolio-other-works__hero .portfolio-subtitle,
+#other-works .portfolio-other-works__scene-copy p:not(.portfolio-kicker),
+#other-works .portfolio-other-works__finale-copy p:not(.portfolio-kicker) {
+  color: var(--type-color-body) !important;
+  font-size: var(--type-title-copy) !important;
+  font-weight: var(--weight-title-copy) !important;
+  line-height: var(--type-line-body) !important;
+  letter-spacing: 0 !important;
+  text-wrap: pretty;
+}.portfolio-card h3,
+.portfolio-image-card h3,
+.portfolio-timeline-card h3,
+.portfolio-storyboard-card h3,
+.portfolio-product-card h3,
+.portfolio-method-card h3,
+.portfolio-delivery-step h3,
+.xiaomi-hover-card h3,
+.xiaomi-dual-gallery__copy h3,
+.portfolio-material-card h3,
+.portfolio-photo-spec-card h3,
+.xiaomi-accordion__item span,
+#aigc-design .xiaomi-accordion__item span,
+#other-works .portfolio-other-works__hero-label strong,
+#other-works .portfolio-other-works__light-card strong,
+#other-works .portfolio-other-works__strip strong,
+#other-works .portfolio-other-works__pedestal strong,
+#other-works .portfolio-other-works__ai-placeholder strong {
+  color: var(--type-color-title-soft) !important;
+  font-size: var(--type-title) !important;
+  font-weight: var(--weight-title) !important;
+  line-height: 1.24 !important;
+  letter-spacing: 0 !important;
+  text-wrap: balance;
+}.portfolio-card p,
+.portfolio-image-card p,
+.portfolio-timeline-card p,
+.portfolio-storyboard-card p,
+.portfolio-product-card p,
+.portfolio-method-card p,
+.portfolio-delivery-step p,
+.xiaomi-hover-card p,
+.xiaomi-dual-gallery__copy p,
+.portfolio-material-card p,
+.portfolio-photo-spec-card p,
+.xiaomi-accordion__item em,
+#aigc-design .xiaomi-accordion__item em,
+#other-works .portfolio-other-works__format-map p,
+#other-works .portfolio-other-works__pedestal p,
+#other-works .portfolio-other-works__ai-placeholder em {
+  color: var(--type-color-body) !important;
+  font-size: var(--type-body) !important;
+  font-weight: var(--weight-body) !important;
+  line-height: var(--type-line-body) !important;
+  letter-spacing: 0 !important;
+  text-wrap: pretty;
+}.portfolio-card__meta,
+.portfolio-storyboard-card__badge,
+.portfolio-judgment-card__level,
+#other-works .portfolio-other-works__format-map span,
+#other-works .portfolio-other-works__hero-label,
+#other-works .portfolio-other-works__light-card span,
+#other-works .portfolio-other-works__strip span,
+#other-works .portfolio-other-works__pedestal span,
+#other-works .portfolio-other-works__ai-placeholder span,
+#other-works .portfolio-other-works__ai-card > span {
+  color: var(--type-color-caption) !important;
+  font-size: var(--type-micro) !important;
+  font-weight: var(--weight-caption) !important;
+  line-height: var(--type-line-caption) !important;
+  letter-spacing: 0 !important;
+}
+
+.portfolio-nav-links a,
+.portfolio-nav-submenu a,
+.portfolio-nav-links .portfolio-nav-subitem {
+  color: var(--type-color-nav) !important;
+  font-size: var(--type-caption) !important;
+  font-weight: var(--weight-nav) !important;
+  line-height: var(--type-line-caption) !important;
+  letter-spacing: 0 !important;
+}
+
+.xiaomi-accordion-stage__copy > .portfolio-titleline + .xiaomi-accordion,
+.xiaomi-color-stage__title > .portfolio-titleline + .xiaomi-color-stage__swatches,
+.xiaomi-carousel__intro > .portfolio-titleline + .xiaomi-carousel__viewport,
+.xiaomi-dual-gallery__copy > .portfolio-titleline + .xiaomi-carousel__controls,
+#other-works .portfolio-other-works__scene-copy > .portfolio-titleline + *,
+#other-works .portfolio-other-works__finale-copy > .portfolio-titleline + * {
+  margin-top: clamp(28px, 3vh, 48px) !important;
+}
+
+@media (max-width: 640px) {
+  .xiaomi-accordion-stage__copy > .portfolio-titleline + .xiaomi-accordion,
+  .xiaomi-color-stage__title > .portfolio-titleline + .xiaomi-color-stage__swatches,
+  .xiaomi-carousel__intro > .portfolio-titleline + .xiaomi-carousel__viewport,
+  .xiaomi-dual-gallery__copy > .portfolio-titleline + .xiaomi-carousel__controls,
+  #other-works .portfolio-other-works__scene-copy > .portfolio-titleline + *,
+  #other-works .portfolio-other-works__finale-copy > .portfolio-titleline + * {
+    margin-top: clamp(18px, 5vw, 28px) !important;
+  }
+}
+
+/* 2026-06-04 warm type cleanup: pull legacy white text into the type palette. */
+.portfolio-hero__tags span,
+.portfolio-video-stage__caption,
+.portfolio-vertical-card div,
+.portfolio-storyboard-strip figcaption,
+.portfolio-channel-tags span {
+  color: var(--type-color-body) !important;
+}
+
+.portfolio-video-stage__caption strong,
+.portfolio-vertical-card strong,
+.portfolio-storyboard-strip figcaption strong,
+.portfolio-channel-tags strong {
+  color: var(--type-color-title-soft) !important;
+}
+
+.portfolio-video-stage__caption span,
+.portfolio-vertical-card span,
+.portfolio-storyboard-strip figcaption span,
+.portfolio-storyboard-strip figcaption em,
+.portfolio-channel-tags em {
+  color: var(--type-color-caption) !important;
+}/* 2026-06-04 single-line main title lock. */
+.portfolio-hero__content,
+.portfolio-section__intro,
+.portfolio-video-feature__copy,
+.portfolio-work__copy,
+.xiaomi-color-stage__title,
+.xiaomi-carousel__intro,
+.xiaomi-detail-carousel__intro,
+.xiaomi-dual-gallery__copy,
+.xiaomi-accordion-stage__copy,
+.portfolio-material-stage__copy,
+.portfolio-photo-spec__copy,
+#other-works .portfolio-other-works__hero-copy,
+#other-works .portfolio-other-works__scene-copy,
+#other-works .portfolio-other-works__finale-copy {
+  container-type: inline-size;
+}.portfolio-main-title,
+.portfolio-hero h1.portfolio-main-title,
+.portfolio-section__intro h2.portfolio-main-title,
+.portfolio-video-feature__copy h2.portfolio-main-title,
+.portfolio-work__copy h2.portfolio-main-title,
+.xiaomi-color-stage__title h2.portfolio-main-title,
+.xiaomi-carousel__intro h2.portfolio-main-title,
+.xiaomi-detail-carousel__intro h2.portfolio-main-title,
+.xiaomi-dual-gallery__copy h2.portfolio-main-title,
+.xiaomi-accordion-stage__copy h2.portfolio-main-title,
+.portfolio-material-stage__copy h2.portfolio-main-title,
+.portfolio-photo-spec__copy h2.portfolio-main-title,
+#other-works .portfolio-other-works__hero h2.portfolio-main-title,
+#other-works .portfolio-other-works__scene-copy h3.portfolio-main-title,
+#other-works .portfolio-other-works__finale-copy h3.portfolio-main-title {
+  display: block !important;
+  width: max-content;
+  max-width: 100% !important;
+  min-width: 0;
+  white-space: nowrap !important;
+  word-break: keep-all !important;
+  overflow-wrap: normal !important;
+  text-wrap: nowrap !important;
+  letter-spacing: 0 !important;
+}
+
+.portfolio-main-title > span,
+.portfolio-hero h1.portfolio-main-title > span {
+  display: inline !important;
+  white-space: nowrap !important;
+}
+
+.portfolio-hero h1.portfolio-main-title {
+  font-size: var(--type-display-hero, var(--type-hero)) !important;
+}.portfolio-section__intro h2.portfolio-main-title,
+.portfolio-video-feature__copy h2.portfolio-main-title,
+#support .portfolio-support-panel .portfolio-section__intro h2.portfolio-main-title,
+#other-works .portfolio-other-works__hero h2.portfolio-main-title {
+  font-size: var(--type-section-title, var(--type-section)) !important;
+}
+
+.xiaomi-color-stage__title h2.portfolio-main-title,
+.xiaomi-carousel__intro h2.portfolio-main-title,
+.xiaomi-detail-carousel__intro h2.portfolio-main-title,
+.xiaomi-dual-gallery__copy h2.portfolio-main-title,
+.xiaomi-accordion-stage__copy h2.portfolio-main-title,
+.portfolio-work__copy h2.portfolio-main-title,
+.portfolio-material-stage__copy h2.portfolio-main-title,
+.portfolio-photo-spec__copy h2.portfolio-main-title,
+#other-works .portfolio-other-works__scene-copy h3.portfolio-main-title,
+#other-works .portfolio-other-works__finale-copy h3.portfolio-main-title {
+  font-size: var(--type-panel-title, var(--type-panel)) !important;
+}
+
+#commercial-film .portfolio-video-feature__copy--cinema h2.portfolio-main-title {
+  font-size: var(--type-section-title, var(--type-section)) !important;
+}
+
+@media (max-width: 900px) {  .portfolio-main-title,
+  .portfolio-hero h1.portfolio-main-title,
+  .portfolio-section__intro h2.portfolio-main-title,
+  .portfolio-video-feature__copy h2.portfolio-main-title,
+  .portfolio-reality-fusion .portfolio-section__intro h2.portfolio-main-title,
+  .portfolio-support-panel .portfolio-section__intro h2.portfolio-main-title,
+  .portfolio-work__copy h2.portfolio-main-title,
+  .xiaomi-color-stage__title h2.portfolio-main-title,
+  .xiaomi-carousel__intro h2.portfolio-main-title,
+  .xiaomi-detail-carousel__intro h2.portfolio-main-title,
+  .xiaomi-dual-gallery__copy h2.portfolio-main-title,
+  .xiaomi-accordion-stage__copy h2.portfolio-main-title,
+  #support .portfolio-support-panel .portfolio-section__intro h2.portfolio-main-title {
+    width: max-content;
+    max-width: 100% !important;
+    white-space: nowrap !important;
+    word-break: keep-all !important;
+    overflow-wrap: normal !important;
+    text-wrap: nowrap !important;
+  }
+}
+
+/* 2026-06-04 rollback repair: 02B title needs a real query container width. */
+#visual-tone .xiaomi-color-stage__title {
+  width: min(640px, calc(100vw - 56px)) !important;
+  max-width: min(640px, calc(100vw - 56px)) !important;
+}
+
+@media (max-width: 900px) {
+  #visual-tone .xiaomi-color-stage__title {
+    width: auto !important;
+    max-width: none !important;
+  }
+}
+
+@media (min-width: 901px) {
+  #before-visuals .portfolio-section__intro > p.portfolio-proof {
+    display: block !important;
+    max-width: 700px !important;
+    margin-top: clamp(14px, 1.2vw, 20px) !important;
+    padding-left: 14px !important;
+    border-left: 1px solid rgba(232, 211, 169, 0.54) !important;
+    color: rgba(232, 211, 169, 0.9) !important;
+    font-size: clamp(13px, 0.84vw, 15px) !important;
+    font-weight: 400 !important;
+    line-height: 1.68 !important;
+  }
+}
+
+/* 2026-06-07 02A accordion: airier switches with quieter labels. */
+#aigc-design .xiaomi-accordion-stage__copy > .portfolio-titleline + .xiaomi-accordion,
+#aigc-design .xiaomi-accordion-stage__copy > .portfolio-subtitle + .xiaomi-accordion {
+  margin-top: clamp(30px, 3.2vh, 44px) !important;
+}
+
+#aigc-design .xiaomi-accordion__item {
+  min-height: clamp(64px, 7.4vh, 82px) !important;
+  padding: clamp(16px, 1.7vh, 22px) 34px clamp(16px, 1.7vh, 22px) 0 !important;
+  border-top-color: rgba(232, 211, 169, 0.1) !important;
+}
+
+#aigc-design .xiaomi-accordion__item + .xiaomi-accordion__item {
+  border-top-color: rgba(232, 211, 169, 0.1) !important;
+}
+
+#aigc-design .xiaomi-accordion__item span {
+  color: rgba(247, 239, 225, 0.6) !important;
+  font-size: clamp(15px, 0.9vw, 17px) !important;
+  font-weight: 360 !important;
+  line-height: 1.42 !important;
+}
+
+#aigc-design .xiaomi-accordion__item em {
+  color: rgba(247, 239, 225, 0.58) !important;
+  font-size: clamp(12px, 0.72vw, 13px) !important;
+  font-weight: 340 !important;
+  line-height: 1.68 !important;
+}
+
+#aigc-design .xiaomi-accordion__item.is-active {
+  border-top-color: rgba(232, 211, 169, 0.18) !important;
+}
+
+#aigc-design .xiaomi-accordion__item.is-active span {
+  color: rgba(255, 248, 232, 0.82) !important;
+  font-weight: 420 !important;
+}
+
+#aigc-design .xiaomi-accordion__item::after {
+  top: clamp(26px, 2.6vh, 34px) !important;
+  color: rgba(247, 239, 225, 0.34) !important;
+}
+
+#aigc-design .xiaomi-accordion__item.is-active::after {
+  color: rgba(232, 211, 169, 0.66) !important;
+}
+
+@media (max-width: 900px) {
+  #aigc-design .xiaomi-accordion-stage__copy > .portfolio-titleline + .xiaomi-accordion,
+  #aigc-design .xiaomi-accordion-stage__copy > .portfolio-subtitle + .xiaomi-accordion {
+    margin-top: clamp(24px, 5vw, 32px) !important;
+  }
+
+  #aigc-design .xiaomi-accordion__item {
+    min-height: clamp(60px, 11vw, 72px) !important;
+    padding: clamp(15px, 3vw, 18px) 34px clamp(15px, 3vw, 18px) 0 !important;
+  }
+
+  #aigc-design .xiaomi-accordion__item span {
+    font-size: clamp(15px, 3.6vw, 17px) !important;
+  }
+}
+
+/* 2026-06-08 cover title refinement: keep the opening quieter and more portfolio-led. */
+#visual-files.portfolio-hero .portfolio-kicker {
+  color: rgba(232, 211, 169, 0.54) !important;
+  font-size: clamp(0.66rem, 0.54vw, 0.82rem) !important;
+  font-weight: 420 !important;
+}
+
+#visual-files.portfolio-hero h1.portfolio-main-title {
+  color: rgba(247, 239, 225, 0.84) !important;
+  font-size: clamp(3.15rem, 3.25vw, 5.45rem) !important;
+  font-weight: 480 !important;
+  line-height: 1.02 !important;
+  text-shadow: 0 18px 42px rgba(0, 0, 0, 0.34);
+}
+
+#visual-files.portfolio-hero .portfolio-hero__titleline {
+  color: rgba(232, 211, 169, 0.62) !important;
+  font-size: clamp(0.84rem, 0.68vw, 1.05rem) !important;
+  font-weight: 380 !important;
+}
+
+/* 2026-06-08 hero visual balance: lift the opening title into the darker left field. */
+@media (min-width: 901px) {
+  #visual-files.portfolio-hero .portfolio-hero__content {
+    transform: translateY(clamp(-64px, -4.3vh, -48px)) !important;
+  }
+}
+
+/* T-100: repair title modules after T-099 overreach.
+   Only true page-level title blocks receive the opening title rail/rhythm. */
+:root {
+  --main-title-rail-color: rgba(232, 211, 169, 0.38);
+  --main-title-rail-pad: clamp(24px, 1.8vw, 32px);
+  --main-title-kicker-size: clamp(0.66rem, 0.54vw, 0.82rem);
+  --main-title-kicker-weight: 420;
+  --main-title-kicker-line: 1.36;
+  --main-title-size: clamp(3.15rem, 3.25vw, 5.45rem);
+  --main-title-weight: 480;
+  --main-title-line: 1.02;
+  --main-titleline-size: clamp(0.84rem, 0.68vw, 1.05rem);
+  --main-titleline-weight: 380;
+  --main-titleline-line: 1.46;
+  --main-title-kicker-color: rgba(232, 211, 169, 0.54);
+  --main-title-color: rgba(247, 239, 225, 0.84);
+  --main-titleline-color: rgba(232, 211, 169, 0.62);
+  --main-titleline-width: min(100%, 42em);
+}
+
+#visual-files.portfolio-hero .portfolio-hero__content::before {
+  content: none !important;
+}
+
+#visual-files.portfolio-hero .portfolio-hero__content {
+  position: relative;
+  border-left: 0 !important;
+  padding-left: var(--main-title-rail-pad) !important;
+}
+
+#visual-files.portfolio-hero .portfolio-hero__content::after {
+  content: "" !important;
+  position: absolute !important;
+  left: 0 !important;
+  top: calc(50% - clamp(7px, 0.7vh, 10px)) !important;
+  z-index: 1 !important;
+  width: 1px !important;
+  height: clamp(128px, 10.6vh, 154px) !important;
+  margin: 0 !important;
+  background: var(--main-title-rail-color) !important;
+  transform: translateY(-50%) !important;
+  opacity: 1 !important;
+  pointer-events: none !important;
+  filter: none !important;
+}.portfolio-section__intro,
+.portfolio-video-feature__copy,
+.portfolio-work__copy,
+#aigc-design .xiaomi-accordion-stage__heading,
+#visual-tone .xiaomi-color-stage__title,
+.portfolio-material-stage__copy,
+.portfolio-photo-spec__copy {
+  box-sizing: border-box !important;
+  border-left: 1px solid var(--main-title-rail-color) !important;
+  padding-left: var(--main-title-rail-pad) !important;
+}
+
+.portfolio-section__intro,
+#aigc-design .xiaomi-accordion-stage__heading,
+#visual-tone .xiaomi-color-stage__title{
+  width: min(100%, 920px) !important;
+  max-width: min(100%, 920px) !important;
+}.portfolio-video-feature__copy,
+.portfolio-work__copy,
+.portfolio-material-stage__copy,
+.portfolio-photo-spec__copy {
+  max-width: min(100%, 920px) !important;
+}#visual-files.portfolio-hero .portfolio-kicker,
+.portfolio-section__intro > .portfolio-kicker,
+.portfolio-video-feature__copy > .portfolio-kicker,
+.portfolio-work__copy > .portfolio-kicker,
+#aigc-design .xiaomi-accordion-stage__heading > .portfolio-kicker,
+#visual-tone .xiaomi-color-stage__title > .portfolio-kicker,
+.portfolio-material-stage__copy > .portfolio-kicker,
+.portfolio-photo-spec__copy > .portfolio-kicker {
+  margin: 0 0 var(--title-rhythm-kicker-to-title) !important;
+  color: var(--main-title-kicker-color) !important;
+  font-size: var(--main-title-kicker-size) !important;
+  font-weight: var(--main-title-kicker-weight) !important;
+  line-height: var(--main-title-kicker-line) !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}#visual-files.portfolio-hero h1.portfolio-main-title,
+.portfolio-section__intro h2.portfolio-main-title,
+.portfolio-video-feature__copy h2.portfolio-main-title,
+.portfolio-work__copy h2.portfolio-main-title,
+#aigc-design .xiaomi-accordion-stage__heading h2.portfolio-main-title,
+#visual-tone .xiaomi-color-stage__title h2.portfolio-main-title,
+.portfolio-material-stage__copy h2.portfolio-main-title,
+.portfolio-photo-spec__copy h2.portfolio-main-title,
+#support .portfolio-support-panel .portfolio-section__intro h2.portfolio-main-title {
+  color: var(--main-title-color) !important;
+  font-size: var(--main-title-size) !important;
+  font-weight: var(--main-title-weight) !important;
+  line-height: var(--main-title-line) !important;
+  letter-spacing: 0 !important;
+  text-shadow: 0 18px 42px rgba(0, 0, 0, 0.34);
+}.portfolio-section__intro h2.portfolio-main-title,
+.portfolio-video-feature__copy h2.portfolio-main-title,
+.portfolio-work__copy h2.portfolio-main-title,
+#aigc-design .xiaomi-accordion-stage__heading h2.portfolio-main-title,
+#visual-tone .xiaomi-color-stage__title h2.portfolio-main-title,
+.portfolio-material-stage__copy h2.portfolio-main-title,
+.portfolio-photo-spec__copy h2.portfolio-main-title {
+  width: max-content !important;
+  max-width: 100% !important;
+}.portfolio-hero__titleline,
+.portfolio-section__intro > p.portfolio-titleline,
+.portfolio-video-feature__copy p.portfolio-titleline,
+.portfolio-work__copy > p.portfolio-titleline,
+#aigc-design .xiaomi-accordion-stage__heading > p.portfolio-titleline,
+#visual-tone .xiaomi-color-stage__title > p.portfolio-titleline,
+.portfolio-material-stage__copy > p.portfolio-titleline,
+.portfolio-photo-spec__copy > p.portfolio-titleline {
+  max-width: var(--main-titleline-width) !important;
+  margin: var(--title-rhythm-main-to-line) 0 0 !important;
+  color: var(--main-titleline-color) !important;
+  font-size: var(--main-titleline-size) !important;
+  font-weight: var(--main-titleline-weight) !important;
+  line-height: var(--main-titleline-line) !important;
+  letter-spacing: 0 !important;
+}
+
+@media (max-width: 900px) {
+  :root {
+    --main-title-rail-pad: clamp(16px, 4.8vw, 24px);
+    --main-title-size: clamp(2.5rem, 10.2vw, 3.25rem);
+    --main-titleline-size: clamp(0.84rem, 3.4vw, 1rem);
+  }  .portfolio-section__intro,
+  .portfolio-video-feature__copy,
+  .portfolio-work__copy,
+  #aigc-design .xiaomi-accordion-stage__heading,
+  #visual-tone .xiaomi-color-stage__title,
+  .portfolio-material-stage__copy,
+  .portfolio-photo-spec__copy {
+    width: min(100%, calc(100vw - 32px)) !important;
+    max-width: min(100%, calc(100vw - 32px)) !important;
+  }
+
+  #visual-files.portfolio-hero .portfolio-hero__content::after {
+    height: clamp(104px, 24vw, 136px) !important;
+  }
+}
+
+/* T-100: late section-specific title safeguard for page-level modules only. */
+#commercial-film .portfolio-video-feature__copy--cinema h2.portfolio-main-title {
+  font-size: var(--main-title-size) !important;
+  font-weight: var(--main-title-weight) !important;
+  line-height: var(--main-title-line) !important;
+  letter-spacing: 0 !important;
+}
+
+#support .portfolio-support-panel .portfolio-section__intro > p.portfolio-titleline {
+  font-size: var(--main-titleline-size) !important;
+  font-weight: var(--main-titleline-weight) !important;
+  line-height: var(--main-titleline-line) !important;
+  letter-spacing: 0 !important;
+}
+
+/* T-100: local gallery and 07 titles opt out of the page title module. */
+#visual-system .xiaomi-carousel__intro,
+#photo-scenes .xiaomi-dual-gallery__copy,
+#other-works .portfolio-other-works__hero-copy,
+#other-works .portfolio-other-works__scene-copy,
+#other-works .portfolio-other-works__finale-copy {
+  border-left: 0 !important;
+  padding-left: 0 !important;
+}
+
+#visual-system .xiaomi-carousel__intro,
+#photo-scenes .xiaomi-dual-gallery__copy {
+  max-width: none !important;
+}
+
+#visual-system .xiaomi-carousel__intro {
+  width: var(--page-wide) !important;
+}
+
+#photo-scenes .xiaomi-dual-gallery__copy {
+  width: auto !important;
+}
+
+#visual-system .xiaomi-carousel__intro h2.portfolio-main-title,
+#photo-scenes .xiaomi-dual-gallery__copy h2.portfolio-main-title {
+  color: #fff !important;
+  font-size: clamp(34px, 3vw, 56px) !important;
+  font-weight: 520 !important;
+  line-height: var(--type-line-title) !important;
+  letter-spacing: 0 !important;
+  width: auto !important;
+  max-width: 100% !important;
+  text-shadow: none !important;
+}
+
+#visual-system .xiaomi-carousel__intro .portfolio-kicker,
+#photo-scenes .xiaomi-dual-gallery__copy .portfolio-kicker {
+  margin: 0 0 var(--title-rhythm-kicker-to-title) !important;
+  color: rgba(226, 195, 135, 0.78) !important;
+  font-size: var(--type-caption) !important;
+  font-weight: var(--weight-caption) !important;
+  line-height: var(--type-line-caption) !important;
+}
+
+#visual-system .xiaomi-carousel__intro > p.portfolio-titleline,
+#photo-scenes .xiaomi-dual-gallery__copy > p.portfolio-titleline {
+  max-width: 760px !important;
+  margin: 12px 0 0 !important;
+  color: rgba(32, 26, 18, 0.7) !important;
+  font-size: var(--type-titleline) !important;
+  font-weight: var(--weight-line) !important;
+  line-height: var(--type-line-lead) !important;
+  letter-spacing: 0 !important;
+}
+
+#other-works .portfolio-other-works__hero-copy {
+  width: min(620px, calc(100vw - 56px)) !important;
+  max-width: none !important;
+  padding-top: 0 !important;
+  border-top: 0 !important;
+}
+
+#other-works .portfolio-other-works__scene-copy,
+#other-works .portfolio-other-works__finale-copy {
+  width: min(680px, 100%) !important;
+  max-width: none !important;
+}
+
+#other-works .portfolio-other-works__hero-copy .portfolio-kicker,
+#other-works .portfolio-other-works__scene-copy .portfolio-kicker,
+#other-works .portfolio-other-works__finale-copy .portfolio-kicker {
+  margin: 0 0 12px !important;
+  color: var(--ow-gold-dim) !important;
+  font-size: var(--type-caption) !important;
+  font-weight: var(--weight-nav) !important;
+  line-height: 1 !important;
+  letter-spacing: 0 !important;
+}
+
+#other-works .portfolio-other-works__hero h2.portfolio-main-title {
+  width: auto !important;
+  max-width: 100% !important;
+  color: var(--ow-ink) !important;
+  font-size: clamp(4rem, 8vw, 9.6rem) !important;
+  font-weight: 570 !important;
+  line-height: 0.92 !important;
+  letter-spacing: 0 !important;
+  text-shadow: none !important;
+}
+
+#other-works .portfolio-other-works__scene-copy h3.portfolio-main-title,
+#other-works .portfolio-other-works__finale-copy h3.portfolio-main-title {
+  width: auto !important;
+  max-width: 100% !important;
+  color: var(--ow-ink) !important;
+  font-size: clamp(2rem, 4.2vw, 4.8rem) !important;
+  font-weight: 540 !important;
+  line-height: 1 !important;
+  letter-spacing: 0 !important;
+  text-shadow: none !important;
+}
+
+#other-works .portfolio-other-works__hero .portfolio-titleline {
+  max-width: 42em !important;
+  margin: 12px 0 0 !important;
+  color: rgba(232, 211, 169, 0.86) !important;
+  font-size: var(--type-titleline) !important;
+  font-weight: var(--weight-line) !important;
+  line-height: var(--type-line-lead) !important;
+}
+
+#other-works .portfolio-other-works__scene-copy > p.portfolio-titleline,
+#other-works .portfolio-other-works__finale-copy > p.portfolio-titleline {
+  max-width: 38em !important;
+  margin: 12px 0 0 !important;
+  color: var(--ow-copy) !important;
+  font-size: var(--type-body) !important;
+  font-weight: var(--weight-body) !important;
+  line-height: 1.68 !important;
+}
+
+@media (max-width: 430px) {
+  #other-works .portfolio-other-works__scene-copy h3.portfolio-main-title,
+  #other-works .portfolio-other-works__finale-copy h3.portfolio-main-title {
+    font-size: clamp(1.8rem, 10vw, 3rem) !important;
+  }
+}
+
+/* T-101: title standards after screenshot review.
+   Page titles keep rail + three-line rhythm. Local galleries keep no rail, but
+   titleline text must stay readable on dark product backgrounds. Controls and
+   button labels never participate in the page title module. */
+#visual-system .xiaomi-carousel__intro > p.portfolio-titleline,
+#photo-scenes .xiaomi-dual-gallery__copy > p.portfolio-titleline {
+  color: rgba(232, 211, 169, 0.72) !important;
+  font-weight: 400 !important;
+  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+}
+
+#visual-system .xiaomi-carousel__intro > p.portfolio-titleline + p.portfolio-subtitle,
+#photo-scenes .xiaomi-dual-gallery__copy > p.portfolio-titleline + p.portfolio-subtitle {
+  color: rgba(247, 239, 225, 0.68) !important;
+  font-weight: 340 !important;
+  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+}
+
+#visual-tone .xiaomi-color-stage__title {
+  position: relative !important;
+  width: min(1040px, calc(100vw - 56px)) !important;
+  max-width: min(1040px, calc(100vw - 56px)) !important;
+  isolation: isolate;
+  background: none !important;
+}
+
+#visual-tone .xiaomi-color-stage__title::before {
+  content: "" !important;
+  position: absolute !important;
+  z-index: -1 !important;
+  inset: clamp(-18px, -1.2vw, -12px) auto clamp(-18px, -1.2vw, -12px) calc(-1 * var(--main-title-rail-pad)) !important;
+  width: min(980px, 72vw) !important;
+  background:
+    radial-gradient(ellipse at 28% 42%, rgba(0, 0, 0, 0.54), rgba(0, 0, 0, 0.28) 42%, rgba(0, 0, 0, 0) 76%) !important;
+  opacity: 0.94 !important;
+  pointer-events: none !important;
+}
+
+#visual-tone .xiaomi-color-stage__title h2.portfolio-main-title {
+  text-shadow:
+    0 18px 42px rgba(0, 0, 0, 0.46),
+    0 2px 14px rgba(0, 0, 0, 0.34) !important;
+}
+
+#commercial-photo .portfolio-reality-fusion__panel > .portfolio-section__intro {
+  width: min(100%, 920px) !important;
+  max-width: min(100%, 920px) !important;
+}
+
+/* T-103: visual-tone is a product stage title, not a page-level chapter title. */
+#visual-tone .xiaomi-color-stage__title {
+  left: clamp(72px, 6vw, 220px) !important;
+  width: min(440px, calc(100vw - 56px)) !important;
+  max-width: min(440px, calc(100vw - 56px)) !important;
+  border-left: 0 !important;
+  padding-left: 0 !important;
+}
+
+#visual-tone .xiaomi-color-stage__title::before {
+  inset: clamp(-14px, -0.9vw, -10px) auto clamp(-18px, -1.1vw, -12px) clamp(-24px, -1.5vw, -16px) !important;
+  width: min(480px, 28vw) !important;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.48), rgba(0, 0, 0, 0.26) 56%, rgba(0, 0, 0, 0) 100%),
+    radial-gradient(ellipse at 26% 48%, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.22) 52%, rgba(0, 0, 0, 0) 82%) !important;
+}
+
+#visual-tone .xiaomi-color-stage__title h2.portfolio-main-title {
+  width: auto !important;
+  max-width: 100% !important;
+  color: rgba(247, 239, 225, 0.88) !important;
+  font-size: clamp(1.875rem, 1.42vw, 2.25rem) !important;
+  font-weight: 520 !important;
+  line-height: 1.12 !important;
+  text-shadow:
+    0 14px 30px rgba(0, 0, 0, 0.52),
+    0 2px 12px rgba(0, 0, 0, 0.36) !important;
+}
+
+#visual-tone .xiaomi-color-stage__title > p.portfolio-titleline,
+#visual-tone .xiaomi-color-stage__title > p.portfolio-titleline + p.portfolio-subtitle {
+  max-width: 34em !important;
+  text-shadow: 0 10px 28px rgba(0, 0, 0, 0.54) !important;
+}
+
+@media (max-width: 900px) {
+  #visual-tone .xiaomi-color-stage__title {
+    left: 20px !important;
+    width: min(100%, calc(100vw - 32px)) !important;
+    max-width: min(100%, calc(100vw - 32px)) !important;
+  }
+
+  #visual-tone .xiaomi-color-stage__title h2.portfolio-main-title {
+    font-size: clamp(2rem, 8vw, 3rem) !important;
+  }
+}
+
+/* T-104: restore title rails and align page titles to their content body. */
+#visual-files.portfolio-hero .portfolio-hero__content::after {
+  top: 50% !important;
+  height: clamp(132px, 11.2vh, 162px) !important;
+}
+
+#visual-system .xiaomi-carousel__intro,
+#other-works .portfolio-other-works__scene-copy,
+#other-works .portfolio-other-works__finale-copy,
+#other-works .portfolio-other-works__thanks-copy {
+  box-sizing: border-box !important;
+  border-left: 1px solid var(--main-title-rail-color) !important;
+  padding-left: var(--main-title-rail-pad) !important;
+}
+
+#visual-system .xiaomi-carousel__intro {
+  width: var(--page-wide) !important;
+  max-width: var(--page-wide) !important;
+}
+
+#film-storyboard .portfolio-section__intro,
+#reality-imagination .portfolio-section__intro,
+#support .portfolio-support-panel .portfolio-section__intro {
+  width: var(--page-wide) !important;
+  max-width: var(--page-wide) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+#other-works .portfolio-other-works__hero-copy,
+#visual-tone .xiaomi-color-stage__title {
+  border-left: 0 !important;
+  padding-left: 0 !important;
+}
+
+#other-works .portfolio-other-works__thanks-copy h3.portfolio-main-title {
+  width: auto !important;
+  max-width: 100% !important;
+}
+
+#other-works .portfolio-other-works__thanks-copy {
+  width: min(860px, calc(100vw - 48px)) !important;
+}
+
+@media (max-width: 900px) {
+  #visual-system .xiaomi-carousel__intro,
+  #film-storyboard .portfolio-section__intro,
+  #reality-imagination .portfolio-section__intro,
+  #support .portfolio-support-panel .portfolio-section__intro {
+    width: min(100%, calc(100vw - 32px)) !important;
+    max-width: min(100%, calc(100vw - 32px)) !important;
+  }
+
+  #other-works .portfolio-other-works__scene-copy,
+  #other-works .portfolio-other-works__finale-copy,
+  #other-works .portfolio-other-works__thanks-copy {
+    padding-left: clamp(18px, 5vw, 24px) !important;
+  }
+
+  #other-works .portfolio-other-works__thanks-copy {
+    width: min(100%, calc(100vw - 36px)) !important;
+  }
+}
+
+/* T-105: align the opening hero rail to the actual title group. */
+#visual-files.portfolio-hero .portfolio-hero__content::after {
+  top: calc(50% + clamp(30px, 3.05vh, 46px)) !important;
+  height: clamp(118px, 11.5vh, 166px) !important;
+}
+
+@media (max-width: 900px) {
+  #visual-files.portfolio-hero .portfolio-hero__content::after {
+    top: calc(50% + clamp(24px, 3.2vh, 30px)) !important;
+    height: clamp(96px, 12vh, 112px) !important;
+  }
+}
+
+/* T-114: final thanks screen returns to a clean closing title. */
+#other-works .portfolio-other-works__thanks-copy {
+  border-left: 0 !important;
+  padding-left: 0 !important;
+}
+
+/* T-122: 07 opening title uses the standard chapter-title scale, not a hero masthead. */
+#other-works .portfolio-other-works__hero-copy {
+  top: auto !important;
+  bottom: clamp(26px, 3.4vh, 54px) !important;
+  width: min(920px, calc(100vw - 56px)) !important;
+  max-width: min(920px, calc(100vw - 56px)) !important;
+  box-sizing: border-box !important;
+  border-left: 0 !important;
+  padding-left: 0 !important;
+}
+
+#other-works .portfolio-other-works__hero-copy .portfolio-kicker {
+  margin: 0 0 var(--title-rhythm-kicker-to-title) !important;
+  color: var(--main-title-kicker-color) !important;
+  font-size: var(--main-title-kicker-size) !important;
+  font-weight: var(--main-title-kicker-weight) !important;
+  line-height: var(--main-title-kicker-line) !important;
+}
+
+#other-works .portfolio-other-works__hero h2.portfolio-main-title {
+  width: max-content !important;
+  max-width: 100% !important;
+  color: var(--main-title-color) !important;
+  font-size: var(--main-title-size) !important;
+  font-weight: var(--main-title-weight) !important;
+  line-height: var(--main-title-line) !important;
+  text-shadow: 0 18px 42px rgba(0, 0, 0, 0.34) !important;
+}
+
+#other-works .portfolio-other-works__hero .portfolio-titleline {
+  max-width: var(--main-titleline-width) !important;
+  margin: var(--title-rhythm-main-to-line) 0 0 !important;
+  color: var(--main-titleline-color) !important;
+  font-size: var(--main-titleline-size) !important;
+  font-weight: var(--main-titleline-weight) !important;
+  line-height: var(--main-titleline-line) !important;
+}
+
+@media (max-width: 900px) {
+  #other-works .portfolio-other-works__hero-copy {
+    top: auto !important;
+    width: min(100%, calc(100vw - 36px)) !important;
+    max-width: min(100%, calc(100vw - 36px)) !important;
+    padding-left: 0 !important;
+  }
+}
+
+/* T-123: corrected 07 title placement and centered GAO DES archive title. */
+#other-works .portfolio-other-works__hero {
+  grid-template-rows: minmax(0, auto) auto !important;
+  align-content: center !important;
+  row-gap: clamp(28px, 3.6vh, 54px) !important;
+  padding-top: clamp(84px, 8.2vh, 128px) !important;
+  padding-bottom: clamp(54px, 6.6vh, 96px) !important;
+}
+
+#other-works .portfolio-other-works__hero-copy {
+  position: relative !important;
+  left: auto !important;
+  right: auto !important;
+  top: auto !important;
+  bottom: auto !important;
+  z-index: 3 !important;
+  order: 2 !important;
+  justify-self: start !important;
+  width: min(920px, 100%) !important;
+  max-width: min(920px, 100%) !important;
+  border: 0 !important;
+  padding: 0 !important;
+}
+
+#other-works .portfolio-other-works__hero-frame {
+  order: 1 !important;
+  width: min(100%, 2360px) !important;
+}
+
+#other-works .portfolio-other-works__hero-label {
+  bottom: clamp(24px, 3.2vh, 46px) !important;
+}
+
+#other-works .portfolio-other-works__finale-copy {
+  position: absolute !important;
+  left: 50% !important;
+  top: 50svh !important;
+  z-index: 5 !important;
+  display: grid !important;
+  justify-items: center !important;
+  width: min(920px, calc(100vw - 64px)) !important;
+  max-width: min(920px, calc(100vw - 64px)) !important;
+  padding: 0 !important;
+  border-left: 0 !important;
+  text-align: center !important;
+  transform: translate3d(-50%, -50%, 0) !important;
+}
+
+#other-works .portfolio-other-works__finale-copy .portfolio-kicker {
+  margin: 0 0 var(--title-rhythm-kicker-to-title) !important;
+  text-align: center !important;
+}
+
+#other-works .portfolio-other-works__finale-copy h3.portfolio-main-title {
+  width: auto !important;
+  max-width: 100% !important;
+  text-align: center !important;
+}
+
+#other-works .portfolio-other-works__finale-copy > p.portfolio-titleline {
+  max-width: none !important;
+  margin: var(--title-rhythm-main-to-line) auto 0 !important;
+  text-align: center !important;
+}
+
+#other-works .portfolio-other-works__ai-wall {
+  align-content: start !important;
+}
+
+@media (max-width: 900px) {
+  #other-works .portfolio-other-works__hero {
+    min-height: 100svh !important;
+    padding-top: 84px !important;
+    padding-bottom: 64px !important;
+  }
+
+  #other-works .portfolio-other-works__hero-copy,
+  #other-works .portfolio-other-works__finale-copy {
+    width: min(100%, calc(100vw - 36px)) !important;
+    max-width: min(100%, calc(100vw - 36px)) !important;
+  }
+}
+
+/* T-124: keep the 07 hero image untouched; only place the title inside it. */
+#other-works .portfolio-other-works__hero {
+  grid-template-rows: minmax(0, 1fr) !important;
+  align-content: center !important;
+  justify-items: center !important;
+  row-gap: 0 !important;
+  padding: clamp(72px, 8vh, 118px) max(28px, calc((100vw - var(--page-wide)) / 2)) !important;
+}
+
+#other-works .portfolio-other-works__hero-frame {
+  order: initial !important;
+  width: min(100vw, 2360px) !important;
+}
+
+#other-works .portfolio-other-works__hero-copy {
+  position: absolute !important;
+  left: max(28px, calc((100vw - var(--page-wide)) / 2)) !important;
+  top: clamp(154px, 13.8vh, 228px) !important;
+  right: auto !important;
+  bottom: auto !important;
+  z-index: 4 !important;
+  width: min(920px, calc(100vw - 56px)) !important;
+  max-width: min(920px, calc(100vw - 56px)) !important;
+  border: 0 !important;
+  padding: 0 !important;
+  transform: none !important;
+}
+
+#other-works .portfolio-other-works__hero h2.portfolio-main-title {
+  font-size: var(--main-title-size) !important;
+}
+
+@media (max-width: 900px) {
+  #other-works .portfolio-other-works__hero {
+    padding: 84px 18px 64px !important;
+  }
+
+  #other-works .portfolio-other-works__hero-copy {
+    position: absolute !important;
+    left: 36px !important;
+    top: clamp(110px, 16vh, 148px) !important;
+    width: min(100%, calc(100vw - 72px)) !important;
+    max-width: min(100%, calc(100vw - 72px)) !important;
+  }
+}
+
+/* T-125: move the 07 hero title to the lower-left image floor area and remove the separate label. */
+#other-works .portfolio-other-works__hero-copy {
+  left: max(28px, calc((100vw - var(--page-wide)) / 2)) !important;
+  top: auto !important;
+  bottom: clamp(320px, 27vh, 420px) !important;
+  width: min(620px, calc(100vw - 56px)) !important;
+  max-width: min(620px, calc(100vw - 56px)) !important;
+}
+
+#other-works .portfolio-other-works__hero-label {
+  display: none !important;
+}
+
+@media (max-width: 900px) {
+  #other-works .portfolio-other-works__hero-copy {
+    left: 36px !important;
+    bottom: clamp(180px, 24vh, 260px) !important;
+    width: min(100%, calc(100vw - 72px)) !important;
+    max-width: min(100%, calc(100vw - 72px)) !important;
+  }
+}
+
+/* T-136: final typography role lock; layout containers must not scale text. */
+:root {
+  --type-display-hero: clamp(3.15rem, 3.25vw, 5.45rem);
+  --type-section-title: var(--type-section);
+  --type-panel-title: var(--type-panel);
+  --type-closing-display: clamp(7.5rem, 5.6vw, 9rem);
+  --type-card-title: var(--type-title);
+  --type-claim-title: clamp(2.25rem, 1.56vw, 2.5rem);
+  --type-body-standard: var(--type-body);
+  --type-body-small: var(--type-caption);
+  --type-kicker: var(--type-caption);
+  --type-micro-label: var(--type-micro);
+  --type-nav-label: var(--type-caption);
+  --color-title: var(--type-color-title);
+  --color-title-strong: rgba(255, 248, 232, 0.96);
+  --color-title-soft: var(--type-color-title-soft);
+  --color-line: var(--type-color-line);
+  --color-body: var(--type-color-body);
+  --color-muted: var(--type-color-muted);
+  --color-caption: var(--type-color-caption);
+  --color-nav: var(--type-color-nav);
+  --main-title-kicker-size: var(--type-kicker);
+  --main-title-kicker-weight: var(--weight-caption);
+  --main-title-kicker-line: var(--type-line-caption);
+  --main-title-size: var(--type-display-hero);
+  --main-title-weight: 500;
+  --main-title-line: 1.02;
+  --main-titleline-size: var(--type-titleline);
+  --main-titleline-weight: var(--weight-line);
+  --main-titleline-line: var(--type-line-lead);
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --type-display-hero: var(--type-hero);
+    --type-section-title: var(--type-section);
+    --type-panel-title: var(--type-panel);
+    --type-closing-display: clamp(4rem, 12vw, 6rem);
+    --type-claim-title: clamp(1.75rem, 6vw, 2.25rem);
+  }
+}.portfolio-main-title,
+#visual-files.portfolio-hero h1.portfolio-main-title,
+.portfolio-section__intro h2.portfolio-main-title,
+.portfolio-video-feature__copy h2.portfolio-main-title,
+.portfolio-work__copy h2.portfolio-main-title,
+#other-works .portfolio-other-works__hero h2.portfolio-main-title {
+  color: var(--color-title) !important;
+  font-size: var(--type-display-hero) !important;
+  font-weight: var(--main-title-weight) !important;
+  line-height: var(--main-title-line) !important;
+  letter-spacing: 0 !important;
+}#commercial-film .portfolio-video-feature__copy--cinema h2.portfolio-main-title,
+#support .portfolio-support-panel .portfolio-section__intro h2.portfolio-main-title {
+  font-size: var(--type-section-title) !important;
+  font-weight: var(--weight-section) !important;
+  line-height: var(--type-line-title) !important;
+}
+
+/* T-153: archive heading is separate from the image wall again. */
+#other-works .portfolio-other-works__ai-wall > .portfolio-other-works__finale-copy {
+  position: relative !important;
+  left: auto !important;
+  top: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  justify-self: center !important;
+  justify-items: start !important;
+  align-content: start !important;
+  align-self: start !important;
+  width: min(var(--ow-stage-max), calc(100vw - clamp(40px, 6vw, 96px))) !important;
+  max-width: none !important;
+  border-left: 1px solid var(--main-title-rail-color) !important;
+  padding-left: var(--main-title-rail-pad) !important;
+  text-align: left !important;
+  transform: translate3d(0, calc(var(--scene-y) * -0.1), 0) !important;
+}
+
+#other-works .portfolio-other-works__ai-wall > .portfolio-other-works__finale-copy .portfolio-kicker,
+#other-works .portfolio-other-works__ai-wall > .portfolio-other-works__finale-copy h3.portfolio-main-title,
+#other-works .portfolio-other-works__ai-wall > .portfolio-other-works__finale-copy > p.portfolio-titleline {
+  text-align: left !important;
+}
+
+#other-works .portfolio-other-works__ai-wall > .portfolio-other-works__finale-copy > p.portfolio-titleline {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+@media (min-width: 2600px) {
+  #other-works .portfolio-other-works__ai-wall > .portfolio-other-works__finale-copy {
+    width: min(2600px, calc(100vw - 280px)) !important;
+  }
+}
+
+@media (min-width: 1800px) and (max-width: 2599px) {
+  #other-works .portfolio-other-works__ai-wall > .portfolio-other-works__finale-copy {
+    width: min(2080px, calc(100vw - 128px)) !important;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1180px) {
+  #other-works .portfolio-other-works__ai-wall > .portfolio-other-works__finale-copy {
+    width: calc(100vw - 56px) !important;
+  }
+}
+
+/* T-154: archive title is a centered exception, not a rail title. */
+#other-works .portfolio-other-works__ai-wall > .portfolio-other-works__finale-copy {
+  justify-items: center !important;
+  border-left: 0 !important;
+  padding-left: 0 !important;
+  text-align: center !important;
+}
+
+#other-works .portfolio-other-works__ai-wall > .portfolio-other-works__finale-copy .portfolio-kicker,
+#other-works .portfolio-other-works__ai-wall > .portfolio-other-works__finale-copy h3.portfolio-main-title,
+#other-works .portfolio-other-works__ai-wall > .portfolio-other-works__finale-copy > p.portfolio-titleline {
+  text-align: center !important;
+}
+
+#other-works .portfolio-other-works__ai-wall > .portfolio-other-works__finale-copy .portfolio-kicker,
+#other-works .portfolio-other-works__ai-wall > .portfolio-other-works__finale-copy > p.portfolio-titleline {
+  justify-self: center !important;
+}
+
+.xiaomi-color-stage__title h2.portfolio-main-title,
+.xiaomi-carousel__intro h2.portfolio-main-title,
+.xiaomi-detail-carousel__intro h2.portfolio-main-title,
+.xiaomi-dual-gallery__copy h2.portfolio-main-title,
+.xiaomi-accordion-stage__copy h2.portfolio-main-title,
+.portfolio-material-stage__copy h2.portfolio-main-title,
+.portfolio-photo-spec__copy h2.portfolio-main-title,
+#visual-system .xiaomi-carousel__intro h2.portfolio-main-title,
+#photo-scenes .xiaomi-dual-gallery__copy h2.portfolio-main-title,
+#other-works .portfolio-other-works__scene-copy h3.portfolio-main-title,
+#other-works .portfolio-other-works__finale-copy h3.portfolio-main-title {
+  color: var(--color-title-soft) !important;
+  font-size: var(--type-panel-title) !important;
+  font-weight: var(--weight-panel) !important;
+  line-height: var(--type-line-title) !important;
+  letter-spacing: 0 !important;
+}
+
+#other-works .portfolio-other-works__thanks-copy h3.portfolio-main-title {
+  color: var(--color-title) !important;
+  font-size: var(--type-closing-display) !important;
+  font-weight: 560 !important;
+  line-height: var(--type-line-tight) !important;
+  letter-spacing: 0 !important;
+}
+
+.portfolio-kicker,
+.portfolio-hero .portfolio-kicker,
+.portfolio-section__intro > .portfolio-kicker,
+.portfolio-work__copy > .portfolio-kicker,
+.portfolio-video-feature__copy > .portfolio-kicker,
+.xiaomi-color-stage__title > .portfolio-kicker,
+.xiaomi-carousel__intro > .portfolio-kicker,
+.xiaomi-detail-carousel__intro > .portfolio-kicker,
+.xiaomi-dual-gallery__copy > .portfolio-kicker,
+.xiaomi-accordion-stage__copy > .portfolio-kicker,
+#other-works .portfolio-other-works__hero-copy .portfolio-kicker,
+#other-works .portfolio-other-works__scene-copy .portfolio-kicker,
+#other-works .portfolio-other-works__finale-copy .portfolio-kicker {
+  color: var(--color-caption) !important;
+  font-size: var(--type-kicker) !important;
+  font-weight: var(--weight-caption) !important;
+  line-height: var(--type-line-caption) !important;
+  letter-spacing: 0 !important;
+}
+
+.portfolio-titleline,
+.portfolio-hero__titleline,
+.portfolio-section__intro > p.portfolio-titleline,
+.portfolio-work__copy > p.portfolio-titleline,
+.portfolio-video-feature__copy p.portfolio-titleline,
+.xiaomi-color-stage__title > p.portfolio-titleline,
+.xiaomi-carousel__intro > p.portfolio-titleline,
+.xiaomi-detail-carousel__intro > p.portfolio-titleline,
+.xiaomi-dual-gallery__copy > p.portfolio-titleline,
+.xiaomi-accordion-stage__copy > p.portfolio-titleline,
+#other-works .portfolio-other-works__hero .portfolio-titleline,
+#other-works .portfolio-other-works__scene-copy > p.portfolio-titleline,
+#other-works .portfolio-other-works__finale-copy > p.portfolio-titleline {
+  color: var(--color-line) !important;
+  font-size: var(--type-titleline) !important;
+  font-weight: var(--weight-line) !important;
+  line-height: var(--type-line-lead) !important;
+  letter-spacing: 0 !important;
+}.portfolio-card h3,
+.portfolio-method-card h3,
+.portfolio-photo-spec__item h3,
+#other-works .portfolio-other-works__poster-caption h3,
+#other-works .portfolio-other-works__light-caption h3,
+#other-works .portfolio-other-works__cinema-caption h3,
+#other-works .portfolio-other-works__wall-card h3 {
+  color: var(--color-title-soft) !important;
+  font-size: var(--type-card-title) !important;
+  font-weight: var(--weight-title) !important;
+  line-height: 1.24 !important;
+  letter-spacing: 0 !important;
+}
+
+p,
+li,
+.portfolio-body,
+.portfolio-card p,
+.portfolio-method-card p,
+.portfolio-photo-spec__item p,
+#other-works .portfolio-other-works__poster-caption p,
+#other-works .portfolio-other-works__light-caption p,
+#other-works .portfolio-other-works__cinema-caption p {
+  letter-spacing: 0;
+}#other-works .portfolio-other-works__poster-caption span,
+#other-works .portfolio-other-works__light-caption span,
+#other-works .portfolio-other-works__cinema-caption span,
+#other-works .portfolio-other-works__wall-card span {
+  color: var(--color-caption) !important;
+  font-size: var(--type-body-small) !important;
+  font-weight: var(--weight-caption) !important;
+  line-height: var(--type-line-caption) !important;
+  letter-spacing: 0 !important;
+}.portfolio-nav a,
+.portfolio-profile-nav a,
+.portfolio-profile-nav button {
+  color: var(--color-nav) !important;
+  font-size: var(--type-nav-label) !important;
+  font-weight: var(--weight-nav) !important;
+  line-height: 1 !important;
+  letter-spacing: 0 !important;
+}
+
+/* T-137: visual-tone top three lines are the section title group; picker text is not. */
+#visual-tone .xiaomi-color-stage__title > .portfolio-kicker {
+  margin: 0 0 var(--title-rhythm-kicker-to-title) !important;
+  color: var(--color-caption) !important;
+  font-size: var(--type-kicker) !important;
+  font-weight: var(--weight-caption) !important;
+  line-height: var(--type-line-caption) !important;
+  letter-spacing: 0 !important;
+}
+
+#visual-tone .xiaomi-color-stage__title h2.portfolio-main-title {
+  width: auto !important;
+  max-width: 100% !important;
+  color: var(--color-title) !important;
+  font-size: var(--type-display-hero) !important;
+  font-weight: var(--main-title-weight) !important;
+  line-height: var(--main-title-line) !important;
+  letter-spacing: 0 !important;
+}
+
+#visual-tone .xiaomi-color-stage__title > p.portfolio-titleline {
+  max-width: var(--titleline-width) !important;
+  margin: var(--title-rhythm-main-to-line) 0 0 !important;
+  color: var(--color-line) !important;
+  font-size: var(--type-titleline) !important;
+  font-weight: var(--weight-line) !important;
+  line-height: var(--type-line-lead) !important;
+  letter-spacing: 0 !important;
+}
+
+#visual-tone .xiaomi-color-stage__picker {
+  margin-top: clamp(18px, 1.4vh, 26px) !important;
+}
+
+#visual-tone .xiaomi-color-stage__picker h3 {
+  margin: 0 0 8px !important;
+  color: var(--color-title-soft) !important;
+  font-size: var(--type-card-title) !important;
+  font-weight: var(--weight-title) !important;
+  line-height: 1.24 !important;
+  letter-spacing: 0 !important;
+}
+
+#visual-tone .xiaomi-color-stage__picker p {
+  max-width: 34em !important;
+  margin: 0 !important;
+  color: var(--color-body) !important;
+  font-size: var(--type-body-small) !important;
+  font-weight: var(--weight-body) !important;
+  line-height: 1.58 !important;
+  letter-spacing: 0 !important;
+}
+
+/* T-170/T-171: 01A opening title is a centered exception without the title rail. */
+#visual-files.portfolio-hero .portfolio-hero__content {
+  padding-left: 0 !important;
+  align-items: center !important;
+  text-align: center !important;
+  transform: translateY(clamp(-56px, -4.2vh, -42px)) !important;
+}
+
+#visual-files.portfolio-hero .portfolio-hero__content::before,
+#visual-files.portfolio-hero .portfolio-hero__content::after {
+  content: none !important;
+  display: none !important;
+}
+
+#visual-files.portfolio-hero .portfolio-kicker,
+#visual-files.portfolio-hero h1.portfolio-main-title,
+#visual-files.portfolio-hero .portfolio-hero__titleline {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  text-align: center !important;
+}
+
+#visual-files.portfolio-hero h1.portfolio-main-title {
+  max-width: min(100%, 1040px) !important;
+}
+
+#visual-files.portfolio-hero .portfolio-hero__titleline {
+  max-width: min(100%, 52em) !important;
+}
+
+/* T-172: visual-tone title returns to the standard section-title scale. */
+#visual-tone .xiaomi-color-stage__title {
+  width: min(920px, calc(100vw - 56px)) !important;
+  max-width: min(920px, calc(100vw - 56px)) !important;
+}
+
+#visual-tone .xiaomi-color-stage__title h2.portfolio-main-title {
+  width: max-content !important;
+  max-width: 100% !important;
+  color: var(--color-title) !important;
+  font-size: var(--type-section-title) !important;
+  font-weight: var(--weight-section) !important;
+  line-height: var(--type-line-title) !important;
+  letter-spacing: 0 !important;
+}
+
+/* T-180: keep 02B title in the upper visual field after CSS cleanup repair. */
+@media (min-width: 901px) {
+  #visual-tone .xiaomi-color-stage__title {
+    position: absolute !important;
+    top: clamp(188px, 14vh, 302px) !important;
+    left: max(96px, calc((100vw - var(--page-wide)) / 2)) !important;
+    width: min(920px, var(--page-wide)) !important;
+    max-width: 920px !important;
+    margin: 0 !important;
+    transform: none !important;
+  }
+}
+
+/* T-191: 02B / 04B align to the 1920 desktop standard container. */
+@media (min-width: 901px) {
+  #visual-tone .xiaomi-color-stage__title {
+    position: absolute !important;
+    top: clamp(188px, 14vh, 302px) !important;
+    left: var(--page-standard-left, max(96px, calc((100vw - var(--page-standard, var(--page-wide))) / 2))) !important;
+    width: min(920px, var(--page-standard, var(--page-wide))) !important;
+    max-width: min(920px, var(--page-standard, var(--page-wide))) !important;
+    margin: 0 !important;
+    transform: none !important;
+    background: none !important;
+  }
+
+  #visual-tone .xiaomi-color-stage__title::before {
+    content: none !important;
+    display: none !important;
+    background: none !important;
+  }
+
+  #reality-imagination .portfolio-section__intro {
+    width: var(--page-standard, var(--page-wide)) !important;
+    max-width: var(--page-standard, var(--page-wide)) !important;
+    margin-inline: auto !important;
+  }
+}
+
+/* T-193: standard title alignment follows the canonical 4K content frame. */
+@media (min-width: 901px) {
+  #aigc-design .xiaomi-accordion-stage__heading,
+  #visual-system .xiaomi-carousel__intro,
+  #film-storyboard .portfolio-section__intro,
+  #reality-imagination .portfolio-section__intro,
+  #support .portfolio-support-panel .portfolio-section__intro {
+    box-sizing: border-box !important;
+    width: var(--page-standard, var(--page-wide)) !important;
+    max-width: var(--page-standard, var(--page-wide)) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  #visual-tone .xiaomi-color-stage__title {
+    left: var(--page-standard-left, max(96px, calc((100vw - var(--page-standard, var(--page-wide))) / 2))) !important;
+    width: min(920px, var(--page-standard, var(--page-wide)) ) !important;
+    max-width: min(920px, var(--page-standard, var(--page-wide)) ) !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+  }
+
+  #visual-tone .xiaomi-color-stage__title::before,
+  #visual-tone .xiaomi-color-stage__title::after {
+    content: none !important;
+    display: none !important;
+  }
+
+  #commercial-photo .portfolio-reality-fusion__panel > .portfolio-section__intro {
+    left: var(--page-standard-left, max(96px, calc((100vw - var(--page-standard, var(--page-wide))) / 2))) !important;
+    width: min(760px, var(--page-standard, var(--page-wide))) !important;
+    max-width: min(760px, var(--page-standard, var(--page-wide))) !important;
+    margin: 0 !important;
+  }
+}
+
+/*
+  T-219: main-title reduction after design taste pass.
+  True chapter titles keep the English eyebrow and Chinese main title only.
+  Local story labels and content captions keep their explanatory copy.
+*/
+#visual-files.portfolio-hero .portfolio-kicker,
+.portfolio-section__intro > .portfolio-kicker,
+.portfolio-video-feature__copy > .portfolio-kicker,
+.portfolio-work__copy > .portfolio-kicker,
+#aigc-design .xiaomi-accordion-stage__heading > .portfolio-kicker,
+#visual-tone .xiaomi-color-stage__title > .portfolio-kicker,
+#visual-system .xiaomi-carousel__intro > .portfolio-kicker,
+#support .portfolio-support-panel .portfolio-section__intro > .portfolio-kicker,
+#other-works .portfolio-other-works__hero-copy > .portfolio-kicker,
+#other-works .portfolio-other-works__ai-wall > .portfolio-other-works__finale-copy > .portfolio-kicker,
+#future-profile .profile-header__eyebrow {
+  display: block !important;
+  font-family: var(--font-sans) !important;
+  font-weight: 520 !important;
+  letter-spacing: 0 !important;
+  text-transform: uppercase !important;
+}
+
+.portfolio-titleline--main,
+#future-profile .profile-header__subtitle {
+  display: none !important;
+}
+
+#visual-files.portfolio-hero .portfolio-hero__content {
+  gap: 0 !important;
+  transform: translateY(clamp(-36px, -3.2vh, -28px)) !important;
+}
+
+#visual-files.portfolio-hero h1.portfolio-main-title {
+  font-family: var(--font-sans) !important;
+  font-weight: 590 !important;
+  letter-spacing: 0 !important;
+}
+
+#visual-files.portfolio-hero .portfolio-kicker {
+  margin-bottom: clamp(14px, 1.15vh, 20px) !important;
+}
+
+.portfolio-section__intro h2.portfolio-main-title,
+.portfolio-video-feature__copy h2.portfolio-main-title,
+.portfolio-work__copy h2.portfolio-main-title,
+#aigc-design .xiaomi-accordion-stage__heading h2.portfolio-main-title,
+#visual-tone .xiaomi-color-stage__title h2.portfolio-main-title,
+#visual-system .xiaomi-carousel__intro h2.portfolio-main-title,
+#support .portfolio-support-panel .portfolio-section__intro h2.portfolio-main-title,
+#other-works .portfolio-other-works__hero-copy h2.portfolio-main-title,
+#other-works .portfolio-other-works__ai-wall > .portfolio-other-works__finale-copy h3.portfolio-main-title,
+#future-profile .profile-header__title {
+  font-family: var(--font-sans) !important;
+  font-size: var(--type-section) !important;
+  font-weight: var(--weight-section) !important;
+  line-height: var(--type-line-tight) !important;
+  letter-spacing: 0 !important;
+}
+
+@media (min-width: 901px) {
+  .portfolio-titleline--main + *,
+  #future-profile .profile-header__subtitle + * {
+    margin-top: clamp(28px, 3vh, 44px) !important;
+  }
+
+  #visual-tone .xiaomi-color-stage__picker {
+    margin-top: clamp(20px, 1.6vh, 30px) !important;
+  }
+
+  #future-profile .profile-header {
+    margin-bottom: clamp(30px, 3vh, 48px) !important;
+    padding-left: 0 !important;
+  }
+
+  #future-profile .profile-header__rail {
+    display: none !important;
+  }
+}
+

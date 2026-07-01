@@ -1,0 +1,526 @@
+/*
+  Portfolio Runtime CSS Atlas
+
+  01. Tokens / base shell
+  02. Intro animation (locked: do not change timing without request)
+  03. Global layout and title rhythm
+  04. Shared cards, media, and chapter primitives
+  05. Chapter modules and interaction surfaces
+  06. Support archive, personal profile, and quick navigation
+  07. Responsive guardrails
+  08. Historical refinements and final overrides
+
+  This stylesheet keeps historical cascade order intact. Later dated blocks are
+  intentionally retained near the end because they carry the current visual lock.
+*/
+
+/* ==========================================================================
+   01. Tokens / Base Shell
+   ========================================================================== */
+
+@font-face {
+  font-family: "MiSans VF";
+  src: url("fonts/MiSans/MiSansVF-subset-t310.woff2") format("woff2");
+  font-weight: 150 700;
+  font-style: normal;
+  font-display: swap;
+}
+:root {
+  --portfolio-bg: #050403;
+  --portfolio-ivory: #0b0906;
+  --portfolio-paper: #100d08;
+  --portfolio-ink: #f7efe1;
+  --portfolio-muted: rgba(247, 239, 225, 0.66);
+  --portfolio-dark: #070604;
+  --portfolio-dark-2: #11100d;
+  --portfolio-gold: #c8a76a;
+  --portfolio-gold-soft: #ead8ae;
+  --portfolio-platinum: #d9d2c3;
+  --portfolio-deep-blue: #10212b;
+  --portfolio-line: rgba(232, 211, 169, 0.16);
+  --portfolio-line-dark: rgba(232, 211, 169, 0.18);
+  --portfolio-shadow: rgba(0, 0, 0, 0.42);
+  --text-title: rgba(255, 250, 238, 0.98);
+  --text-subtitle: rgba(247, 239, 225, 0.76);
+  --text-body: rgba(247, 239, 225, 0.66);
+  --text-muted: rgba(247, 239, 225, 0.48);
+  --text-meta: rgba(234, 216, 174, 0.64);
+  --text-gold: rgba(234, 216, 174, 0.82);
+  --font-hero: clamp(58px, 4.2vw, 92px);
+  --font-section: clamp(40px, 2.55vw, 58px);
+  --font-lead: clamp(15px, 0.92vw, 18px);
+  --font-body: clamp(12px, 0.72vw, 14px);
+  --font-card-title: clamp(16px, 0.92vw, 20px);
+  --font-emphasis: clamp(15px, 0.9vw, 18px);
+  --font-method: clamp(14px, 0.82vw, 17px);
+  --font-caption: clamp(10px, 0.56vw, 12px);
+  --font-nav: clamp(11px, 0.6vw, 13px);
+  --leading-tight: 1.05;
+  --leading-title: 1.1;
+  --leading-body: 1.62;
+  --leading-caption: 1.45;
+  --title-group-subtitle-width: 760px;
+  --hero-subtitle-width: 720px;
+  --screen-h: 100svh;
+  --screen-pad-top: clamp(96px, 10.4vh, 132px);
+  --screen-pad-bottom: clamp(44px, 5.4vh, 72px);
+  /*
+    Canonical frame system.
+    Keep all standard content widths based on CSS viewport pixels:
+    Desktop portfolio review is optimized around a restrained 1560px frame.
+    HiDPI / Windows display scaling should map CSS pixels to physical pixels;
+    the page itself should not keep widening into 4K physical pixels.
+    Do not add DPR / screenshot-pixel branches; they make layout drift.
+  */
+  --page-standard: min(1560px, calc(100vw - clamp(80px, 10vw, 220px)));
+  --page-standard-left: max(48px, calc((100vw - var(--page-standard)) / 2));
+  --page-wide: var(--page-standard);
+  --portfolio-profile-wide: var(--page-standard);
+  --portfolio-profile-left: var(--page-standard-left);
+  --page-medium: min(1320px, calc(100vw - clamp(72px, 12vw, 240px)));
+}
+
+@media (min-width: 1920px) {
+  :root {
+    --page-standard: min(1560px, calc(100vw - clamp(96px, 6.25vw, 160px)));
+    --page-standard-left: max(48px, calc((100vw - var(--page-standard)) / 2));
+  }
+}
+
+@media (min-width: 2560px) {
+  :root {
+    --page-standard: min(1560px, calc(100vw - clamp(96px, 6.25vw, 160px)));
+    --page-standard-left: max(48px, calc((100vw - var(--page-standard)) / 2));
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html.is-intro-running,
+html.is-intro-running body {
+  overflow: hidden !important;
+  overscroll-behavior: none;
+  touch-action: none;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  background: #050403;
+}
+
+.portfolio-page,
+.portfolio-page * {
+  box-sizing: border-box;
+}
+
+.portfolio-page {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  color: var(--portfolio-ink);
+  background:
+    radial-gradient(circle at 76% 10%, rgba(198, 157, 86, 0.12), transparent 32%),
+    linear-gradient(180deg, #050403 0%, #0a0806 44%, #050403 100%);
+  font-family: "MiSans Local", "MiSans VF", "MiSans_VF", MiSans, "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-variant-numeric: tabular-nums;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+}
+
+.portfolio-page img,
+.portfolio-page video {
+  display: block;
+  max-width: 100%;
+}
+
+/* ==========================================================================
+   02. Intro Animation
+   Locked sequence: word wall, line collapse, black field, AI VISUAL mark.
+   ========================================================================== */
+
+.portfolio-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  overflow: hidden;
+  background: #030302;
+  color: #fff;
+  pointer-events: none;
+  animation: portfolioIntroExit 760ms ease 7820ms forwards;
+}
+
+.portfolio-intro.is-hidden {
+  display: none;
+  visibility: hidden;
+}
+
+.portfolio-intro__wall {
+  --intro-gap: clamp(16px, 1.45vw, 34px);
+  position: absolute;
+  top: -12vh;
+  bottom: -12vh;
+  left: 0;
+  right: 0;
+  width: 100vw;
+  display: grid;
+  grid-template-columns: repeat(13, minmax(0, 1fr));
+  column-gap: var(--intro-gap);
+  padding-inline: var(--intro-gap);
+  align-content: center;
+  justify-content: center;
+  transform: none;
+  box-sizing: border-box;
+  opacity: 0;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 7%, #000 93%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 7%, #000 93%, transparent 100%);
+  animation:
+    portfolioWallIn 620ms cubic-bezier(0.22, 1, 0.36, 1) 80ms forwards,
+    portfolioWallOut 620ms ease 2920ms forwards;
+}
+
+.portfolio-intro__column {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(15px, 1.5vh, 25.5px);
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+  animation-duration: 5200ms;
+  animation-timing-function: linear;
+  animation-delay: var(--column-delay, 0ms);
+  animation-fill-mode: both;
+}
+
+.portfolio-intro__column.is-up {
+  animation-name: portfolioColumnUp;
+}
+
+.portfolio-intro__column.is-down {
+  animation-name: portfolioColumnDown;
+}
+
+.portfolio-intro__column.is-center {
+  z-index: 2;
+}
+
+.portfolio-intro__column.is-far {
+  opacity: 0.58;
+}
+
+.portfolio-intro__wall span {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.48);
+  font-size: clamp(16px, 1.06vw, 29px);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: normal;
+  white-space: nowrap;
+  overflow: visible;
+  text-align: center;
+  text-shadow: 0 0 22px rgba(255, 255, 255, 0.06);
+  font-synthesis: none;
+  font-stretch: normal;
+  font-kerning: normal;
+  font-feature-settings: "kern" 1;
+  text-rendering: optimizeLegibility;
+}
+
+.portfolio-intro__wall span.is-strong {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 300;
+}
+
+.portfolio-intro__wall span.is-bright {
+  color: rgba(255, 255, 255, 0.78);
+  font-weight: 300;
+}
+
+.portfolio-intro__wall span.is-dim,
+.portfolio-intro__wall span.is-soft {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.portfolio-intro__column.is-center span {
+  font-weight: 600;
+}
+
+.portfolio-intro__wall span.is-focus {
+  color: #fff;
+  font-size: clamp(20px, 1.34vw, 34px);
+  font-weight: 600;
+  text-shadow:
+    0 0 18px rgba(255, 255, 255, 0.22),
+    0 0 70px rgba(255, 255, 255, 0.1);
+}
+
+.portfolio-intro__mattes {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.portfolio-intro__mattes span {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 0;
+  background: #030302;
+  animation: portfolioMatteIn 640ms cubic-bezier(0.76, 0, 0.24, 1) 1220ms forwards;
+}
+
+.portfolio-intro__mattes span:first-child {
+  top: 0;
+}
+
+.portfolio-intro__mattes span:last-child {
+  bottom: 0;
+}
+
+.portfolio-intro__frame {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.portfolio-intro__frame span {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.96);
+  opacity: 0;
+  transform: scaleX(0);
+  transform-origin: center;
+  box-shadow:
+    0 0 18px rgba(255, 255, 255, 0.38),
+    0 0 48px rgba(255, 255, 255, 0.2);
+  animation:
+    portfolioLineFlash 140ms ease 1100ms forwards,
+    portfolioLineSettle 640ms cubic-bezier(0.76, 0, 0.24, 1) 1220ms forwards,
+    portfolioLineOut 620ms ease 2920ms forwards;
+}
+
+.portfolio-intro__frame span:first-child {
+  top: 0;
+}
+
+.portfolio-intro__frame span:last-child {
+  bottom: 0;
+}
+
+.portfolio-intro__black {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  background: #030302;
+  opacity: 0;
+  animation: portfolioBlackIn 640ms ease 3360ms forwards;
+}
+
+.portfolio-intro__mark {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: clamp(42px, 4.8vw, 92px);
+  font-weight: 450;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  opacity: 0;
+  animation:
+    portfolioMarkIn 80ms linear 4200ms forwards,
+    portfolioMarkOut 520ms ease 7080ms forwards;
+}
+
+.portfolio-intro__mark span {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  width: auto;
+  max-width: 0;
+  white-space: nowrap;
+  text-align: center;
+  animation: portfolioType 1180ms steps(9, end) 4320ms forwards;
+}
+
+.portfolio-intro__mark span::after {
+  content: "";
+  position: absolute;
+  top: 0.05em;
+  right: 0;
+  bottom: 0.03em;
+  width: 2px;
+  background: #fff;
+  opacity: 0;
+  animation:
+    portfolioCaret 760ms steps(1, end) 4320ms 3,
+    portfolioCaretOut 140ms linear 6960ms forwards;
+}
+
+@keyframes portfolioWallIn {
+  from {
+    opacity: 0;
+    filter: blur(2px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+@keyframes portfolioWallOut {
+  to {
+    opacity: 0;
+    filter: blur(6px);
+  }
+}
+
+@keyframes portfolioColumnUp {
+  from {
+    transform: translateY(34px);
+  }
+  to {
+    transform: translateY(-82px);
+  }
+}
+
+@keyframes portfolioColumnDown {
+  from {
+    transform: translateY(-34px);
+  }
+  to {
+    transform: translateY(82px);
+  }
+}
+
+@keyframes portfolioMatteIn {
+  to {
+    height: 33.333vh;
+  }
+}
+
+@keyframes portfolioMatteOut {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes portfolioLineFlash {
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+@keyframes portfolioLineSettle {
+  from {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+.portfolio-intro__frame span:first-child {
+  animation-name: portfolioLineFlash, portfolioLineSettleTop, portfolioLineOut;
+}
+
+.portfolio-intro__frame span:last-child {
+  animation-name: portfolioLineFlash, portfolioLineSettleBottom, portfolioLineOut;
+}
+
+@keyframes portfolioLineSettleTop {
+  from {
+    top: 0;
+  }
+  to {
+    top: 33.333vh;
+  }
+}
+
+@keyframes portfolioLineSettleBottom {
+  from {
+    bottom: 0;
+  }
+  to {
+    bottom: 33.333vh;
+  }
+}
+
+@keyframes portfolioLineOut {
+  to {
+    opacity: 0;
+    transform: scaleX(0.72);
+  }
+}
+
+@keyframes portfolioBlackIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes portfolioMarkIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes portfolioType {
+  to {
+    max-width: 12em;
+  }
+}
+
+@keyframes portfolioCaret {
+  0%, 49% {
+    opacity: 1;
+  }
+  50%, 100% {
+    opacity: 0;
+  }
+}
+
+@keyframes portfolioCaretOut {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes portfolioMarkOut {
+  to {
+    opacity: 0;
+    filter: blur(4px);
+  }
+}
+
+@keyframes portfolioIntroExit {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes portfolioHeroSettle {
+  from {
+    filter: brightness(0.96);
+  }
+  to {
+    filter: saturate(1) brightness(1);
+  }
+}

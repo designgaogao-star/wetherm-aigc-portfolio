@@ -1,0 +1,1845 @@
+/* ==========================================================================
+   T-157: Personal profile flip-card module, scoped from external profile-card.
+   Source: external profile-card prototype
+   ========================================================================== */
+
+/* ==========================================================================
+   Personal Profile Flip Card Archive  v5
+   Design DNA: extracted from Wetherm AIGC Portfolio
+   v5: full visual polish — front theme graphics, flip hints, signature
+        monogram, refined tagline, index hierarchy, Row B alignment fix
+   ========================================================================== */
+
+#future-profile .profile-page {
+  --pc-bg: #050403;
+  --pc-ink: #f7efe1;
+  --pc-ink-soft: rgba(247, 239, 225, 0.86);
+  --pc-body: rgba(247, 239, 225, 0.68);
+  --pc-muted: rgba(247, 239, 225, 0.48);
+  --pc-gold: #c8a76a;
+  --pc-gold-soft: #e8d3a9;
+  --pc-gold-dim: rgba(232, 211, 169, 0.5);
+  --pc-line: rgba(232, 211, 169, 0.16);
+  --pc-line-soft: rgba(232, 211, 169, 0.08);
+
+  --font-sans: "MiSans VF", "PingFang SC", "Microsoft YaHei", sans-serif;
+
+  --type-hero: clamp(2.6rem, 3.8vw, 5rem);
+  --type-section: clamp(1.75rem, 2.2vw, 2.8rem);
+  --type-card-title: clamp(1.35rem, 1.55vw, 2rem);
+  --type-body: clamp(0.88rem, 0.72vw, 1.02rem);
+  --type-caption: clamp(0.68rem, 0.52vw, 0.8rem);
+  --type-micro: clamp(0.62rem, 0.46vw, 0.72rem);
+
+  --leading-tight: 1.02;
+  --leading-title: 1.1;
+  --leading-body: 1.66;
+  --leading-caption: 1.36;
+
+  --weight-hero: 580;
+  --weight-section: 520;
+  --weight-card: 480;
+  --weight-body: 380;
+  --weight-caption: 430;
+
+  --page-wide: var(--page-standard);
+  --flip-duration: 500ms;
+  --flip-easing: cubic-bezier(0.34, 1.16, 0.64, 1);
+}
+
+#future-profile .profile-page,
+#future-profile .profile-page * { box-sizing: border-box; }
+
+#future-profile.portfolio-profile-card-chapter,
+#future-profile .portfolio-profile-card-panel {
+  position: relative;
+  display: block;
+  min-height: 100svh;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* ==========================================================================
+   Page Shell & Ambient
+   ========================================================================== */
+
+.profile-page {
+  position: relative; min-height: 100vh;
+  display: flex; flex-direction: column; align-items: center;
+  padding: clamp(64px, 7vh, 100px) 0 clamp(36px, 4vh, 60px);
+  color: var(--pc-ink); overflow: hidden;
+}
+
+.profile-page__ambient {
+  position: absolute; inset: 0; z-index: 0;
+  background:
+    radial-gradient(circle at 76% 10%, rgba(198, 157, 86, 0.11), transparent 32%),
+    radial-gradient(circle at 18% 82%, rgba(52, 112, 130, 0.07), transparent 34%),
+    radial-gradient(circle at 50% 50%, rgba(200, 167, 106, 0.03), transparent 60%),
+    linear-gradient(180deg, #050403 0%, #0a0806 44%, #050403 100%);
+  pointer-events: none;
+}
+
+.profile-page__grid-overlay {
+  position: absolute; inset: 0; z-index: 0;
+  background:
+    repeating-linear-gradient(90deg, rgba(232, 211, 169, 0.018) 0 1px, transparent 1px 9.2vw),
+    repeating-linear-gradient(180deg, rgba(232, 211, 169, 0.008) 0 1px, transparent 1px 9.2vh);
+  pointer-events: none;
+}
+
+.profile-page > * { position: relative; z-index: 1; }
+
+/* ==========================================================================
+   Header — with Signature Monogram (#6)
+   ========================================================================== */
+
+.profile-header {
+  width: var(--page-wide); max-width: var(--page-wide);
+  margin-bottom: clamp(28px, 3vh, 44px);
+  padding-left: clamp(22px, 1.6vw, 30px);
+  position: relative;
+}
+
+.profile-header__rail {
+  position: absolute; left: 0; top: 50%;
+  width: 1px; height: clamp(110px, 9vh, 150px);
+  background: linear-gradient(180deg, transparent, var(--pc-gold-dim) 20%, var(--pc-gold-dim) 80%, transparent);
+  transform: translateY(-50%);
+}
+
+/* #6: Signature monogram — visual anchor */
+.profile-header__monogram {
+  position: absolute; right: clamp(22px, 1.65vw, 40px); top: 50%; transform: translateY(-50%);
+  width: clamp(64px, 5.5vw, 96px); height: clamp(64px, 5.5vw, 96px);
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--pc-line); border-radius: 8px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.015));
+}
+.profile-header__monogram-char {
+  color: var(--pc-gold-dim); font-size: clamp(1.8rem, 2.2vw, 3rem);
+  font-weight: 300; line-height: 1; letter-spacing: 0;
+}
+
+.profile-header__eyebrow {
+  margin: 0 0 clamp(8px, 0.8vh, 12px);
+  color: var(--pc-gold-dim); font-size: var(--type-caption);
+  font-weight: var(--weight-caption); line-height: var(--leading-caption); letter-spacing: 0;
+}
+
+.profile-header__title {
+  margin: 0; color: var(--pc-ink-soft);
+  font-size: var(--type-hero); font-weight: var(--weight-hero);
+  line-height: var(--leading-tight); letter-spacing: 0; text-wrap: balance;
+}
+
+.profile-header__subtitle {
+  margin: clamp(12px, 1.2vw, 16px) 0 0;
+  max-width: 500px; color: var(--pc-body);
+  font-size: var(--type-body); font-weight: var(--weight-body);
+  line-height: var(--leading-body); text-wrap: pretty;
+}
+
+/* ==========================================================================
+   Grid Sections — with Row B alignment fix (#3)
+   ========================================================================== */
+
+.profile-grid {
+  width: var(--page-wide); max-width: var(--page-wide);
+  display: grid; gap: clamp(10px, 0.85vw, 15px);
+}
+
+/* Row B: Identity — hero card (2x2) + 2 standard cards stacked vertically */
+.profile-grid--identity {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: auto auto;
+}
+
+/* #3: Force name & role cards to each occupy exactly one row so they fill hero height */
+.profile-grid--identity .flip-card:nth-child(2) { grid-row: 1 / 2; }
+.profile-grid--identity .flip-card:nth-child(3) { grid-row: 2 / 3; }
+
+/* Row C: Quad — 4 equal cards */
+.profile-grid--quad {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-auto-flow: dense;
+}
+
+/* Row D: Philosophy — 2 equal tall cards */
+.profile-grid--philosophy {
+  grid-template-columns: 1fr 1fr;
+  grid-auto-flow: row;
+}
+
+/* Row E: Contact — 3 equal cards */
+.profile-grid--contact {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-auto-flow: row;
+}
+
+/* Section spacing */
+.profile-grid--identity { margin-bottom: clamp(16px, 1.6vh, 26px); }
+.profile-grid--quad      { margin-bottom: clamp(16px, 1.6vh, 26px); }
+
+/* Row C2: Ultra-wide single card (full width) */
+.profile-grid--ultra-row {
+  grid-template-columns: 1fr;
+  margin-bottom: clamp(16px, 1.6vh, 26px);
+}
+
+.profile-grid--philosophy{ margin-bottom: clamp(16px, 1.6vh, 26px); }
+
+/* ==========================================================================
+   Scroll Cue — breathing arrow
+   ========================================================================== */
+
+.scroll-cue {
+  width: var(--page-wide); max-width: var(--page-wide);
+  display: flex; justify-content: center; align-items: center;
+  padding: clamp(20px, 2.5vh, 36px) 0 clamp(28px, 3.5vh, 48px) 0;
+}
+
+.scroll-cue__mark {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(1.6rem, 2vw, 2.4rem);
+  font-weight: 300;
+  color: var(--pc-gold-dim);
+  line-height: 1;
+  display: inline-block;
+  animation: scroll-breathe 2.4s ease-in-out infinite;
+}
+
+@keyframes scroll-breathe {
+  0%, 100% {
+    opacity: 0.25;
+    transform: rotate(90deg) translateY(0);
+  }
+  50% {
+    opacity: 0.7;
+    transform: rotate(90deg) translateY(6px);
+  }
+}
+
+/* ==========================================================================
+   Flip Card Core — Sheen Reveal
+   ========================================================================== */
+
+.flip-card {
+  position: relative;
+  cursor: pointer; border: 0; background: none; padding: 0; outline: none;
+}
+
+.flip-card__inner {
+  position: relative; width: 100%; height: 100%;
+}
+
+/* Sheen layer — left to right diagonal */
+.flip-card__sheen {
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(232,211,169,0.04) 46%,
+    rgba(232,211,169,0.10) 50%,
+    rgba(232,211,169,0.04) 54%,
+    transparent 60%
+  );
+  background-size: 300% 300%;
+  background-position: 200% 0;
+  opacity: 0;
+  transition: background-position 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              opacity 0.2s ease;
+  pointer-events: none;
+  z-index: 5;
+  border-radius: 7px;
+}
+
+.flip-card:hover .flip-card__sheen,
+.flip-card:focus-visible .flip-card__sheen,
+.flip-card.is-active .flip-card__sheen {
+  background-position: -100% 0;
+  opacity: 1;
+}
+
+/* Front & Back faces */
+.flip-card__front,
+.flip-card__back {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: clamp(22px, 1.65vw, 32px);
+  border: 1px solid var(--pc-line); border-radius: 7px; overflow: hidden;
+}
+
+/* ---- Front Face ---- */
+.flip-card__front {
+  background: linear-gradient(180deg, rgba(255,255,255,0.058), rgba(255,255,255,0.024));
+  backdrop-filter: blur(18px);
+  box-shadow: 0 22px 64px rgba(0,0,0,0.2);
+  transition: opacity 0.35s ease, border-color 320ms ease, box-shadow 320ms ease;
+  z-index: 2;
+}
+
+.flip-card:hover .flip-card__front,
+.flip-card:focus-visible .flip-card__front,
+.flip-card.is-active .flip-card__front {
+  opacity: 0;
+  border-color: rgba(200,167,106,0.5);
+}
+
+/* ---- Back Face ---- */
+.flip-card__back {
+  background:
+    linear-gradient(135deg, rgba(200,167,106,0.065), rgba(5,4,3,0.58) 60%),
+    radial-gradient(circle at 70% 30%, rgba(232,211,169,0.045), transparent 50%);
+  border-color: rgba(200,167,106,0.28);
+  box-shadow: 0 22px 64px rgba(0,0,0,0.28), inset 0 0 56px rgba(232,211,169,0.025);
+  backdrop-filter: blur(18px);
+  opacity: 0;
+  transition: opacity 0.35s ease 0.12s;
+  z-index: 3;
+}
+
+.flip-card:hover .flip-card__back,
+.flip-card:focus-visible .flip-card__back,
+.flip-card.is-active .flip-card__back {
+  opacity: 1;
+}
+
+/* All cards: index hidden */
+.flip-card__index { display: none; }
+
+.flip-card__label {
+  position: absolute; top: clamp(20px, 1.55vw, 28px); right: clamp(22px, 1.65vw, 32px);
+  color: var(--pc-gold-dim); font-size: var(--type-micro);
+  font-weight: 500; line-height: 1; letter-spacing: 0.06em;
+}
+
+.flip-card__title {
+  margin: 0; color: var(--pc-ink-soft);
+  font-size: var(--type-card-title); font-weight: var(--weight-card);
+  line-height: var(--leading-title); letter-spacing: 0; text-wrap: balance;
+  position: relative; z-index: 1;
+}
+
+/* Ultra-wide title — same alignment as other cards (not centered) */
+.flip-card__title--centered {
+  /* removed centering — now behaves like standard cards */
+}
+
+/* Decor line — hidden per user request */
+.flip-card__decor { display: none; }
+
+/* Front theme graphics — all hidden per user request */
+.flip-card__fg { display: none; }
+
+/* Flip hint — hidden per user request */
+.flip-card__hint { display: none; }
+
+/* Back Face (shared) — no 3D transform needed */
+
+/* Back content — same position as front title */
+.flip-card__back-value {
+  margin: 0; color: var(--pc-ink);
+  font-size: clamp(1.35rem, 1.25vw, 1.85rem); font-weight: 520;
+  line-height: 1.18; letter-spacing: 0; text-wrap: balance;
+  position: relative; z-index: 2;
+}
+
+.flip-card__back-unit {
+  font-size: 0.58em; font-weight: 400; margin-left: 4px; color: var(--pc-gold-soft);
+}
+
+.flip-card__back-list {
+  margin: 0; padding: 0; list-style: none;
+  display: grid; gap: clamp(5px, 0.5vw, 9px);
+  position: relative; z-index: 2;
+}
+.flip-card__back-list li {
+  color: var(--pc-ink-soft); font-size: var(--type-body); font-weight: 400;
+  line-height: var(--leading-body); padding-left: clamp(11px, 0.8vw, 15px); position: relative;
+}
+.flip-card__back-list li::before {
+  content: ""; position: absolute; left: 0; top: 0.68em;
+  width: 5px; height: 1px; background: var(--pc-gold-dim);
+}
+
+/* ---- Back Decorative Elements ---- */
+
+.flip-card__back-glyph {
+  position: absolute; bottom: clamp(22px, 1.65vw, 32px); right: clamp(22px, 1.65vw, 32px);
+  font-size: clamp(3rem, 3.5vw, 5rem); font-weight: 600;
+  color: rgba(232,211,169,0.08); line-height: 1; letter-spacing: 0.02em;
+  pointer-events: none; z-index: 1;
+}
+.flip-card__back-glyph--sm {
+  font-size: clamp(2rem, 2.4vw, 3.2rem); font-weight: 500;
+}
+
+.flip-card__back-arc {
+  position: absolute; bottom: clamp(18px, 1.4vw, 26px); right: clamp(18px, 1.4vw, 26px);
+  width: clamp(60px, 5vw, 90px); height: clamp(60px, 5vw, 90px);
+  pointer-events: none; z-index: 1;
+}
+.flip-card__back-arc svg { width: 100%; height: 100%; }
+
+.flip-card__back-lines {
+  position: absolute; top: clamp(22px, 1.65vw, 32px); right: clamp(22px, 1.65vw, 32px);
+  width: 1px; height: calc(100% - clamp(44px, 3.3vw, 64px));
+  background: linear-gradient(180deg, var(--pc-gold-dim), transparent);
+  opacity: 0.3; pointer-events: none; z-index: 1;
+}
+
+/* Hero back */
+.flip-card__back--hero {
+  align-items: center; justify-content: center; text-align: center;
+  background:
+    linear-gradient(135deg, rgba(200,167,106,0.09), rgba(5,4,3,0.55) 60%),
+    radial-gradient(circle at 50% 45%, rgba(232,211,169,0.08), transparent 55%);
+}
+.flip-card__back-value--hero {
+  font-size: clamp(1.8rem, 2.2vw, 3rem); font-weight: 580;
+  letter-spacing: 0.04em; line-height: 1.2; text-align: center;
+}
+.flip-card__back-hero-decor {
+  position: absolute; bottom: clamp(30px, 3vw, 50px); left: 50%; transform: translateX(-50%);
+  width: clamp(50px, 4vw, 80px); height: 1px;
+  background: linear-gradient(90deg, transparent, var(--pc-gold-dim), transparent);
+  pointer-events: none;
+}
+
+/* Credo back */
+.flip-card__back--credo {
+  justify-content: flex-end;
+}
+.flip-card__back-credo-list {
+  display: grid; gap: clamp(10px, 0.9vw, 15px);
+  position: relative; z-index: 2;
+}
+.flip-card__back-credo-item strong {
+  display: block; color: var(--pc-ink-soft);
+  font-size: clamp(1.1rem, 1vw, 1.4rem); font-weight: 500; line-height: 1.3;
+}
+.flip-card__back-roman {
+  position: absolute; top: clamp(18px, 1.4vw, 26px); right: clamp(22px, 1.65vw, 32px);
+  font-size: clamp(1.8rem, 1.8vw, 2.8rem); font-weight: 300;
+  color: rgba(232,211,169,0.1); line-height: 1; letter-spacing: 0.04em;
+  font-family: Georgia, "Times New Roman", serif; font-style: italic;
+  pointer-events: none; z-index: 1;
+}
+
+/* ==========================================================================
+   Card Size Variants
+   ========================================================================== */
+
+.flip-card__inner { min-height: clamp(180px, 20vh, 225px); }
+
+.flip-card--hero {
+  grid-column: 1 / 3;
+  grid-row: 1 / 3;
+}
+.flip-card--hero .flip-card__inner {
+  min-height: clamp(380px, 40vh, 470px);
+}
+
+.flip-card--tall .flip-card__inner {
+  min-height: clamp(240px, 27vh, 305px);
+}
+
+/* Ultra-wide card */
+.flip-card--ultra { grid-column: 1 / -1; }
+.flip-card--ultra .flip-card__inner {
+  min-height: clamp(135px, 15vh, 178px);
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media (max-width: 1080px) {
+  #future-profile .profile-page {
+    --type-hero: 2.25rem; --type-card-title: 1.25rem;
+    --type-body: 0.84rem; --type-caption: 0.72rem; --type-micro: 0.65rem;
+  }
+
+  .profile-grid--quad { grid-template-columns: repeat(2, 1fr); }
+  .profile-grid--contact { grid-template-columns: repeat(3, 1fr); }
+  .flip-card--hero .flip-card__inner { min-height: 320px; }
+  .flip-card--tall .flip-card__inner { min-height: 220px; }
+
+  .profile-tagline__text { white-space: normal; }
+  .profile-header__monogram { width: 52px; height: 52px; }
+  .profile-header__monogram-char { font-size: 1.5rem; }
+}
+
+@media (max-width: 800px) {
+  #future-profile .profile-page {
+    --type-hero: 1.95rem; --type-card-title: 1.15rem;
+    --type-body: 0.82rem; --type-caption: 0.7rem; --type-micro: 0.63rem;
+    --page-wide: calc(100vw - 36px);
+  }
+
+  .profile-grid--identity,
+  .profile-grid--quad,
+  .profile-grid--philosophy,
+  .profile-grid--contact {
+    grid-template-columns: 1fr;
+  }
+
+  .flip-card--hero,
+  .flip-card--tall {
+    grid-column: 1; grid-row: auto;
+  }
+
+  /* Reset explicit row assignments in mobile */
+  .flip-card:nth-child(2),
+  .flip-card:nth-child(3) { grid-row: auto; }
+
+  .flip-card--hero .flip-card__inner { min-height: 200px; }
+  .flip-card--tall .flip-card__inner { min-height: 185px; }
+  .flip-card__inner { min-height: 160px; }
+
+  .profile-header { padding-left: 18px; }
+  .profile-header__rail { height: 90px; }
+  .profile-header__monogram { display: none; }
+  .flip-card__fg { display: none; } /* Hide theme graphics on mobile for cleanliness */
+  .flip-card__hint { display: none; } /* Hide hints on mobile — touch is obvious */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flip-card__sheen { transition: none; }
+  .flip-card__front, .flip-card__back { transition: none; }
+}
+
+/* ==========================================================================
+   Tool Icons — Matter.js Physics Canvas
+   ========================================================================== */
+
+.flip-card__back--tools {
+  display: flex; flex-direction: column;
+  padding: clamp(14px, 1.2vw, 22px);
+  overflow: hidden;
+}
+
+.flip-card__back-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.tool-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 12px;
+  border-radius: 6px;
+  font: 700 12px/1 'MiSans VF', system-ui, sans-serif;
+  color: #fff;
+  background: linear-gradient(135deg, var(--tc, #333), rgba(0,0,0,0.35));
+  border: 1px solid rgba(232,211,169,0.15);
+  letter-spacing: 0.04em;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  opacity: 0;
+  transform: translateY(-8px);
+  animation: tag-in 0.5s ease forwards;
+}
+
+.tool-tag:nth-child(1) { animation-delay: 0.15s; }
+.tool-tag:nth-child(2) { animation-delay: 0.25s; }
+.tool-tag:nth-child(3) { animation-delay: 0.35s; }
+.tool-tag:nth-child(4) { animation-delay: 0.45s; }
+.tool-tag:nth-child(5) { animation-delay: 0.55s; }
+
+@keyframes tag-in {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.flip-card__back-text {
+  flex: 0 0 auto;
+  margin-top: clamp(10px, 0.8vw, 16px);
+  position: relative; z-index: 2;
+}
+
+.flip-card__back-text .flip-card__back-value {
+  font-size: clamp(0.82rem, 0.78vw, 1.05rem);
+  font-weight: 520;
+  line-height: 1.3;
+  color: var(--pc-ink-soft);
+}
+
+.flip-card__back-desc {
+  margin: 6px 0 0; padding: 0;
+  font-size: var(--type-body);
+  font-weight: 400;
+  line-height: var(--leading-body);
+  color: var(--pc-gold-soft);
+  opacity: 0.75;
+}
+
+
+/* T-157: old 01B becomes a quiet creative reserve, not a profile page. */
+#before-visuals.portfolio-profile-reserve {
+  position: relative;
+  min-height: 150svh;
+  display: block;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 72% 18%, rgba(200, 167, 106, 0.08), transparent 34%),
+    radial-gradient(circle at 20% 82%, rgba(33, 95, 108, 0.08), transparent 36%),
+    linear-gradient(180deg, #050403 0%, #090704 48%, #050403 100%);
+}
+
+#before-visuals.portfolio-profile-reserve::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  background:
+    repeating-linear-gradient(90deg, rgba(232, 211, 169, 0.018) 0 1px, transparent 1px 9vw),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.22), transparent 38%, rgba(0, 0, 0, 0.42));
+}
+
+#before-visuals .portfolio-profile-reserve__stage {
+  min-height: 150svh;
+}
+
+/* ==========================================================================
+   T-158: profile-card integration polish.
+   Fold the transplanted module back into the portfolio typography system.
+   ========================================================================== */
+
+#future-profile .profile-page {
+  --pc-ink: var(--type-color-title);
+  --pc-ink-soft: var(--type-color-title-soft);
+  --pc-body: var(--type-color-body);
+  --pc-muted: var(--type-color-muted);
+  --pc-gold: rgba(226, 202, 156, 0.76);
+  --pc-gold-soft: rgba(226, 202, 156, 0.82);
+  --pc-gold-dim: rgba(196, 170, 122, 0.5);
+  --pc-line: rgba(226, 202, 156, 0.14);
+  --pc-line-soft: rgba(226, 202, 156, 0.07);
+  padding-top: clamp(86px, 8.4vh, 122px);
+  padding-bottom: clamp(96px, 9vh, 132px);
+}
+
+#future-profile .profile-header,
+#future-profile .profile-grid,
+#future-profile .scroll-cue {
+  width: var(--page-standard, var(--page-wide));
+  max-width: var(--page-standard, var(--page-wide));
+}
+
+#future-profile .profile-header {
+  margin-bottom: clamp(34px, 3.4vh, 54px);
+  padding-left: var(--main-title-rail-pad, clamp(22px, 1.7vw, 34px));
+}
+
+#future-profile .profile-header__monogram,
+#future-profile .scroll-cue {
+  display: none !important;
+}
+
+#future-profile .profile-header__rail {
+  height: clamp(98px, 7.8vh, 130px);
+  opacity: 0.82;
+}
+
+#future-profile .profile-header__eyebrow,
+#future-profile .flip-card__label {
+  color: var(--type-color-caption);
+  font-family: var(--font-sans);
+  font-size: var(--type-caption);
+  font-weight: var(--weight-caption);
+  line-height: var(--type-line-caption);
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+#future-profile .profile-header__eyebrow {
+  margin-bottom: var(--title-rhythm-kicker-to-title);
+}
+
+#future-profile .profile-header__title {
+  color: var(--type-color-title);
+  font-family: var(--font-sans);
+  font-size: var(--type-section);
+  font-weight: var(--weight-section);
+  line-height: var(--type-line-tight);
+  letter-spacing: 0;
+}
+
+#future-profile .profile-header__subtitle {
+  max-width: var(--titleline-width);
+  margin-top: var(--title-rhythm-main-to-line);
+  color: var(--type-color-line);
+  font-family: var(--font-sans);
+  font-size: var(--type-titleline);
+  font-weight: var(--weight-line);
+  line-height: var(--type-line-lead);
+  letter-spacing: 0;
+}
+
+#future-profile .profile-grid {
+  gap: clamp(12px, 0.9vw, 18px);
+}
+
+#future-profile .profile-grid--identity,
+#future-profile .profile-grid--quad,
+#future-profile .profile-grid--ultra-row,
+#future-profile .profile-grid--philosophy {
+  margin-bottom: clamp(14px, 1.3vh, 22px);
+}
+
+#future-profile .flip-card {
+  cursor: pointer;
+}
+
+#future-profile .flip-card__front,
+#future-profile .flip-card__back {
+  border-radius: 8px;
+  padding: clamp(22px, 1.45vw, 30px);
+}
+
+#future-profile .flip-card__front {
+  border-color: rgba(226, 202, 156, 0.12);
+  background:
+    linear-gradient(180deg, rgba(245, 233, 211, 0.05), rgba(245, 233, 211, 0.018)),
+    rgba(12, 10, 7, 0.58);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 245, 225, 0.035),
+    0 18px 52px rgba(0, 0, 0, 0.18);
+}
+
+#future-profile .flip-card__back {
+  border-color: rgba(226, 202, 156, 0.28);
+  background:
+    linear-gradient(135deg, rgba(226, 202, 156, 0.075), rgba(5, 4, 3, 0.66) 62%),
+    radial-gradient(circle at 74% 26%, rgba(226, 202, 156, 0.055), transparent 54%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 245, 225, 0.05),
+    0 20px 58px rgba(0, 0, 0, 0.28);
+}
+
+#future-profile .flip-card:hover .flip-card__front,
+#future-profile .flip-card:focus-visible .flip-card__front,
+#future-profile .flip-card.is-active .flip-card__front {
+  border-color: rgba(226, 202, 156, 0.32);
+}
+
+#future-profile .flip-card:focus-visible .flip-card__inner {
+  outline: 1px solid rgba(226, 202, 156, 0.48);
+  outline-offset: 4px;
+  border-radius: 10px;
+}
+
+#future-profile .flip-card__label {
+  top: clamp(20px, 1.35vw, 27px);
+  right: clamp(22px, 1.45vw, 30px);
+  opacity: 0.78;
+}
+
+#future-profile .flip-card__title {
+  color: var(--type-color-title-soft);
+  font-family: var(--font-sans);
+  font-size: var(--type-title);
+  font-weight: var(--weight-title);
+  line-height: var(--type-line-title);
+  letter-spacing: 0;
+}
+
+#future-profile .flip-card__back-value,
+#future-profile .flip-card__back-text .flip-card__back-value {
+  color: var(--type-color-title);
+  font-family: var(--font-sans);
+  font-size: var(--type-title);
+  font-weight: var(--weight-title);
+  line-height: var(--type-line-title);
+  letter-spacing: 0;
+}
+
+#future-profile .flip-card__back-value--hero {
+  font-size: var(--type-panel);
+  font-weight: var(--weight-panel);
+  line-height: var(--type-line-title);
+  letter-spacing: 0;
+}
+
+#future-profile .flip-card__back-unit,
+#future-profile .flip-card__back-desc,
+#future-profile .flip-card__back-list li {
+  color: var(--type-color-body);
+  font-family: var(--font-sans);
+  font-size: var(--type-title-copy);
+  font-weight: var(--weight-title-copy);
+  line-height: var(--type-line-body);
+  letter-spacing: 0;
+}
+
+#future-profile .flip-card__back-desc {
+  max-width: 34em;
+  margin-top: 8px;
+  opacity: 1;
+}
+
+#future-profile .flip-card__back-glyph,
+#future-profile .flip-card__back-roman {
+  color: rgba(226, 202, 156, 0.07);
+}
+
+#future-profile .flip-card__sheen {
+  background: linear-gradient(
+    105deg,
+    transparent 42%,
+    rgba(226, 202, 156, 0.035) 47%,
+    rgba(226, 202, 156, 0.08) 50%,
+    rgba(226, 202, 156, 0.035) 53%,
+    transparent 58%
+  );
+  border-radius: 8px;
+}
+
+/* ==========================================================================
+   T-159: dedicated long-page height for the profile archive.
+   This module reads as an archive page, not a single-screen chapter.
+   ========================================================================== */
+
+#future-profile.portfolio-profile-card-chapter,
+#future-profile .portfolio-profile-card-panel,
+#future-profile .profile-page {
+  min-height: clamp(2520px, 215svh, 3180px);
+}
+
+#future-profile .profile-page {
+  padding-top: clamp(112px, 9.6vh, 152px);
+  padding-bottom: clamp(180px, 16vh, 260px);
+}
+
+#future-profile .profile-header {
+  margin-bottom: clamp(46px, 4.8vh, 74px);
+}
+
+#future-profile .profile-grid {
+  gap: clamp(16px, 1.15vw, 24px);
+}
+
+#future-profile .profile-grid--identity,
+#future-profile .profile-grid--quad,
+#future-profile .profile-grid--ultra-row,
+#future-profile .profile-grid--philosophy {
+  margin-bottom: clamp(22px, 2.3vh, 38px);
+}
+
+#future-profile .flip-card__inner {
+  min-height: clamp(220px, 23vh, 300px);
+}
+
+#future-profile .flip-card--hero .flip-card__inner {
+  min-height: clamp(520px, 44vh, 630px);
+}
+
+#future-profile .flip-card--tall .flip-card__inner {
+  min-height: clamp(320px, 31vh, 430px);
+}
+
+#future-profile .flip-card--ultra .flip-card__inner {
+  min-height: clamp(190px, 18vh, 250px);
+}
+
+/* ==========================================================================
+   T-160: 01B AI-era creative judgment page.
+   This section is a long-form thinking prelude, not a resume page.
+   ========================================================================== */
+
+#before-visuals.portfolio-ai-judgment {
+  position: relative;
+  min-height: clamp(1920px, 168svh, 2480px);
+  display: block;
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 76% 18%, rgba(214, 184, 128, 0.11), transparent 32%),
+    radial-gradient(circle at 18% 72%, rgba(34, 98, 110, 0.12), transparent 35%),
+    linear-gradient(180deg, rgba(5, 4, 3, 0.94) 0%, rgba(9, 7, 5, 0.98) 42%, rgba(5, 4, 3, 1) 100%),
+    url("images/shared/ambient/01B-before-visuals-bg-generated-v1.webp") center / cover no-repeat;
+}
+
+#before-visuals.portfolio-ai-judgment::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.78), rgba(0, 0, 0, 0.42) 48%, rgba(0, 0, 0, 0.7)),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.6), transparent 22%, rgba(0, 0, 0, 0.72) 100%);
+}
+
+#before-visuals.portfolio-ai-judgment::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.48;
+  background:
+    repeating-linear-gradient(90deg, rgba(232, 211, 169, 0.02) 0 1px, transparent 1px 9vw),
+    repeating-linear-gradient(180deg, rgba(232, 211, 169, 0.014) 0 1px, transparent 1px 15vh);
+}
+
+#before-visuals .portfolio-ai-judgment__ambient {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+#before-visuals .portfolio-ai-judgment__ambient::before,
+#before-visuals .portfolio-ai-judgment__ambient::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+#before-visuals .portfolio-ai-judgment__ambient::before {
+  left: 50%;
+  top: clamp(560px, 52vh, 760px);
+  width: min(58vw, 1120px);
+  height: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, transparent, rgba(226, 202, 156, 0.36), transparent);
+  box-shadow: 0 0 72px rgba(226, 202, 156, 0.14);
+}
+
+#before-visuals .portfolio-ai-judgment__ambient::after {
+  right: max(6vw, calc((100vw - var(--page-wide)) / 2));
+  bottom: clamp(220px, 18vh, 340px);
+  width: clamp(220px, 24vw, 520px);
+  height: clamp(360px, 46vh, 680px);
+  border: 1px solid rgba(226, 202, 156, 0.08);
+  border-left-color: rgba(226, 202, 156, 0.18);
+  opacity: 0.7;
+  transform: skewX(-12deg);
+}
+
+#before-visuals .portfolio-profile-reserve__stage {
+  display: none;
+}
+
+#before-visuals .portfolio-ai-judgment__inner {
+  position: relative;
+  z-index: 1;
+  width: var(--page-wide);
+  max-width: calc(100vw - clamp(56px, 8vw, 176px));
+  min-height: clamp(1920px, 168svh, 2480px);
+  margin: 0 auto;
+  padding: clamp(160px, 16vh, 230px) 0 clamp(180px, 18vh, 260px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: clamp(84px, 10vh, 148px);
+}
+
+#before-visuals .portfolio-ai-judgment__hero {
+  position: relative;
+  width: min(100%, 1040px);
+  padding-left: var(--main-title-rail-pad, clamp(24px, 1.8vw, 34px));
+}
+
+#before-visuals .portfolio-ai-judgment__hero::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1px;
+  height: clamp(128px, 12vh, 176px);
+  background: linear-gradient(180deg, rgba(226, 202, 156, 0.82), rgba(226, 202, 156, 0.18));
+}
+
+#before-visuals .portfolio-ai-judgment__kicker {
+  margin: 0 0 var(--title-rhythm-kicker-to-title);
+  color: var(--type-color-caption);
+  font-family: var(--font-sans);
+  font-size: var(--type-caption);
+  font-weight: var(--weight-caption);
+  line-height: var(--type-line-caption);
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+#before-visuals .portfolio-ai-judgment__hero h2 {
+  margin: 0;
+  max-width: 10.5em;
+  color: var(--type-color-title);
+  font-family: var(--font-sans);
+  font-size: var(--type-section);
+  font-weight: var(--weight-section);
+  line-height: var(--type-line-tight);
+  letter-spacing: 0;
+  text-wrap: balance;
+}
+
+#before-visuals .portfolio-ai-judgment__lead {
+  max-width: var(--titleline-width);
+  margin: var(--title-rhythm-main-to-line) 0 0;
+  color: var(--type-color-line);
+  font-family: var(--font-sans);
+  font-size: var(--type-titleline);
+  font-weight: var(--weight-line);
+  line-height: var(--type-line-lead);
+  letter-spacing: 0;
+}
+
+#before-visuals .portfolio-ai-judgment__body {
+  display: grid;
+  grid-template-columns: minmax(360px, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(92px, 10vw, 186px);
+  align-items: start;
+  padding-top: clamp(18px, 2vh, 36px);
+}
+
+#before-visuals .portfolio-ai-judgment__thesis {
+  position: sticky;
+  top: clamp(118px, 12vh, 180px);
+  min-height: clamp(340px, 38vh, 520px);
+  display: flex;
+  align-items: flex-end;
+  padding-left: var(--main-title-rail-pad, clamp(24px, 1.8vw, 34px));
+}
+
+#before-visuals .portfolio-ai-judgment__thesis::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 1px;
+  height: clamp(112px, 13vh, 188px);
+  background: linear-gradient(180deg, rgba(226, 202, 156, 0.2), rgba(226, 202, 156, 0.72));
+  pointer-events: none;
+}
+
+#before-visuals .portfolio-ai-judgment__thesis p {
+  position: relative;
+  max-width: 13.5em;
+  margin: 0;
+  color: var(--type-color-title-soft);
+  font-family: var(--font-sans);
+  font-size: var(--type-panel);
+  font-weight: var(--weight-panel);
+  line-height: var(--type-line-title);
+  letter-spacing: 0;
+  text-wrap: balance;
+}
+
+#before-visuals .portfolio-ai-judgment__stack {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(58px, 6.4vh, 104px);
+  padding-top: clamp(40px, 5.2vh, 78px);
+}
+
+#before-visuals .portfolio-ai-judgment__point {
+  position: relative;
+  width: min(100%, 780px);
+  padding: 0 0 clamp(18px, 1.7vh, 28px) clamp(26px, 2vw, 38px);
+  display: grid;
+  grid-template-columns: clamp(68px, 5.5vw, 102px) minmax(0, 1fr);
+  grid-template-areas:
+    "tag title"
+    "tag copy";
+  column-gap: clamp(20px, 2vw, 34px);
+  border-bottom: 1px solid rgba(226, 202, 156, 0.12);
+}
+
+#before-visuals .portfolio-ai-judgment__point::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.35em;
+  width: 1px;
+  height: clamp(52px, 6vh, 86px);
+  background: linear-gradient(180deg, rgba(226, 202, 156, 0.66), rgba(226, 202, 156, 0.12));
+}
+
+#before-visuals .portfolio-ai-judgment__point--prompt {
+  margin-left: clamp(0px, 3vw, 56px);
+}
+
+#before-visuals .portfolio-ai-judgment__point--selection {
+  margin-left: clamp(84px, 9vw, 184px);
+}
+
+#before-visuals .portfolio-ai-judgment__point--delivery {
+  margin-left: clamp(28px, 5vw, 104px);
+}
+
+#before-visuals .portfolio-ai-judgment__point span {
+  grid-area: tag;
+  align-self: start;
+  color: var(--type-color-caption);
+  font-family: var(--font-sans);
+  font-size: var(--type-caption);
+  font-weight: var(--weight-caption);
+  line-height: var(--type-line-caption);
+  letter-spacing: 0;
+}
+
+#before-visuals .portfolio-ai-judgment__point h3 {
+  grid-area: title;
+  margin: 0;
+  color: var(--type-color-title-soft);
+  font-family: var(--font-sans);
+  font-size: var(--type-panel);
+  font-weight: var(--weight-panel);
+  line-height: var(--type-line-title);
+  letter-spacing: 0;
+}
+
+#before-visuals .portfolio-ai-judgment__point p {
+  grid-area: copy;
+  max-width: 31em;
+  margin: clamp(12px, 1.1vh, 18px) 0 0;
+  color: var(--type-color-body);
+  font-family: var(--font-sans);
+  font-size: var(--type-body);
+  font-weight: var(--weight-body);
+  line-height: var(--leading-body);
+  letter-spacing: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  #before-visuals .portfolio-ai-judgment__point {
+    transition:
+      border-color 360ms cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 360ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  #before-visuals .portfolio-ai-judgment__point:hover {
+    border-bottom-color: rgba(226, 202, 156, 0.24);
+  }
+}
+
+@media (max-width: 1180px) {
+  #before-visuals .portfolio-ai-judgment__inner {
+    justify-content: flex-start;
+  }
+
+  #before-visuals .portfolio-ai-judgment__body {
+    grid-template-columns: 1fr;
+  }
+
+  #before-visuals .portfolio-ai-judgment__thesis {
+    position: relative;
+    top: auto;
+    min-height: auto;
+  }
+
+  #before-visuals .portfolio-ai-judgment__stack {
+    padding-top: 0;
+  }
+
+  #before-visuals .portfolio-ai-judgment__point,
+  #before-visuals .portfolio-ai-judgment__point--prompt,
+  #before-visuals .portfolio-ai-judgment__point--selection,
+  #before-visuals .portfolio-ai-judgment__point--delivery {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+/* ==========================================================================
+   T-161: 01B design point-of-view page.
+   One standard screen, one creed, no card composition.
+   ========================================================================== */
+
+#before-visuals.portfolio-design-creed {
+  min-height: var(--screen-h);
+  height: var(--screen-h);
+}
+
+#before-visuals.portfolio-design-creed .portfolio-ai-judgment__ambient::after {
+  display: none;
+}
+
+#before-visuals.portfolio-design-creed .portfolio-ai-judgment__ambient::before {
+  top: 57%;
+  width: min(62vw, 1120px);
+  opacity: 0.54;
+}
+
+#before-visuals.portfolio-design-creed .portfolio-ai-judgment__inner {
+  min-height: min(100%, var(--screen-h));
+  padding: 0;
+  justify-content: center;
+  gap: clamp(74px, 9vh, 118px);
+}
+
+#before-visuals .portfolio-design-creed__hero {
+  width: min(100%, 1040px);
+  padding-left: 0;
+}
+
+#before-visuals .portfolio-design-creed__hero::before {
+  left: calc(-1 * clamp(26px, 2.1vw, 44px));
+  height: clamp(96px, 10vh, 138px);
+  opacity: 0.72;
+}
+
+#before-visuals.portfolio-design-creed .portfolio-ai-judgment__kicker {
+  margin-bottom: var(--title-rhythm-kicker-to-title);
+  color: rgba(226, 202, 156, 0.58);
+}
+
+#before-visuals.portfolio-design-creed .portfolio-ai-judgment__hero h2 {
+  max-width: 7em;
+  color: var(--type-color-title);
+  font-size: var(--type-hero);
+  font-weight: var(--weight-hero);
+  line-height: 0.98;
+  text-wrap: balance;
+}
+
+#before-visuals.portfolio-design-creed .portfolio-ai-judgment__lead,
+#before-visuals .portfolio-design-creed__statement {
+  display: none;
+}
+
+#before-visuals .portfolio-design-creed__body {
+  width: min(100%, 1040px);
+}
+
+#before-visuals .portfolio-design-creed__process {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  list-style: none;
+  margin: 0;
+  padding: clamp(26px, 3vh, 42px) 0;
+  border-top: 1px solid rgba(226, 202, 156, 0.18);
+  border-bottom: 1px solid rgba(226, 202, 156, 0.1);
+}
+
+#before-visuals .portfolio-design-creed__process::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 38%;
+  top: -1px;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(226, 202, 156, 0.48), transparent);
+}
+
+#before-visuals .portfolio-design-creed__process li {
+  position: relative;
+  min-height: clamp(58px, 6.5vh, 82px);
+  padding: 0 clamp(22px, 2.2vw, 38px);
+  display: flex;
+  align-items: center;
+}
+
+#before-visuals .portfolio-design-creed__process li:first-child {
+  padding-left: 0;
+}
+
+#before-visuals .portfolio-design-creed__process li:last-child {
+  padding-right: 0;
+}
+
+#before-visuals .portfolio-design-creed__process li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 22%;
+  right: 0;
+  bottom: 22%;
+  width: 1px;
+  background: linear-gradient(180deg, transparent, rgba(226, 202, 156, 0.18), transparent);
+}
+
+#before-visuals .portfolio-design-creed__process span {
+  color: var(--type-color-title-soft);
+  font-family: var(--font-sans);
+  font-size: var(--type-title);
+  font-weight: var(--weight-title);
+  line-height: var(--type-line-title);
+  letter-spacing: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  #before-visuals .portfolio-design-creed__process li {
+    transition:
+      opacity 280ms cubic-bezier(0.16, 1, 0.3, 1),
+      color 280ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  #before-visuals .portfolio-design-creed__process:hover li {
+    opacity: 0.68;
+  }
+
+  #before-visuals .portfolio-design-creed__process li:hover {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 1180px) {
+  #before-visuals .portfolio-design-creed__process {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #before-visuals .portfolio-design-creed__process li:nth-child(2)::after {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   T-167: Let 01B sit on the shared chapter-01 Galaxy field.
+   ========================================================================== */
+
+#before-visuals.portfolio-profile-reserve,
+#before-visuals.portfolio-ai-judgment,
+#before-visuals.portfolio-design-creed {
+  background: transparent;
+}
+
+#before-visuals.portfolio-ai-judgment::before,
+#before-visuals.portfolio-ai-judgment::after,
+#before-visuals .portfolio-ai-judgment__ambient::before,
+#before-visuals .portfolio-ai-judgment__ambient::after {
+  display: none;
+}
+
+/* ==========================================================================
+   T-173: 01B becomes a clean centered design creed page.
+   ========================================================================== */
+
+#before-visuals.portfolio-profile-reserve,
+#before-visuals.portfolio-ai-judgment,
+#before-visuals.portfolio-design-creed {
+  min-height: var(--screen-h);
+  height: var(--screen-h);
+  display: grid;
+  place-items: center;
+  padding: 0;
+  overflow: hidden;
+  background: #000 !important;
+}
+
+#before-visuals.portfolio-ai-judgment::before,
+#before-visuals.portfolio-ai-judgment::after,
+#before-visuals.portfolio-design-creed::before,
+#before-visuals.portfolio-design-creed::after,
+#before-visuals .portfolio-ai-judgment__ambient,
+#before-visuals .portfolio-ai-judgment__ambient::before,
+#before-visuals .portfolio-ai-judgment__ambient::after {
+  content: none !important;
+  display: none !important;
+}
+
+#before-visuals .portfolio-design-creed__inner,
+#before-visuals .portfolio-ai-judgment__inner {
+  width: min(1800px, calc(100vw - clamp(72px, 10vw, 260px)));
+  min-height: var(--screen-h);
+  display: grid;
+  place-items: center;
+  padding: 0;
+  text-align: center;
+}
+
+#before-visuals .portfolio-design-creed__statement {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: max-content;
+  max-width: calc(100vw - clamp(72px, 10vw, 260px));
+  margin: 0;
+  color: rgba(250, 242, 226, 0.9);
+  font-size: clamp(2rem, 3vw, 3.75rem);
+  font-weight: 520;
+  line-height: 1.16;
+  letter-spacing: 0;
+  text-align: center;
+  white-space: nowrap;
+  text-shadow: 0 18px 48px rgba(0, 0, 0, 0.34);
+}
+
+#before-visuals .portfolio-design-creed__blur-text {
+  display: inline-flex !important;
+  flex-wrap: nowrap !important;
+  justify-content: center;
+  width: max-content;
+  max-width: 100%;
+  margin: 0;
+  white-space: nowrap;
+}
+
+#before-visuals .portfolio-design-creed__blur-text span {
+  display: inline-block;
+  white-space: pre;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #before-visuals .portfolio-design-creed__statement {
+    filter: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* T-180: shorten the inserted profile archive now that the card module is stable. */
+@media (min-width: 901px) {
+  #future-profile.portfolio-profile-card-chapter,
+  #future-profile .portfolio-profile-card-panel,
+  #future-profile .profile-page {
+    min-height: clamp(2160px, 125svh, 2400px) !important;
+  }
+
+  #future-profile .profile-page {
+    padding-top: clamp(96px, 7.2vh, 128px) !important;
+    padding-bottom: clamp(116px, 9vh, 168px) !important;
+  }
+}
+
+/*
+  T-193: profile archive follows the canonical content frame.
+  Keep the transplanted card design, but do not let its local --page-wide
+  become another global alignment source.
+*/
+@media (min-width: 901px) {
+  #future-profile .profile-page {
+    --page-wide: var(--page-standard);
+    min-height: clamp(1720px, 146svh, 2200px) !important;
+  }
+
+  #future-profile.portfolio-profile-card-chapter,
+  #future-profile .portfolio-profile-card-panel {
+    min-height: clamp(1720px, 146svh, 2200px) !important;
+  }
+
+  #future-profile .profile-header,
+  #future-profile .profile-grid {
+    width: var(--page-standard) !important;
+    max-width: var(--page-standard) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
+/*
+  T-198: profile archive must grow from its card content.
+  The global chapter rule clamps screens to one viewport; this transplanted
+  archive is taller, so it needs an explicit height/overflow escape hatch.
+*/
+@media (min-width: 901px) {
+  #future-profile.portfolio-profile-card-chapter,
+  #future-profile .portfolio-profile-card-panel,
+  #future-profile .profile-page {
+    height: auto !important;
+    min-height: 100svh !important;
+    overflow: visible !important;
+  }
+
+  #future-profile .profile-page {
+    padding-bottom: clamp(180px, 12vh, 260px) !important;
+  }
+}
+
+/*
+  T-241: profile flip-card visual entry images.
+  Front faces receive the generated asset; back faces reuse it only as a
+  quiet blurred archive texture so the DOM text remains the information layer.
+*/
+#future-profile .flip-card {
+  --profile-card-image: none;
+  --profile-card-front-opacity: 0.38;
+  --profile-card-back-opacity: 0.075;
+  --profile-card-position: center center;
+}
+
+#future-profile .flip-card[data-profile-asset="01"] {
+  --profile-card-image: url("images/06-about/profile-cards/profile-card-01-philosophy-v1.webp");
+  --profile-card-position: 50% 46%;
+}
+
+#future-profile .flip-card[data-profile-asset="02"] {
+  --profile-card-image: url("images/06-about/profile-cards/profile-card-02-name-v1.webp");
+  --profile-card-front-opacity: 0.26;
+  --profile-card-back-opacity: 0.045;
+}
+
+#future-profile .flip-card[data-profile-asset="03"] {
+  --profile-card-image: url("images/06-about/profile-cards/profile-card-03-role-v1.webp");
+  --profile-card-position: 50% 44%;
+}
+
+#future-profile .flip-card[data-profile-asset="04"] {
+  --profile-card-image: url("images/06-about/profile-cards/profile-card-04-experience-v1.webp");
+  --profile-card-front-opacity: 0.3;
+  --profile-card-back-opacity: 0.055;
+}
+
+#future-profile .flip-card[data-profile-asset="05"] {
+  --profile-card-image: url("images/06-about/profile-cards/profile-card-05-expertise-v1.webp");
+  --profile-card-position: 50% 42%;
+}
+
+#future-profile .flip-card[data-profile-asset="06"] {
+  --profile-card-image: url("images/06-about/profile-cards/profile-card-06-industry-v1.webp");
+}
+
+#future-profile .flip-card[data-profile-asset="07"] {
+  --profile-card-image: url("images/06-about/profile-cards/profile-card-07-contact-v1.webp");
+  --profile-card-front-opacity: 0.24;
+  --profile-card-back-opacity: 0.04;
+}
+
+#future-profile .flip-card[data-profile-asset="08"] {
+  --profile-card-image: url("images/06-about/profile-cards/profile-card-08-work-ethos-v1.webp");
+  --profile-card-front-opacity: 0.34;
+  --profile-card-back-opacity: 0.045;
+  --profile-card-position: center center;
+}
+
+#future-profile .flip-card[data-profile-asset="09"] {
+  --profile-card-image: url("images/06-about/profile-cards/profile-card-09-brand-design-v1.webp");
+  --profile-card-position: 50% 42%;
+}
+
+#future-profile .flip-card[data-profile-asset="10"] {
+  --profile-card-image: url("images/06-about/profile-cards/profile-card-10-motion-video-v1.webp");
+  --profile-card-position: 50% 52%;
+}
+
+#future-profile .flip-card[data-profile-asset="11"] {
+  --profile-card-image: url("images/06-about/profile-cards/profile-card-11-3d-visual-v1.webp");
+  --profile-card-position: 50% 44%;
+}
+
+#future-profile .flip-card[data-profile-asset="12"] {
+  --profile-card-image: url("images/06-about/profile-cards/profile-card-12-aigc-generation-v1.webp");
+}
+
+#future-profile .flip-card[data-profile-asset="13"] {
+  --profile-card-image: url("images/06-about/profile-cards/profile-card-13-dev-tools-v1.webp");
+  --profile-card-front-opacity: 0.32;
+  --profile-card-back-opacity: 0.05;
+}
+
+#future-profile .flip-card__front,
+#future-profile .flip-card__back {
+  isolation: isolate;
+}
+
+#future-profile .flip-card__front::before,
+#future-profile .flip-card__back::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: var(--profile-card-image);
+  background-size: cover;
+  background-position: var(--profile-card-position);
+  background-repeat: no-repeat;
+}
+
+#future-profile .flip-card__front::before {
+  opacity: var(--profile-card-front-opacity);
+  filter: saturate(0.82) contrast(0.94) brightness(0.78);
+  transform: scale(1.018);
+}
+
+#future-profile .flip-card__front::after,
+#future-profile .flip-card__back::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+#future-profile .flip-card__front::after {
+  background:
+    linear-gradient(180deg, rgba(5, 4, 3, 0.14), rgba(5, 4, 3, 0.66) 76%),
+    radial-gradient(circle at 18% 82%, rgba(5, 4, 3, 0.56), transparent 36%),
+    radial-gradient(circle at 82% 14%, rgba(232, 211, 169, 0.08), transparent 38%);
+}
+
+#future-profile .flip-card__back::before {
+  opacity: var(--profile-card-back-opacity);
+  filter: blur(12px) saturate(0.65) brightness(0.62);
+  transform: scale(1.08);
+}
+
+#future-profile .flip-card__back::after {
+  background:
+    linear-gradient(135deg, rgba(5, 4, 3, 0.78), rgba(5, 4, 3, 0.9) 62%),
+    radial-gradient(circle at 78% 22%, rgba(226, 202, 156, 0.045), transparent 50%);
+}
+
+#future-profile .flip-card__label,
+#future-profile .flip-card__title,
+#future-profile .flip-card__back-value,
+#future-profile .flip-card__back-list,
+#future-profile .flip-card__back-text {
+  z-index: 2;
+}
+
+/* T-260: final About page from profile-swiss, scoped to avoid the removed 05 module. */
+#about-me.portfolio-about-profile {
+  position: relative;
+  min-height: 100svh;
+  background:
+    radial-gradient(ellipse 70% 50% at 10% 0%, rgba(200, 167, 106, 0.06), transparent 50%),
+    radial-gradient(ellipse 60% 50% at 90% 100%, rgba(52, 112, 130, 0.04), transparent 50%),
+    #050403;
+  color: rgba(247, 239, 225, 0.92);
+}
+
+#about-me .portfolio-about-profile__panel {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: clamp(56px, 6vh, 88px) 0 clamp(40px, 4.5vh, 68px);
+}
+
+#about-me .portfolio-about-profile__page {
+  width: var(--page-standard, min(1560px, calc(100vw - 160px)));
+  max-width: var(--page-standard, min(1560px, calc(100vw - 160px)));
+  margin: 0 auto;
+  transform: scale(0.94);
+  transform-origin: top center;
+}
+
+#about-me .portfolio-about-profile__hero {
+  padding-bottom: clamp(30px, 3.8vh, 52px);
+}
+
+#about-me .portfolio-about-profile__name {
+  margin: 0;
+  color: rgba(247, 239, 225, 0.94);
+  font-size: clamp(5.2rem, 3.8vw, 8.6rem);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+#about-me .portfolio-about-profile__name span {
+  color: #c8a76a;
+}
+
+#about-me .portfolio-about-profile__tagline {
+  margin: clamp(10px, 1.2vh, 18px) 0 0;
+  color: rgba(247, 239, 225, 0.66);
+  font-size: clamp(1.45rem, 1.0vw, 2.0rem);
+  font-weight: 380;
+  line-height: 1.35;
+  letter-spacing: 0;
+}
+
+#about-me .portfolio-about-profile__divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(232, 211, 169, 0.16);
+}
+
+#about-me .portfolio-about-profile__grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  padding: clamp(32px, 4.0vh, 52px) 0;
+}
+
+#about-me .portfolio-about-profile__column {
+  min-width: 0;
+}
+
+#about-me .portfolio-about-profile__column--left {
+  grid-column: 1 / span 4;
+  padding-right: clamp(24px, 2vw, 40px);
+}
+
+#about-me .portfolio-about-profile__column--center {
+  grid-column: 5 / span 4;
+  padding-right: clamp(24px, 2vw, 40px);
+  padding-left: clamp(24px, 2vw, 40px);
+  border-left: 1px solid rgba(232, 211, 169, 0.16);
+}
+
+#about-me .portfolio-about-profile__column--right {
+  grid-column: 9 / span 4;
+  padding-left: clamp(24px, 2vw, 40px);
+  border-left: 1px solid rgba(232, 211, 169, 0.16);
+}
+
+#about-me .portfolio-about-profile__label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 clamp(18px, 2.2vh, 28px);
+  color: rgba(247, 239, 225, 0.48);
+  font-size: clamp(0.95rem, 0.52vw, 1.12rem);
+  font-weight: 430;
+  line-height: 1.2;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+#about-me .portfolio-about-profile__label::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(232, 211, 169, 0.16), transparent);
+}
+
+#about-me .portfolio-about-profile__role {
+  margin: 0 0 clamp(20px, 2.6vh, 34px);
+  color: rgba(247, 239, 225, 0.92);
+  font-size: clamp(1.65rem, 1.15vw, 2.35rem);
+  font-weight: 480;
+  line-height: 1.1;
+  letter-spacing: 0;
+}
+
+#about-me .portfolio-about-profile__minor {
+  margin: 0 0 16px;
+  color: rgba(247, 239, 225, 0.48);
+  font-size: clamp(0.95rem, 0.52vw, 1.12rem);
+  font-weight: 430;
+  line-height: 1.2;
+}
+
+#about-me .portfolio-about-profile__philosophy {
+  margin: 0;
+  color: rgba(247, 239, 225, 0.66);
+  font-size: clamp(1.45rem, 0.96vw, 2.0rem);
+  font-weight: 400;
+  line-height: 1.62;
+  letter-spacing: 0;
+}
+
+#about-me .portfolio-about-profile__philosophy strong {
+  color: #ead8ae;
+  font-weight: 520;
+}
+
+#about-me .portfolio-about-profile__cap {
+  margin-bottom: clamp(16px, 2.0vh, 26px);
+}
+
+#about-me .portfolio-about-profile__cap:last-child {
+  margin-bottom: 0;
+}
+
+#about-me .portfolio-about-profile__cap span {
+  display: block;
+  margin-bottom: 6px;
+  color: #c8a76a;
+  font-size: clamp(0.95rem, 0.52vw, 1.12rem);
+  font-weight: 430;
+  line-height: 1.2;
+}
+
+#about-me .portfolio-about-profile__cap h3 {
+  margin: 0 0 4px;
+  color: rgba(247, 239, 225, 0.92);
+  font-size: clamp(1.28rem, 0.78vw, 1.55rem);
+  font-weight: 480;
+  line-height: 1.1;
+  letter-spacing: 0;
+}
+
+#about-me .portfolio-about-profile__tools {
+  margin: 0 0 8px;
+  color: rgba(247, 239, 225, 0.48);
+  font-size: clamp(0.95rem, 0.52vw, 1.12rem);
+  font-weight: 430;
+  line-height: 1.35;
+}
+
+#about-me .portfolio-about-profile__cap p:not(.portfolio-about-profile__tools) {
+  margin: 0;
+  color: rgba(247, 239, 225, 0.66);
+  font-size: clamp(1.1rem, 0.66vw, 1.28rem);
+  font-weight: 380;
+  line-height: 1.62;
+  letter-spacing: 0;
+}
+
+#about-me .portfolio-about-profile__scope {
+  list-style: none;
+  margin: 0 0 clamp(24px, 3vh, 40px);
+  padding: 0;
+}
+
+#about-me .portfolio-about-profile__scope li {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(232, 211, 169, 0.16);
+  color: rgba(247, 239, 225, 0.92);
+  font-size: clamp(1.28rem, 0.78vw, 1.55rem);
+  font-weight: 480;
+  line-height: 1.1;
+}
+
+#about-me .portfolio-about-profile__scope li:last-child {
+  border-bottom: 0;
+}
+
+#about-me .portfolio-about-profile__meta {
+  margin-bottom: clamp(20px, 2.6vh, 32px);
+}
+
+#about-me .portfolio-about-profile__meta:last-child {
+  margin-bottom: 0;
+}
+
+#about-me .portfolio-about-profile__meta p {
+  margin: 0 0 8px;
+  color: rgba(247, 239, 225, 0.48);
+  font-size: clamp(0.95rem, 0.52vw, 1.12rem);
+  font-weight: 430;
+  line-height: 1.2;
+}
+
+#about-me .portfolio-about-profile__meta strong {
+  display: block;
+  color: rgba(247, 239, 225, 0.92);
+  font-size: clamp(1.28rem, 0.78vw, 1.55rem);
+  font-weight: 480;
+  line-height: 1.1;
+  letter-spacing: 0;
+}
+
+#about-me .portfolio-about-profile__meta span {
+  color: #ead8ae;
+}
+
+#about-me .portfolio-about-profile__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding-top: clamp(24px, 3vh, 40px);
+  color: rgba(247, 239, 225, 0.48);
+  font-size: clamp(0.95rem, 0.52vw, 1.12rem);
+  font-weight: 430;
+  line-height: 1.4;
+}
+
+#about-me .portfolio-about-profile__footer p {
+  margin: 0;
+}
+
+@media (max-width: 1024px) {
+  #about-me .portfolio-about-profile__grid {
+    display: block;
+  }
+
+  #about-me .portfolio-about-profile__column {
+    padding: clamp(32px, 4vh, 48px) 0 clamp(16px, 2vh, 24px);
+    border-left: 0;
+  }
+
+  #about-me .portfolio-about-profile__column + .portfolio-about-profile__column {
+    border-top: 1px solid rgba(232, 211, 169, 0.16);
+  }
+}

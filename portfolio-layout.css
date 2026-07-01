@@ -1,0 +1,360 @@
+/*
+  Portfolio Layout and Type Rhythm
+  Source order preserved from portfolio-runtime.css during code atlas cleanup.
+*/
+
+/* ==========================================================================
+   03. Global Layout / Title Rhythm
+   ========================================================================== */
+
+.portfolio-kicker {
+  display: none;
+}
+
+.reveal {
+  opacity: 0;
+  transition: opacity 320ms ease-out;
+  transition-delay: 0ms;
+  will-change: opacity;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+}
+
+.portfolio-hero {
+  position: relative;
+  min-height: var(--screen-h);
+  height: var(--screen-h);
+  overflow: hidden;
+  background: var(--portfolio-dark);
+}
+
+.portfolio-hero::after {
+  content: "PERSONAL AIGC VISUAL PORTFOLIO  /  WETHERM CASE STUDY  /  AI WORKFLOW";
+  position: absolute;
+  left: max(34px, calc((100vw - 1720px) / 2));
+  right: max(34px, calc((100vw - 1720px) / 2));
+  bottom: clamp(22px, 3.2vw, 52px);
+  z-index: 3;
+  border-top: 1px solid rgba(232, 211, 169, 0.16);
+  padding-top: 16px;
+  color: rgba(255, 255, 255, 0.34);
+  font-size: clamp(11px, 0.78vw, 15px);
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.portfolio-hero__image {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform: none;
+  animation: portfolioHeroSettle 260ms ease-out both;
+}
+
+.portfolio-hero__shade {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(90deg, rgba(3, 2, 1, 0.98) 0%, rgba(3, 2, 1, 0.84) 38%, rgba(3, 2, 1, 0.32) 64%, rgba(3, 2, 1, 0.02) 100%),
+    linear-gradient(0deg, rgba(5, 4, 2, 0.58), rgba(5, 4, 2, 0.04) 55%);
+}
+
+.portfolio-hero__content {
+  position: relative;
+  z-index: 3;
+  width: var(--page-wide);
+  min-height: var(--screen-h);
+  height: var(--screen-h);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--screen-pad-top) 0 var(--screen-pad-bottom);
+  color: #fff;
+}
+
+.portfolio-hero__content::before {
+  content: "";
+  width: clamp(72px, 6vw, 118px);
+  height: 1px;
+  margin-bottom: clamp(18px, 2vw, 34px);
+  background: linear-gradient(90deg, var(--portfolio-gold-soft), rgba(232, 211, 169, 0));
+  opacity: 0.78;
+}
+
+.portfolio-hero h1 {
+  max-width: 760px;
+  margin: 0;
+  font-size: var(--font-hero);
+  font-weight: 500;
+  line-height: var(--leading-tight);
+  letter-spacing: 0;
+  text-shadow: 0 22px 74px rgba(0, 0, 0, 0.42);
+}
+
+.portfolio-hero h1 span {
+  display: block;
+}
+
+.portfolio-hero__lead {
+  max-width: 620px;
+  margin: 24px 0 0;
+  color: rgba(255, 255, 255, 0.84);
+  font-size: var(--font-lead);
+  font-weight: 400;
+  line-height: 1.72;
+}
+
+.portfolio-hero__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  max-width: 720px;
+  margin-top: 38px;
+}
+
+.portfolio-hero__tags span {
+  padding: 10px 15px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 999px;
+  background: rgba(14, 10, 6, 0.34);
+  color: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(18px);
+  font-size: var(--font-caption);
+  font-weight: 450;
+  line-height: var(--leading-caption);
+}
+
+.portfolio-panel {
+  min-height: var(--screen-h);
+  height: var(--screen-h);
+  padding: var(--screen-pad-top) max(24px, calc((100vw - var(--page-wide)) / 2)) var(--screen-pad-bottom);
+  overflow: hidden;
+}
+
+.portfolio-panel:not(.portfolio-hero) {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.portfolio-section__intro {
+  max-width: 980px;
+  margin-bottom: clamp(34px, 3.4vw, 60px);
+}.portfolio-section__intro h2,
+.portfolio-work__copy h2 {
+  margin: 0;
+  font-size: var(--font-section);
+  font-weight: 600;
+  line-height: var(--leading-title);
+  letter-spacing: 0;
+}
+
+.portfolio-section__intro > p:last-child,
+.portfolio-work__copy > p {
+  max-width: 660px;
+  margin: 20px 0 0;
+  color: var(--portfolio-muted);
+  font-size: var(--font-lead);
+  font-weight: 400;
+  line-height: 1.72;
+}
+
+p.portfolio-proof,
+.portfolio-section__intro > p.portfolio-proof,
+.portfolio-work__copy > p.portfolio-proof,
+.portfolio-hero__content > p.portfolio-proof,
+.xiaomi-color-stage__title p.portfolio-proof,
+.xiaomi-carousel__intro p.portfolio-proof,
+.xiaomi-detail-carousel__intro p.portfolio-proof,
+.xiaomi-detail-carousel__caption p.portfolio-proof,
+.xiaomi-dual-gallery__copy p.portfolio-proof,
+.xiaomi-accordion-stage__copy p.portfolio-proof {
+  max-width: 760px;
+  margin: clamp(14px, 1.2vw, 20px) 0 0;
+  padding-left: 14px;
+  border-left: 1px solid rgba(232, 211, 169, 0.54);
+  color: rgba(232, 211, 169, 0.86);
+  font-size: clamp(13px, 0.84vw, 15px);
+  font-weight: 400;
+  line-height: 1.68;
+}
+
+.portfolio-hero__content > p.portfolio-proof {
+  max-width: 620px;
+  margin-top: 18px;
+  color: rgba(232, 211, 169, 0.9);
+}
+
+.xiaomi-color-stage__title p.portfolio-proof,
+.xiaomi-carousel__intro p.portfolio-proof,
+.xiaomi-detail-carousel__intro p.portfolio-proof,
+.xiaomi-accordion-stage__copy p.portfolio-proof {
+  max-width: 480px;
+  color: rgba(232, 211, 169, 0.78);
+}
+
+.xiaomi-detail-carousel__caption p.portfolio-proof,
+.xiaomi-dual-gallery__copy p.portfolio-proof {
+  max-width: 620px;
+  color: rgba(232, 211, 169, 0.76);
+  font-size: 14px;
+}
+
+.portfolio-profile {
+  position: relative;
+  overflow: hidden;
+  padding-top: clamp(112px, 12vh, 154px);
+  padding-bottom: clamp(84px, 9vh, 118px);
+  background:
+    radial-gradient(circle at 82% 18%, rgba(200, 167, 106, 0.14), transparent 32%),
+    radial-gradient(circle at 18% 90%, rgba(43, 129, 158, 0.08), transparent 34%),
+    linear-gradient(180deg, #070604 0%, #0d0a07 52%, #050403 100%);
+}
+
+#before-visuals {
+  background:
+    linear-gradient(90deg, rgba(5, 4, 3, 0.96) 0%, rgba(5, 4, 3, 0.86) 48%, rgba(5, 4, 3, 0.58) 100%),
+    linear-gradient(180deg, rgba(5, 4, 3, 0.36), rgba(5, 4, 3, 0.78)),
+    url("images/shared/ambient/01B-before-visuals-bg-generated-v1.webp") center / cover no-repeat,
+    linear-gradient(180deg, #070604 0%, #0d0a07 52%, #050403 100%);
+}.portfolio-profile::before {
+  content: none;
+  position: absolute;
+  left: max(34px, calc((100vw - 1720px) / 2));
+  right: max(34px, calc((100vw - 1720px) / 2));
+  top: clamp(34px, 5vw, 78px);
+  color: rgba(232, 211, 169, 0.045);
+  font-size: clamp(32px, 5.6vw, 104px);
+  font-weight: 300;
+  line-height: 1;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.portfolio-profile::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  height: clamp(58px, 7.5vh, 96px);
+  background:
+    linear-gradient(180deg, rgba(7, 6, 4, 0), rgba(7, 6, 4, 0.28) 70%, #050403 100%);
+  pointer-events: none;
+}
+
+.portfolio-profile > * {
+  position: relative;
+  z-index: 1;
+}
+
+.portfolio-profile__grid,
+.portfolio-steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(18px, 1.5vw, 28px);
+}
+
+.portfolio-profile__grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: min(1080px, 100%);
+}
+
+/* T-167: Shared Galaxy field across the complete chapter 01 module. */
+.portfolio-chapter-one {
+  position: relative;
+  isolation: isolate;
+  overflow: visible;
+  background: #000;
+}
+
+.portfolio-hero__galaxy {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: var(--screen-h);
+  min-height: var(--screen-h);
+  z-index: 0;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 420ms ease;
+}
+
+.portfolio-hero__galaxy.is-mounted {
+  opacity: 1;
+}
+
+.portfolio-chapter-one > #visual-files,
+.portfolio-chapter-one > #before-visuals {
+  position: relative;
+  z-index: 1;
+  background: transparent;
+}
+
+#visual-files.portfolio-hero {
+  background: transparent;
+}
+
+#visual-files .portfolio-hero__image {
+  display: none;
+}
+
+#visual-files .portfolio-hero__shade {
+  z-index: 1;
+  background: transparent;
+  pointer-events: none;
+}
+
+#visual-files .portfolio-hero__bottom-fade {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  z-index: 2;
+  height: clamp(240px, 24vh, 380px);
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.28) 34%,
+      rgba(0, 0, 0, 0.74) 72%,
+      #000 100%
+    );
+  pointer-events: none;
+}
+
+#visual-files .portfolio-hero__content,
+#visual-files.portfolio-hero::after {
+  z-index: 4;
+  pointer-events: none;
+}
+
+/* T-166: Prepare chapter 01 for a continuous black-field treatment. */
+#visual-files.portfolio-hero::after {
+  content: none;
+  display: none;
+}
+
+#before-visuals {
+  background: #000;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-hero__galaxy {
+    display: none;
+  }
+}

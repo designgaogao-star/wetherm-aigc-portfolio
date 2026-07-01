@@ -1,0 +1,4181 @@
+/*
+  Portfolio Motion System
+  Purposeful motion polish for ordinary reveals and repeated interactions.
+  Protected: intro animation and the commercial-photo fusion / taiji motion.
+*/
+
+:root {
+  --motion-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --motion-ease-ui: cubic-bezier(0.2, 0, 0, 1);
+  --motion-fast: 180ms;
+  --motion-base: 280ms;
+  --motion-reveal: 460ms;
+  --motion-reveal-y: 14px;
+  --motion-reveal-blur: 6px;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translate3d(0, var(--motion-reveal-y), 0);
+  filter: blur(var(--motion-reveal-blur));
+  transition:
+    opacity var(--motion-reveal) var(--motion-ease-out),
+    transform var(--motion-reveal) var(--motion-ease-out),
+    filter var(--motion-reveal) var(--motion-ease-out);
+  transition-delay: 0ms;
+  will-change: opacity, transform, filter;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  filter: blur(0);
+  will-change: auto;
+}
+
+#commercial-photo .portfolio-fusion-device.reveal {
+  transform: none;
+  filter: none;
+  transition: opacity 320ms ease-out;
+  will-change: opacity;
+}
+
+#commercial-photo .portfolio-fusion-device.reveal.is-visible {
+  transform: none;
+  filter: none;
+}
+
+/* 2026-06-08 taiji direction and floating depth. */
+#commercial-photo .portfolio-fusion-mask-rotor {
+  animation-direction: reverse;
+}
+
+#commercial-photo .portfolio-fusion-device.reveal,
+#commercial-photo .portfolio-fusion-device.reveal.is-visible {
+  filter:
+    drop-shadow(0 0 clamp(18px, 1.5vw, 32px) rgba(232, 211, 169, 0.16))
+    drop-shadow(0 0 clamp(48px, 4.5vw, 96px) rgba(232, 211, 169, 0.08))
+    drop-shadow(0 clamp(34px, 3.7vw, 72px) clamp(38px, 4.2vw, 84px) rgba(0, 0, 0, 0.58));
+}
+
+#commercial-photo .portfolio-fusion-float-shadow {
+  position: absolute;
+  z-index: 0;
+  left: 50%;
+  bottom: clamp(-74px, -4vw, -42px);
+  width: min(78%, 520px);
+  height: clamp(50px, 6vw, 92px);
+  border-radius: 999px;
+  background:
+    radial-gradient(ellipse at 50% 48%, rgba(255, 248, 232, 0.24), rgba(232, 211, 169, 0.14) 24%, rgba(78, 54, 24, 0.12) 45%, rgba(0, 0, 0, 0.58) 72%, transparent 100%);
+  opacity: 0;
+  filter: blur(clamp(16px, 1.6vw, 28px));
+  transform: translate3d(-50%, 0, 0) scaleX(1.04) scaleY(0.78);
+  transform-origin: 50% 50%;
+  pointer-events: none;
+  will-change: opacity;
+}
+
+#commercial-photo .portfolio-fusion-device.reveal.is-visible .portfolio-fusion-float-shadow {
+  opacity: 0.78;
+  animation: none;
+}
+
+#commercial-photo .portfolio-fusion-device.reveal.is-visible .portfolio-fusion-disc {
+  animation: portfolioFusionTaijiPop 360ms cubic-bezier(0.12, 0.82, 0.18, 1) 720ms both;
+  filter:
+    drop-shadow(0 clamp(42px, 4.4vw, 84px) clamp(30px, 3.5vw, 70px) rgba(0, 0, 0, 0.74))
+    drop-shadow(0 clamp(78px, 7.4vw, 144px) clamp(76px, 8vw, 164px) rgba(0, 0, 0, 0.48))
+    drop-shadow(0 clamp(16px, 1.7vw, 32px) clamp(30px, 3.4vw, 66px) rgba(232, 211, 169, 0.18))
+    drop-shadow(0 0 clamp(38px, 4vw, 82px) rgba(53, 133, 156, 0.09));
+}
+
+/* T-192: restore 04A fusion keyframes after dormant CSS cleanup. */
+@keyframes portfolioFusionTaijiPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+
+  1% {
+    opacity: 1;
+  }
+
+  68% {
+    opacity: 1;
+    transform: scale(1.012);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes portfolioFusionRingCollapse {
+  0% {
+    opacity: 0;
+    transform: scale(6.45);
+  }
+
+  10% {
+    opacity: 0.86;
+  }
+
+  40% {
+    opacity: 0.94;
+    transform: scale(1.18);
+  }
+
+  68% {
+    opacity: 1;
+    transform: scale(0.08);
+  }
+
+  80%,
+  100% {
+    opacity: 0;
+    transform: scale(0.02);
+  }
+}
+
+@keyframes portfolioFusionSingularity {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.12);
+  }
+
+  40% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.18);
+  }
+
+  68% {
+    opacity: 0.98;
+    transform: translate(-50%, -50%) scale(1.35);
+  }
+
+  76% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0.42);
+  }
+
+  79% {
+    opacity: 0.92;
+    transform: translate(-50%, -50%) scale(0.22);
+  }
+
+  80%,
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.16);
+  }
+}
+
+/* 2026-06-08 future judgment: aligned card triptych with restrained hover selection. */
+@media (min-width: 901px) {}
+
+@keyframes portfolioFutureCardGoldSweep {
+  0% {
+    opacity: 0;
+    transform: translate3d(-120%, 0, 0) skewX(-14deg);
+  }
+
+  24% {
+    opacity: 0.74;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(120%, 0, 0) skewX(-14deg);
+  }
+}
+
+/* 2026-06-08 AIGC accordion: remove terminal divider and keep detail copy equally luminous. */
+#aigc-design .xiaomi-accordion {
+  border-bottom: 0 !important;
+}
+
+#aigc-design .xiaomi-accordion__item em,
+#aigc-design .xiaomi-accordion__item.is-active em {
+  color: rgba(255, 248, 232, 0.82) !important;
+}
+
+@media (min-width: 901px) {
+  #aigc-design .xiaomi-accordion-stage__copy {
+    transform: none !important;
+  }
+
+  #aigc-design .xiaomi-accordion {
+    --aigc-accordion-track-height: clamp(468px, 28.2vh, 636px) !important;
+  }
+
+  #aigc-design .xiaomi-accordion__item,
+  #aigc-design .xiaomi-accordion__item.is-active {
+    flex: 1 1 0 !important;
+    flex-grow: 1 !important;
+    align-content: start !important;
+    padding-top: clamp(15px, 1.25vh, 18px) !important;
+    padding-bottom: clamp(12px, 1.05vh, 16px) !important;
+    transition:
+      border-color 160ms var(--motion-ease-ui),
+      color 160ms var(--motion-ease-ui),
+      background 160ms var(--motion-ease-ui) !important;
+  }
+
+  #aigc-design .xiaomi-accordion__item span,
+  #aigc-design .xiaomi-accordion__item.is-active span,
+  #aigc-design .xiaomi-accordion__item:not(.is-active) span {
+    color: rgba(255, 248, 232, 0.82) !important;
+    font-size: clamp(18px, 1.06vw, 23px) !important;
+    font-weight: 430 !important;
+    line-height: 1.22 !important;
+    transform: none !important;
+    transition: color 160ms var(--motion-ease-ui) !important;
+    will-change: auto !important;
+  }
+
+  #aigc-design .xiaomi-accordion__item em {
+    transform: none !important;
+    margin-top: clamp(5px, 0.48vh, 7px) !important;
+    opacity: 0 !important;
+    max-height: 34px !important;
+    transition:
+      opacity 140ms var(--motion-ease-ui) !important;
+    will-change: opacity;
+  }
+
+  #aigc-design .xiaomi-accordion__item.is-active em {
+    line-height: 1.6 !important;
+    margin-top: clamp(5px, 0.48vh, 7px) !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+    max-height: 34px !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  #aigc-design .xiaomi-accordion__item::after,
+  #aigc-design .xiaomi-accordion__item.is-active::after {
+    top: clamp(24px, 1.85vh, 28px) !important;
+  }
+}
+
+/* 2026-06-08 visual tone: standalone material swatches and slightly lower picker rhythm. */
+@media (min-width: 901px) {
+  #visual-tone .xiaomi-color-stage__picker {
+    margin-top: clamp(24px, 2.05vh, 34px) !important;
+  }
+
+  #visual-tone .xiaomi-color-stage__swatches {
+    margin-top: clamp(16px, 1.35vh, 24px) !important;
+  }
+}
+
+#visual-tone .xiaomi-color-stage__image {
+  object-fit: contain !important;
+  object-position: center !important;
+  background: #050403;
+}
+
+@media (min-width: 901px) {
+  #visual-tone .xiaomi-color-stage__image {
+    inset: 0 0 0 auto !important;
+    width: min(78vw, calc(100svh * 1.777));
+    height: 100%;
+  }
+}
+
+#visual-tone .xiaomi-color-stage__swatches {
+  align-items: center;
+}
+
+#visual-tone .xiaomi-color-stage__swatches button {
+  width: clamp(54px, 3.15vw, 66px);
+  height: clamp(54px, 3.15vw, 66px);
+  padding: 3px;
+  overflow: hidden;
+  border-color: rgba(255, 255, 255, 0.28);
+  background: rgba(5, 4, 3, 0.5);
+  box-shadow:
+    0 10px 28px rgba(0, 0, 0, 0.24),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+}
+
+#visual-tone .xiaomi-color-stage__swatches button:hover,
+#visual-tone .xiaomi-color-stage__swatches button.is-active {
+  border-color: rgba(232, 211, 169, 0.9);
+  box-shadow:
+    0 14px 34px rgba(0, 0, 0, 0.28),
+    0 0 0 3px rgba(232, 211, 169, 0.13),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+}
+
+#visual-tone .xiaomi-color-stage__swatches img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 999px;
+  object-fit: cover;
+  object-position: center;
+  opacity: 1;
+  filter: saturate(1.04) contrast(1.04);
+}
+
+@media (max-width: 900px) {
+  #visual-tone .xiaomi-color-stage__image {
+    object-position: center 42% !important;
+  }
+
+  #visual-tone .xiaomi-color-stage__swatches button {
+    flex-basis: 50px;
+    width: 50px;
+    height: 50px;
+  }
+}
+
+/* 2026-06-12 browser comments: make visual-tone switches read as material-image chips. */
+#visual-tone .xiaomi-color-stage__swatches {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: clamp(8px, 0.72vw, 14px) !important;
+}
+
+#visual-tone .xiaomi-color-stage__swatches button {
+  position: relative !important;
+  flex: 0 0 auto !important;
+  width: clamp(66px, 4.2vw, 88px) !important;
+  height: clamp(44px, 2.62vw, 58px) !important;
+  padding: 3px !important;
+  border-radius: 999px !important;
+  border: 1px solid rgba(255, 248, 232, 0.28) !important;
+  background:
+    linear-gradient(180deg, rgba(255, 248, 232, 0.12), rgba(255, 248, 232, 0.02)),
+    rgba(5, 4, 3, 0.72) !important;
+  box-shadow:
+    0 14px 34px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 248, 232, 0.12) !important;
+}
+
+#visual-tone .xiaomi-color-stage__swatches button::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 4px !important;
+  pointer-events: none !important;
+  border-radius: 999px !important;
+  background:
+    linear-gradient(110deg, rgba(255, 255, 255, 0.28), transparent 28%, transparent 68%, rgba(255, 248, 232, 0.18)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.12), transparent 42%, rgba(0, 0, 0, 0.18)) !important;
+  mix-blend-mode: screen !important;
+  opacity: 0.56 !important;
+}
+
+#visual-tone .xiaomi-color-stage__swatches button:hover,
+#visual-tone .xiaomi-color-stage__swatches button.is-active {
+  transform: translateY(-2px) !important;
+  border-color: rgba(232, 211, 169, 0.92) !important;
+  box-shadow:
+    0 18px 44px rgba(0, 0, 0, 0.36),
+    0 0 0 3px rgba(232, 211, 169, 0.16),
+    0 0 42px rgba(226, 202, 156, 0.16),
+    inset 0 1px 0 rgba(255, 248, 232, 0.18) !important;
+}
+
+#visual-tone .xiaomi-color-stage__swatches img {
+  border-radius: 999px !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  filter: saturate(1.08) contrast(1.08) brightness(0.96) !important;
+}
+
+/* 2026-06-15 browser comments: restore circular tone switches and full-stage image alignment. */
+#visual-tone .xiaomi-color-stage__image {
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+}
+
+#visual-tone .xiaomi-color-stage__swatches button {
+  width: clamp(48px, 3.1vw, 62px) !important;
+  height: clamp(48px, 3.1vw, 62px) !important;
+  aspect-ratio: 1 / 1 !important;
+  border-radius: 50% !important;
+}
+
+#visual-tone .xiaomi-color-stage__swatches button::after,
+#visual-tone .xiaomi-color-stage__swatches img {
+  border-radius: 50% !important;
+}
+
+/* 2026-06-12 browser comments: unify future judgment cards as one clean triptych. */
+@media (max-width: 1180px) {}
+
+/* 2026-06-08 commercial film: remove the video-stage gradient overlay and bottom caption. */
+#commercial-film .portfolio-video-stage--cinema::after,
+#commercial-film .portfolio-video-stage--cinema .portfolio-video-stage__caption {
+  content: none !important;
+  display: none !important;
+  background: none !important;
+}
+
+/* 2026-06-09 future delivery: 35mm film reels with Academy-ratio frames. */
+/* 2026-06-17 T-060: ReactBits-inspired motion polish, kept light and compositional. */
+.motion-split {
+  display: inline-block;
+  white-space: normal;
+  text-wrap: balance;
+  word-break: keep-all;
+  line-height: inherit;
+}
+
+.motion-char {
+  display: inline-block;
+  opacity: 0;
+  transform: translate3d(0, 0.72em, 0);
+  filter: blur(8px);
+  transition:
+    opacity 620ms var(--motion-ease-out),
+    transform 720ms var(--motion-ease-out),
+    filter 720ms var(--motion-ease-out);
+  transition-delay: calc(var(--motion-index, 0) * 20ms);
+  will-change: opacity, transform, filter;
+}
+
+.motion-char--space {
+  width: 0.35em;
+}
+
+.motion-split.is-motion-visible .motion-char {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  filter: blur(0);
+}
+
+#visual-files .motion-split {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.02em;
+}
+
+#visual-files .motion-char {
+  transition-duration: 760ms;
+  transition-delay: calc(460ms + var(--motion-index, 0) * 24ms);
+}
+
+#visual-files .motion-hero-frame::before {
+  opacity: 0;
+  transform: translate3d(0, 10px, 0) scaleX(0.42);
+  transform-origin: left center;
+  filter: blur(4px);
+  transition:
+    opacity 520ms var(--motion-ease-out),
+    transform 680ms var(--motion-ease-out),
+    filter 680ms var(--motion-ease-out);
+  transition-delay: 180ms;
+  will-change: opacity, transform, filter;
+}
+
+#visual-files .motion-hero-frame.is-motion-visible::before {
+  opacity: 0.82;
+  transform: translate3d(0, 0, 0) scaleX(1);
+  filter: blur(0);
+  will-change: auto;
+}
+
+#visual-files .motion-content {
+  opacity: 0;
+  transform: translate3d(0, 10px, 0);
+  filter: blur(5px);
+  transition:
+    opacity 520ms var(--motion-ease-out),
+    transform 620ms var(--motion-ease-out),
+    filter 620ms var(--motion-ease-out);
+  will-change: opacity, transform, filter;
+}
+
+#visual-files .portfolio-kicker.motion-content {
+  transition-delay: 320ms;
+}
+
+#visual-files .portfolio-hero__titleline.motion-content {
+  transition-delay: 1180ms;
+}
+
+#visual-files .motion-content.is-motion-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  filter: blur(0);
+  will-change: auto;
+}
+
+#before-visuals .motion-split,
+#before-visuals .motion-content {
+  text-wrap: pretty;
+}
+
+#before-visuals .motion-content {
+  opacity: 0;
+  transform: translate3d(0, 14px, 0);
+  filter: blur(6px);
+  transition:
+    opacity 520ms var(--motion-ease-out),
+    transform 620ms var(--motion-ease-out),
+    filter 620ms var(--motion-ease-out);
+  transition-delay: calc(var(--motion-index, 0) * 48ms);
+}
+
+#before-visuals .motion-content.is-motion-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  filter: blur(0);
+}
+
+.motion-depth-surface {
+  transform-style: preserve-3d;
+  transition:
+    transform 260ms var(--motion-ease-out),
+    box-shadow 260ms var(--motion-ease-out),
+    border-color 220ms var(--motion-ease-ui),
+    background 220ms var(--motion-ease-ui);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .motion-depth-surface.is-pointer-active {
+    transform:
+      perspective(1200px)
+      rotateX(var(--motion-tilt-x, 0deg))
+      rotateY(var(--motion-tilt-y, 0deg))
+      translate3d(0, -4px, 0);
+  }
+
+  .motion-depth-surface.is-pointer-active img {
+    transform: scale(1.025);
+    transition: transform 260ms var(--motion-ease-out), filter 260ms var(--motion-ease-out);
+  }  #visual-system .xiaomi-hover-card.motion-depth-surface.is-pointer-active,
+  #film-storyboard .portfolio-storyboard-card.motion-depth-surface.is-pointer-active,
+  #other-works .portfolio-other-works__light-card.motion-depth-surface.is-pointer-active {
+    box-shadow:
+      0 24px 60px rgba(0, 0, 0, 0.34),
+      0 0 0 1px rgba(255, 248, 232, 0.08) inset;
+  }
+}
+
+.motion-magnet {
+  transition:
+    transform 180ms var(--motion-ease-ui),
+    opacity 180ms var(--motion-ease-ui),
+    filter 180ms var(--motion-ease-ui);
+}
+
+.motion-magnet.is-magnet-active {
+  transform: translate3d(var(--magnet-x, 0), var(--magnet-y, 0), 0);
+}
+
+#film-storyboard.motion-scroll-accent .portfolio-storyboard-strip {
+  transform: translate3d(calc(var(--motion-scroll-velocity, 0) * -6px), 0, 0);
+  transition: transform 160ms var(--motion-ease-out);
+}
+
+/* 2026-06-18 T-065 R2: original BorderGlow structure adapted to the storyboard area. */
+#film-storyboard .border-glow-card {
+  --edge-proximity: 0;
+  --edge-alpha: 0;
+  --color-alpha: 0;
+  --fill-alpha: 0;
+  --cursor-angle: 450deg;
+  --edge-sensitivity: 30;
+  --color-sensitivity: calc(var(--edge-sensitivity) + 20);
+  --border-radius: 8px;
+  --glow-padding: 40px;
+  --cone-spread: 25;
+  --fill-opacity: 0.5;
+  position: relative;
+  isolation: isolate;
+  overflow: visible;
+  border-color: rgba(255, 255, 255, 0.15);
+  background: var(--card-bg, rgba(5, 4, 3, 0.82));
+  transition:
+    border-color 260ms var(--motion-ease-ui),
+    box-shadow 360ms var(--motion-ease-out),
+    transform 300ms var(--motion-ease-out);
+}
+
+#film-storyboard .border-glow-card::before,
+#film-storyboard .border-glow-card::after,
+#film-storyboard .border-glow-card > .edge-light {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 1;
+  pointer-events: none;
+  transition: opacity 250ms var(--motion-ease-out);
+}
+
+#film-storyboard .border-glow-card:not(:hover):not(.is-border-glowing)::before,
+#film-storyboard .border-glow-card:not(:hover):not(.is-border-glowing)::after,
+#film-storyboard .border-glow-card:not(:hover):not(.is-border-glowing) > .edge-light {
+  opacity: 0;
+  transition: opacity 750ms ease-in-out;
+}
+
+#film-storyboard .border-glow-card::before {
+  z-index: 1;
+  border: 1px solid transparent;
+  background:
+    linear-gradient(var(--card-bg, #120f17) 0 100%) padding-box,
+    linear-gradient(rgb(255 255 255 / 0%) 0 100%) border-box,
+    var(--gradient-one) border-box,
+    var(--gradient-two) border-box,
+    var(--gradient-three) border-box,
+    var(--gradient-four) border-box,
+    var(--gradient-five) border-box,
+    var(--gradient-six) border-box,
+    var(--gradient-seven) border-box,
+    var(--gradient-base) border-box;
+  opacity: var(--color-alpha, 0);
+  mask-image:
+    conic-gradient(
+      from var(--cursor-angle) at center,
+      black calc(var(--cone-spread) * 1%),
+      transparent calc((var(--cone-spread) + 15) * 1%),
+      transparent calc((100 - var(--cone-spread) - 15) * 1%),
+      black calc((100 - var(--cone-spread)) * 1%)
+    );
+}
+
+#film-storyboard .border-glow-card::after {
+  z-index: 0;
+  border: 1px solid transparent;
+  background:
+    var(--gradient-one) padding-box,
+    var(--gradient-two) padding-box,
+    var(--gradient-three) padding-box,
+    var(--gradient-four) padding-box,
+    var(--gradient-five) padding-box,
+    var(--gradient-six) padding-box,
+    var(--gradient-seven) padding-box,
+    var(--gradient-base) padding-box;
+  mask-image:
+    linear-gradient(to bottom, black, black),
+    radial-gradient(ellipse at 50% 50%, black 40%, transparent 65%),
+    radial-gradient(ellipse at 66% 66%, black 5%, transparent 40%),
+    radial-gradient(ellipse at 33% 33%, black 5%, transparent 40%),
+    radial-gradient(ellipse at 66% 33%, black 5%, transparent 40%),
+    radial-gradient(ellipse at 33% 66%, black 5%, transparent 40%),
+    conic-gradient(from var(--cursor-angle) at center, transparent 5%, black 15%, black 85%, transparent 95%);
+  mask-composite: subtract, add, add, add, add, add;
+  opacity: var(--fill-alpha, 0);
+  mix-blend-mode: soft-light;
+}
+
+#film-storyboard .border-glow-card > .edge-light {
+  inset: calc(var(--glow-padding) * -1);
+  z-index: 1;
+  mask-image:
+    conic-gradient(
+      from var(--cursor-angle) at center,
+      black 2.5%,
+      transparent 10%,
+      transparent 90%,
+      black 97.5%
+    );
+  opacity: var(--edge-alpha, 0);
+  mix-blend-mode: plus-lighter;
+}
+
+#film-storyboard .border-glow-card > .edge-light::before {
+  content: "";
+  position: absolute;
+  inset: var(--glow-padding);
+  border-radius: inherit;
+  box-shadow:
+    inset 0 0 1px var(--glow-color, hsl(40deg 80% 80% / 100%)),
+    inset 0 0 10px var(--glow-color-60, hsl(40deg 80% 80% / 60%)),
+    inset 0 0 3px 0 var(--glow-color-50, hsl(40deg 80% 80% / 50%)),
+    inset 0 0 6px 0 var(--glow-color-40, hsl(40deg 80% 80% / 40%)),
+    inset 0 0 15px 0 var(--glow-color-30, hsl(40deg 80% 80% / 30%)),
+    inset 0 0 25px 2px var(--glow-color-20, hsl(40deg 80% 80% / 20%)),
+    inset 0 0 50px 2px var(--glow-color-10, hsl(40deg 80% 80% / 10%)),
+    0 0 1px var(--glow-color-60, hsl(40deg 80% 80% / 60%)),
+    0 0 3px 0 var(--glow-color-50, hsl(40deg 80% 80% / 50%)),
+    0 0 6px 0 var(--glow-color-40, hsl(40deg 80% 80% / 40%)),
+    0 0 15px 0 var(--glow-color-30, hsl(40deg 80% 80% / 30%)),
+    0 0 25px 2px var(--glow-color-20, hsl(40deg 80% 80% / 20%)),
+    0 0 50px 2px var(--glow-color-10, hsl(40deg 80% 80% / 10%));
+}
+
+#film-storyboard .border-glow-card > .border-glow-inner {
+  position: relative;
+  z-index: 3;
+  display: block;
+  border-radius: inherit;
+  overflow: hidden;
+}
+
+#film-storyboard .portfolio-prompt-console.border-glow-card > .border-glow-inner {
+  overflow: visible;
+}
+
+#film-storyboard .border-glow-card--storyboard.is-border-glowing {
+  border-color: rgba(255, 248, 232, 0.24);
+  box-shadow:
+    0 28px 86px rgba(0, 0, 0, 0.46),
+    0 0 72px rgba(232, 211, 169, 0.18),
+    0 0 96px rgba(45, 132, 158, 0.08);
+}
+
+#film-storyboard .border-glow-card--quiet {
+  --color-sensitivity: calc(var(--edge-sensitivity) + 28);
+}
+
+#film-storyboard .border-glow-card--quiet > .edge-light::before {
+  box-shadow:
+    inset 0 0 1px var(--glow-color-40, hsl(40deg 80% 80% / 40%)),
+    inset 0 0 8px var(--glow-color-20, hsl(40deg 80% 80% / 20%)),
+    0 0 1px var(--glow-color-30, hsl(40deg 80% 80% / 30%)),
+    0 0 18px var(--glow-color-10, hsl(40deg 80% 80% / 10%));
+}
+
+#film-storyboard .border-glow-card--quiet.is-border-glowing {
+  border-color: rgba(232, 211, 169, 0.24);
+  box-shadow:
+    0 30px 98px rgba(0, 0, 0, 0.42),
+    0 0 28px rgba(232, 211, 169, 0.06);
+}
+
+@keyframes portfolioFutureFilmMoveForward {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes portfolioFutureFilmMoveReverse {
+  from {
+    transform: translate3d(-50%, 0, 0);
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}.portfolio-work__visual img,
+.portfolio-image-card img,
+.portfolio-ai-compare__preview img,
+#other-works .portfolio-other-work__media img,
+#other-works .portfolio-other-works__poster-card,
+#other-works .portfolio-other-works__light-card,
+#other-works .portfolio-other-works__strip,
+#other-works .portfolio-other-works__ai-card {
+  transition-timing-function: var(--motion-ease-out) !important;
+}.portfolio-card,
+.portfolio-image-card,
+.portfolio-method-card,
+.portfolio-delivery-step,
+.portfolio-storyboard-card,
+.portfolio-material-card,
+.portfolio-photo-spec-card,
+#other-works .portfolio-other-work__media,
+#other-works .portfolio-other-works__poster-control {
+  transition-duration: var(--motion-base) !important;
+  transition-timing-function: var(--motion-ease-out) !important;
+}
+
+.portfolio-nav-links a,
+.portfolio-nav-submenu,
+.portfolio-nav-submenu a {
+  transition-duration: var(--motion-fast) !important;
+  transition-timing-function: var(--motion-ease-ui) !important;
+}
+
+@media (hover: hover) and (pointer: fine) {  .portfolio-card:hover,
+  .portfolio-image-card:hover,
+  .portfolio-method-card:hover,
+  .portfolio-delivery-step:hover,
+  .portfolio-material-card:hover,
+  .portfolio-photo-spec-card:hover {
+    transform: translate3d(0, -2px, 0);
+  }  .portfolio-card:active,
+  .portfolio-image-card:active,
+  .portfolio-method-card:active,
+  .portfolio-delivery-step:active,
+  .portfolio-material-card:active,
+  .portfolio-photo-spec-card:active,
+  #other-works .portfolio-other-works__poster-control:active {
+    transform: translate3d(0, -1px, 0) scale(0.995);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal.is-visible {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+    will-change: auto !important;
+  }
+
+  #commercial-photo .portfolio-fusion-float-shadow,
+  #commercial-photo .portfolio-fusion-device.reveal.is-visible .portfolio-fusion-float-shadow {
+    opacity: 0.78;
+    animation: none !important;
+  }  .portfolio-card,
+  .portfolio-image-card,
+  .portfolio-method-card,
+  .portfolio-delivery-step,
+  .portfolio-storyboard-card,
+  .portfolio-material-card,
+  .portfolio-photo-spec-card,
+  #other-works .portfolio-other-work__media,
+  #other-works .portfolio-other-works__poster-control {
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .motion-split,
+  .motion-content,
+  .motion-char,
+  .motion-depth-surface,
+  .motion-magnet,
+  #aigc-design .xiaomi-accordion__item,
+  #aigc-design .xiaomi-accordion__item span,
+  #aigc-design .xiaomi-accordion__item em,
+  #film-storyboard .storyboard-border-glow,
+  #film-storyboard .storyboard-border-glow::before,
+  #film-storyboard .storyboard-border-glow::after {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+    animation: none !important;
+    will-change: auto !important;
+  }
+
+  #film-storyboard .storyboard-border-glow::before,
+  #film-storyboard .storyboard-border-glow::after {
+    opacity: 0 !important;
+  }
+
+  #film-storyboard.motion-scroll-accent .portfolio-storyboard-strip{
+    transform: none !important;
+  }
+}
+
+/* T-126: 02A accordion opens its row instead of only revealing text. */
+@media (min-width: 901px) {
+  #aigc-design .xiaomi-accordion {
+    --aigc-accordion-track-height: clamp(520px, 33vh, 690px) !important;
+    --aigc-accordion-closed-row: minmax(78px, 1fr);
+    --aigc-accordion-open-row: minmax(138px, 1.74fr);
+    display: grid !important;
+    grid-template-rows:
+      var(--aigc-accordion-closed-row)
+      var(--aigc-accordion-closed-row)
+      var(--aigc-accordion-closed-row)
+      var(--aigc-accordion-closed-row)
+      var(--aigc-accordion-closed-row) !important;
+    height: var(--aigc-accordion-track-height) !important;
+    min-height: var(--aigc-accordion-track-height) !important;
+    max-height: var(--aigc-accordion-track-height) !important;
+    border-top: 1px solid rgba(232, 211, 169, 0.14) !important;
+    border-bottom: 1px solid rgba(232, 211, 169, 0.14) !important;
+    transition: grid-template-rows 520ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+  }
+
+  #aigc-design .xiaomi-accordion:has(.xiaomi-accordion__item:nth-child(1).is-active) {
+    grid-template-rows:
+      var(--aigc-accordion-open-row)
+      var(--aigc-accordion-closed-row)
+      var(--aigc-accordion-closed-row)
+      var(--aigc-accordion-closed-row)
+      var(--aigc-accordion-closed-row) !important;
+  }
+
+  #aigc-design .xiaomi-accordion:has(.xiaomi-accordion__item:nth-child(2).is-active) {
+    grid-template-rows:
+      var(--aigc-accordion-closed-row)
+      var(--aigc-accordion-open-row)
+      var(--aigc-accordion-closed-row)
+      var(--aigc-accordion-closed-row)
+      var(--aigc-accordion-closed-row) !important;
+  }
+
+  #aigc-design .xiaomi-accordion:has(.xiaomi-accordion__item:nth-child(3).is-active) {
+    grid-template-rows:
+      var(--aigc-accordion-closed-row)
+      var(--aigc-accordion-closed-row)
+      var(--aigc-accordion-open-row)
+      var(--aigc-accordion-closed-row)
+      var(--aigc-accordion-closed-row) !important;
+  }
+
+  #aigc-design .xiaomi-accordion:has(.xiaomi-accordion__item:nth-child(4).is-active) {
+    grid-template-rows:
+      var(--aigc-accordion-closed-row)
+      var(--aigc-accordion-closed-row)
+      var(--aigc-accordion-closed-row)
+      var(--aigc-accordion-open-row)
+      var(--aigc-accordion-closed-row) !important;
+  }
+
+  #aigc-design .xiaomi-accordion:has(.xiaomi-accordion__item:nth-child(5).is-active) {
+    grid-template-rows:
+      var(--aigc-accordion-closed-row)
+      var(--aigc-accordion-closed-row)
+      var(--aigc-accordion-closed-row)
+      var(--aigc-accordion-closed-row)
+      var(--aigc-accordion-open-row) !important;
+  }
+
+  #aigc-design .xiaomi-accordion__item,
+  #aigc-design .xiaomi-accordion__item.is-active {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    grid-template-rows: 1fr auto 1fr !important;
+    align-items: center !important;
+    align-content: stretch !important;
+    min-height: 0 !important;
+    height: auto !important;
+    padding: 0 clamp(18px, 1.5vw, 26px) 0 0 !important;
+    border-top: 0 !important;
+    border-bottom: 1px solid rgba(232, 211, 169, 0.14) !important;
+    background: transparent !important;
+    transition:
+      border-color 240ms cubic-bezier(0.22, 1, 0.36, 1),
+      background-color 240ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+  }
+
+  #aigc-design .xiaomi-accordion__item:last-child {
+    border-bottom: 0 !important;
+  }
+
+  #aigc-design .xiaomi-accordion__item span {
+    grid-column: 1 / 2 !important;
+    grid-row: 2 !important;
+    align-self: end !important;
+    display: block !important;
+    transition:
+      color 240ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 420ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+  }
+
+  #aigc-design .xiaomi-accordion__item em {
+    grid-column: 1 / -1 !important;
+    grid-row: 3 !important;
+    display: block !important;
+    max-height: 0 !important;
+    margin: 0 !important;
+    opacity: 0 !important;
+    overflow: hidden !important;
+    transform: translate3d(0, -8px, 0) !important;
+    transition:
+      max-height 520ms cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 260ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 420ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+  }
+
+  #aigc-design .xiaomi-accordion__item.is-active {
+    border-color: rgba(232, 211, 169, 0.24) !important;
+    background:
+      linear-gradient(180deg, rgba(255, 248, 232, 0.028), rgba(255, 248, 232, 0.006)) !important;
+  }
+
+  #aigc-design .xiaomi-accordion__item.is-active span {
+    color: rgba(255, 248, 232, 0.92) !important;
+    transform: translate3d(0, -4px, 0) !important;
+  }
+
+  #aigc-design .xiaomi-accordion__item.is-active em {
+    max-height: 58px !important;
+    margin-top: clamp(8px, 0.7vh, 12px) !important;
+    opacity: 1 !important;
+    transform: translate3d(0, 0, 0) !important;
+  }
+
+  #aigc-design .xiaomi-accordion__item::after {
+    grid-column: 2 / 3 !important;
+    grid-row: 2 !important;
+    align-self: center !important;
+    top: auto !important;
+    right: 0 !important;
+    transition:
+      transform 360ms cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 240ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+  }
+}
+
+@media (min-width: 901px) and (prefers-reduced-motion: reduce) {
+  #aigc-design .xiaomi-accordion,
+  #aigc-design .xiaomi-accordion__item,
+  #aigc-design .xiaomi-accordion__item span,
+  #aigc-design .xiaomi-accordion__item em,
+  #aigc-design .xiaomi-accordion__item::after {
+    transition: none !important;
+  }
+}
+
+/* T-134: 02A accordion follows the Xiaomi-style two-line information group rhythm. */
+@media (min-width: 901px) {
+  #aigc-design .xiaomi-accordion {
+    --aigc-accordion-track-height: clamp(486px, 31.5vh, 620px) !important;
+    --aigc-accordion-closed-row: minmax(74px, 1fr);
+    --aigc-accordion-open-row: minmax(118px, 1.44fr);
+  }
+
+  #aigc-design .xiaomi-accordion__item,
+  #aigc-design .xiaomi-accordion__item.is-active {
+    grid-template-rows: auto auto !important;
+    align-content: center !important;
+    padding-right: clamp(18px, 1.5vw, 26px) !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  #aigc-design .xiaomi-accordion__item span {
+    grid-row: 1 !important;
+    align-self: center !important;
+    line-height: 1.14 !important;
+    transform: none !important;
+  }
+
+  #aigc-design .xiaomi-accordion__item em {
+    grid-row: 2 !important;
+    align-self: start !important;
+    line-height: 1.48 !important;
+    transform: translate3d(0, -4px, 0) !important;
+  }
+
+  #aigc-design .xiaomi-accordion__item.is-active span {
+    transform: none !important;
+  }
+
+  #aigc-design .xiaomi-accordion__item.is-active em {
+    max-height: 46px !important;
+    margin-top: clamp(5px, 0.48vh, 8px) !important;
+    transform: translate3d(0, 0, 0) !important;
+  }
+
+  #aigc-design .xiaomi-accordion__item::after {
+    grid-row: 1 !important;
+    align-self: center !important;
+  }
+}
+
+/* T-136: motion file loads last, so re-lock text roles without scale-based sizing. */
+@media (min-width: 901px) {
+  #aigc-design .xiaomi-accordion__item span {
+    color: var(--color-title-soft, rgba(244, 234, 216, 0.86)) !important;
+    font-size: var(--type-titleline, 1.125rem) !important;
+    font-weight: var(--weight-line, 430) !important;
+    line-height: 1.14 !important;
+    letter-spacing: 0 !important;
+    transform: none !important;
+  }
+
+  #aigc-design .xiaomi-accordion__item em {
+    color: var(--color-body, rgba(239, 229, 211, 0.68)) !important;
+    font-size: var(--type-body-small, 0.875rem) !important;
+    font-weight: var(--weight-body, 380) !important;
+    line-height: 1.48 !important;
+    letter-spacing: 0 !important;
+  }
+
+  #aigc-design .xiaomi-accordion__item.is-active span {
+    color: var(--color-title-strong, rgba(255, 248, 232, 0.96)) !important;
+    font-weight: var(--weight-title, 520) !important;
+    transform: none !important;
+  }
+}
+
+/* T-172: visual-tone swatches stay as one controlled row. */
+#visual-tone .xiaomi-color-stage__swatches {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  gap: clamp(8px, 0.54vw, 12px) !important;
+  max-width: 100% !important;
+}
+
+#visual-tone .xiaomi-color-stage__swatches button {
+  flex: 0 0 clamp(48px, 2.45vw, 58px) !important;
+  width: clamp(48px, 2.45vw, 58px) !important;
+  height: clamp(48px, 2.45vw, 58px) !important;
+  aspect-ratio: 1 / 1 !important;
+}
+
+/* T-176: 02A accordion removes outer frame lines and switches with a lighter Xiaomi-like collapse rhythm. */
+@media (min-width: 901px) {
+  #aigc-design .xiaomi-accordion {
+    --aigc-accordion-track-height: clamp(486px, 31.5vh, 620px) !important;
+    --aigc-accordion-closed-row: minmax(72px, 1fr);
+    --aigc-accordion-open-row: minmax(128px, 1.52fr);
+    border-top: 0 !important;
+    border-bottom: 0 !important;
+    box-shadow: none !important;
+    transition: grid-template-rows 430ms cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+
+  #aigc-design .xiaomi-accordion__item,
+  #aigc-design .xiaomi-accordion__item.is-active {
+    grid-template-rows: auto auto !important;
+    align-content: center !important;
+    padding: 0 clamp(18px, 1.45vw, 26px) 0 0 !important;
+    border-top: 0 !important;
+    border-bottom: 1px solid rgba(232, 211, 169, 0.12) !important;
+    background: transparent !important;
+    transition:
+      border-color 180ms cubic-bezier(0.16, 1, 0.3, 1),
+      background-color 180ms cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+
+  #aigc-design .xiaomi-accordion__item:last-child {
+    border-bottom: 0 !important;
+  }
+
+  #aigc-design .xiaomi-accordion__item span {
+    grid-row: 1 !important;
+    align-self: end !important;
+    opacity: 0.66 !important;
+    transition:
+      color 190ms cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 190ms cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+
+  #aigc-design .xiaomi-accordion__item em {
+    grid-row: 2 !important;
+    max-height: 0 !important;
+    margin-top: 0 !important;
+    opacity: 0 !important;
+    overflow: hidden !important;
+    filter: blur(3px) !important;
+    transform: translate3d(0, -5px, 0) !important;
+    transition:
+      max-height 430ms cubic-bezier(0.16, 1, 0.3, 1),
+      margin-top 430ms cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 220ms cubic-bezier(0.16, 1, 0.3, 1),
+      filter 260ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 330ms cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+
+  #aigc-design .xiaomi-accordion.is-transitioning .xiaomi-accordion__item em,
+  #aigc-design .portfolio-panel.xiaomi-accordion-stage:has(.xiaomi-accordion.is-transitioning) .xiaomi-accordion-stage__image img {
+    will-change: opacity, transform, filter;
+  }
+
+  #aigc-design .xiaomi-accordion__item.is-active {
+    border-bottom-color: rgba(232, 211, 169, 0.2) !important;
+    background: linear-gradient(180deg, rgba(255, 248, 232, 0.018), rgba(255, 248, 232, 0)) !important;
+  }
+
+  #aigc-design .xiaomi-accordion__item.is-active span {
+    opacity: 1 !important;
+  }
+
+  #aigc-design .xiaomi-accordion__item.is-active em {
+    max-height: calc(var(--accordion-copy-height, 42px) + 4px) !important;
+    margin-top: clamp(5px, 0.46vh, 8px) !important;
+    opacity: 1 !important;
+    filter: blur(0) !important;
+    transform: translate3d(0, 0, 0) !important;
+  }
+
+  #aigc-design .xiaomi-accordion__item::after,
+  #aigc-design .xiaomi-accordion__item.is-active::after {
+    grid-row: 1 / -1 !important;
+    top: 50% !important;
+    right: 0 !important;
+    opacity: 0.52 !important;
+    transform: translate3d(0, -50%, 0) rotate(45deg) !important;
+    transition:
+      transform 280ms cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 180ms cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+
+  #aigc-design .xiaomi-accordion__item.is-active::after {
+    opacity: 0.78 !important;
+    transform: translate3d(0, -50%, 0) rotate(-135deg) !important;
+  }
+
+  #aigc-design .xiaomi-accordion-stage__image img {
+    transform: scale(1.004) !important;
+    transition:
+      opacity 420ms cubic-bezier(0.16, 1, 0.3, 1),
+      filter 420ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 620ms cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+
+  #aigc-design .xiaomi-accordion-stage__image img.is-active {
+    transform: scale(1) !important;
+  }
+}
+
+@media (min-width: 901px) and (prefers-reduced-motion: reduce) {
+  #aigc-design .xiaomi-accordion,
+  #aigc-design .xiaomi-accordion__item,
+  #aigc-design .xiaomi-accordion__item span,
+  #aigc-design .xiaomi-accordion__item em,
+  #aigc-design .xiaomi-accordion__item::after,
+  #aigc-design .xiaomi-accordion-stage__image img {
+    transition: none !important;
+    filter: none !important;
+  }
+}
+
+/*
+  T-195/T-202: final-frame guard.
+  The canonical frame formula lives in portfolio-runtime.css. This late layer
+  may only bridge legacy variables to that frame; it must not recalculate widths
+  or add DPR-specific branches.
+*/
+@media (min-width: 901px) {
+  :root {
+    --page-wide: var(--page-standard);
+    --portfolio-profile-wide: var(--page-standard);
+    --portfolio-profile-left: var(--page-standard-left);
+  }
+}
+
+@media (min-width: 901px) {
+  #aigc-design.portfolio-panel {
+    background: #000 !important;
+  }
+
+  #aigc-design .xiaomi-accordion-stage__heading,
+  #aigc-design .portfolio-panel.xiaomi-accordion-stage {
+    width: var(--page-standard) !important;
+    max-width: var(--page-standard) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  #aigc-design .portfolio-panel.xiaomi-accordion-stage {
+    grid-template-columns: minmax(0, 1fr) minmax(400px, 0.42fr) !important;
+    column-gap: clamp(56px, 3.9vw, 96px) !important;
+    justify-content: initial !important;
+    align-content: center !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  #aigc-design .xiaomi-accordion-stage__image {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    aspect-ratio: 16 / 9 !important;
+  }
+
+  #aigc-design .xiaomi-accordion-stage__copy {
+    width: min(100%, 520px) !important;
+    max-width: 520px !important;
+    justify-self: stretch !important;
+  }
+
+  #aigc-design .xiaomi-accordion__item,
+  #aigc-design .xiaomi-accordion__item.is-active {
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  #aigc-design .xiaomi-accordion__item::before,
+  #aigc-design .xiaomi-accordion__item.is-active::before {
+    content: none !important;
+    display: none !important;
+  }
+
+  #commercial-film .portfolio-video-feature--cinema {
+    width: 100vw !important;
+    max-width: none !important;
+    margin-inline: calc(50% - 50vw) !important;
+    padding-inline: 0 !important;
+    min-height: var(--screen-h) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  #commercial-film .portfolio-video-feature__media--cinema,
+  #commercial-film .portfolio-video-stage--cinema {
+    width: 100vw !important;
+    max-width: none !important;
+    margin-inline: 0 !important;
+  }
+
+  #commercial-film .portfolio-video-feature__media--cinema {
+    flex: 0 0 100vw !important;
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  #commercial-film .portfolio-video-stage--cinema {
+    aspect-ratio: 2.35 / 1 !important;
+    min-height: min(72vh, 1560px) !important;
+    border-left: 0 !important;
+    border-right: 0 !important;
+    border-radius: 0 !important;
+  }
+}
+
+/*
+  T-196: photo-gallery composition, taiji scale, and title role cleanup.
+  Scope is intentionally narrow: two 04 photo-gallery panels, 04A taiji,
+  and page-level title typography. Do not use parent scale() to fix text.
+*/
+@media (min-width: 901px) {
+  .portfolio-section__intro h2.portfolio-main-title,
+  .portfolio-video-feature__copy h2.portfolio-main-title,
+  .portfolio-work__copy h2.portfolio-main-title,
+  #aigc-design .xiaomi-accordion-stage__heading h2.portfolio-main-title,
+  #visual-tone .xiaomi-color-stage__title h2.portfolio-main-title,
+  #commercial-photo .portfolio-reality-fusion__panel > .portfolio-section__intro h2.portfolio-main-title,
+  #support .portfolio-support-panel .portfolio-section__intro h2.portfolio-main-title {
+    color: var(--color-title, var(--type-color-title)) !important;
+    font-size: var(--type-section-title, var(--type-section)) !important;
+    font-weight: var(--weight-section) !important;
+    line-height: var(--type-line-title) !important;
+    letter-spacing: 0 !important;
+  }
+
+  #photo-scenes .xiaomi-dual-gallery {
+    min-height: var(--screen-h) !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: #000 !important;
+  }
+
+  #photo-scenes .xiaomi-dual-gallery__wrap {
+    width: min(var(--page-standard), calc(100vw - clamp(96px, 6.25vw, 160px))) !important;
+    max-width: min(var(--page-standard), calc(100vw - clamp(96px, 6.25vw, 160px))) !important;
+    margin-inline: auto !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 16fr) minmax(360px, 7.25fr) !important;
+    gap: clamp(28px, 2.2vw, 56px) !important;
+    align-items: center !important;
+  }
+
+  #photo-scenes .xiaomi-dual-gallery.is-reverse .xiaomi-dual-gallery__wrap {
+    grid-template-columns: minmax(360px, 7.25fr) minmax(0, 16fr) !important;
+  }
+
+  #photo-scenes .xiaomi-dual-gallery.is-reverse .xiaomi-dual-gallery__big {
+    order: 2 !important;
+  }
+
+  #photo-scenes .xiaomi-dual-gallery.is-reverse .xiaomi-dual-gallery__side {
+    order: 1 !important;
+  }
+
+  #photo-scenes .xiaomi-dual-gallery__big {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    aspect-ratio: 16 / 9 !important;
+    align-self: center !important;
+  }
+
+  #photo-scenes .xiaomi-dual-gallery__side {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    display: grid !important;
+    grid-template-rows: auto auto auto !important;
+    align-content: center !important;
+    gap: clamp(14px, 1.25vw, 24px) !important;
+  }
+
+  #photo-scenes .xiaomi-dual-gallery__small {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    aspect-ratio: 1 / 1 !important;
+  }
+
+  #photo-scenes .xiaomi-dual-gallery__copy {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border-left: 0 !important;
+  }
+
+  #photo-scenes .xiaomi-dual-gallery__copy h2.portfolio-main-title {
+    color: var(--color-title, var(--type-color-title)) !important;
+    font-size: var(--type-panel-title, var(--type-panel)) !important;
+    font-weight: var(--weight-panel) !important;
+    line-height: var(--type-line-title) !important;
+    letter-spacing: 0 !important;
+  }
+
+  #photo-scenes .xiaomi-dual-gallery .xiaomi-carousel__controls {
+    width: 100% !important;
+    margin-top: clamp(4px, 0.5vw, 10px) !important;
+  }
+
+  #commercial-photo .portfolio-reality-fusion__panel::before,
+  #commercial-photo .portfolio-fusion-float-shadow,
+  #commercial-photo .portfolio-fusion-device.reveal.is-visible .portfolio-fusion-float-shadow {
+    content: none !important;
+    display: none !important;
+    opacity: 0 !important;
+  }
+
+  #commercial-photo .portfolio-fusion-device {
+    --fusion-device-size: min(860px, calc(var(--page-standard) * 0.44), 76vh) !important;
+    width: var(--fusion-device-size) !important;
+    height: var(--fusion-device-size) !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+}
+
+/*
+  T-197: live title/copy role consolidation.
+  The homepage owns display-hero. Ordinary page titles use section-title.
+  GAO DESIGN submodule headings remain panel-title; archive is centered but
+  still a page title. This layer exists because motion CSS loads last.
+*/
+@media (min-width: 901px) {
+  #aigc-design .xiaomi-accordion-stage__heading h2.portfolio-main-title,
+  #visual-tone .xiaomi-color-stage__title h2.portfolio-main-title,
+  #visual-system .xiaomi-carousel__intro h2.portfolio-main-title,
+  #commercial-film .portfolio-video-feature__copy h2.portfolio-main-title,
+  #film-storyboard .portfolio-section__intro h2.portfolio-main-title,
+  #commercial-photo .portfolio-reality-fusion__panel > .portfolio-section__intro h2.portfolio-main-title,
+  #reality-imagination .portfolio-section__intro h2.portfolio-main-title,
+  #support .portfolio-support-panel .portfolio-section__intro h2.portfolio-main-title,
+  #other-works .portfolio-other-works__hero h2.portfolio-main-title,
+  #other-works .portfolio-other-works__ai-wall > .portfolio-other-works__finale-copy h3.portfolio-main-title,
+  #future-profile .profile-header__title {
+    color: var(--color-title, var(--type-color-title)) !important;
+    font-size: var(--type-section-title, var(--type-section)) !important;
+    font-weight: var(--weight-section) !important;
+    line-height: var(--type-line-title) !important;
+    letter-spacing: 0 !important;
+  }
+
+  /* T-201: photo-scenes gallery labels are local pseudo titles, not page titles. */
+  #photo-scenes .xiaomi-dual-gallery__copy h2.portfolio-main-title,
+  #other-works .portfolio-other-works__scene-copy h3.portfolio-main-title {
+    color: var(--color-title-soft, var(--type-color-title-soft)) !important;
+    font-size: var(--type-panel-title, var(--type-panel)) !important;
+    font-weight: var(--weight-panel) !important;
+    line-height: var(--type-line-title) !important;
+    letter-spacing: 0 !important;
+  }
+
+  #visual-files.portfolio-hero h1.portfolio-main-title {
+    color: var(--color-title, var(--type-color-title)) !important;
+    font-size: var(--type-display-hero, var(--type-hero)) !important;
+    font-weight: var(--main-title-weight, 500) !important;
+    line-height: var(--main-title-line, 1.02) !important;
+    letter-spacing: 0 !important;
+  }
+
+  #other-works .portfolio-other-works__thanks-copy h3.portfolio-main-title {
+    color: var(--color-title, var(--type-color-title)) !important;
+    font-size: var(--type-closing-display) !important;
+    font-weight: 560 !important;
+    line-height: var(--type-line-tight) !important;
+    letter-spacing: 0 !important;
+  }
+}
+
+/*
+  T-205: title scale and alignment closeout.
+  Ordinary page titles now follow the restrained profile / GAO submodule scale.
+  Homepage and final thanks stay as deliberate opening / closing exceptions.
+*/
+@media (min-width: 901px) {
+  #aigc-design .xiaomi-accordion-stage__heading h2.portfolio-main-title,
+  #visual-tone .xiaomi-color-stage__title h2.portfolio-main-title,
+  #visual-system .xiaomi-carousel__intro h2.portfolio-main-title,
+  #commercial-film .portfolio-video-feature__copy h2.portfolio-main-title,
+  #film-storyboard .portfolio-section__intro h2.portfolio-main-title,
+  #commercial-photo .portfolio-reality-fusion__panel > .portfolio-section__intro h2.portfolio-main-title,
+  #reality-imagination .portfolio-section__intro h2.portfolio-main-title,
+  #support .portfolio-support-panel .portfolio-section__intro h2.portfolio-main-title,
+  #other-works .portfolio-other-works__hero h2.portfolio-main-title,
+  #other-works .portfolio-other-works__ai-wall > .portfolio-other-works__finale-copy h3.portfolio-main-title,
+  #future-profile .profile-header__title {
+    color: var(--color-title, var(--type-color-title)) !important;
+    font-size: var(--type-panel-title, var(--type-panel)) !important;
+    font-weight: var(--weight-panel) !important;
+    line-height: var(--type-line-title) !important;
+    letter-spacing: 0 !important;
+  }
+
+  #visual-files.portfolio-hero h1.portfolio-main-title {
+    font-size: var(--type-display-hero, var(--type-hero)) !important;
+    font-weight: var(--main-title-weight, 500) !important;
+    line-height: var(--main-title-line, 1.02) !important;
+  }
+
+  #other-works .portfolio-other-works__thanks-copy h3.portfolio-main-title {
+    font-size: var(--type-closing-display) !important;
+    font-weight: 560 !important;
+    line-height: var(--type-line-tight) !important;
+  }
+
+  .portfolio-section__intro,
+  .portfolio-video-feature__copy,
+  #aigc-design .xiaomi-accordion-stage__heading,
+  #visual-tone .xiaomi-color-stage__title,
+  #visual-system .xiaomi-carousel__intro,
+  #film-storyboard .portfolio-section__intro,
+  #reality-imagination .portfolio-section__intro,
+  #support .portfolio-support-panel .portfolio-section__intro,
+  #other-works .portfolio-other-works__hero-copy,
+  #other-works .portfolio-other-works__scene-copy,
+  #other-works .portfolio-other-works__finale-copy,
+  #other-works .portfolio-other-works__ai-wall > .portfolio-other-works__finale-copy,
+  #future-profile .profile-header {
+    border-left: 0 !important;
+    padding-left: 0 !important;
+  }
+
+  .portfolio-section__intro::before,
+  .portfolio-section__intro::after,
+  .portfolio-video-feature__copy::before,
+  .portfolio-video-feature__copy::after,
+  #aigc-design .xiaomi-accordion-stage__heading::before,
+  #aigc-design .xiaomi-accordion-stage__heading::after,
+  #visual-tone .xiaomi-color-stage__title::before,
+  #visual-tone .xiaomi-color-stage__title::after,
+  #visual-system .xiaomi-carousel__intro::before,
+  #visual-system .xiaomi-carousel__intro::after,
+  #other-works .portfolio-other-works__hero-copy::before,
+  #other-works .portfolio-other-works__hero-copy::after,
+  #other-works .portfolio-other-works__scene-copy::before,
+  #other-works .portfolio-other-works__scene-copy::after,
+  #other-works .portfolio-other-works__finale-copy::before,
+  #other-works .portfolio-other-works__finale-copy::after {
+    content: none !important;
+    display: none !important;
+  }
+
+  #future-profile .profile-header__rail {
+    display: none !important;
+  }
+
+  #aigc-design .xiaomi-accordion-stage__heading,
+  #visual-system .xiaomi-carousel__intro,
+  #film-storyboard .portfolio-section__intro,
+  #reality-imagination .portfolio-section__intro,
+  #support .portfolio-support-panel .portfolio-section__intro,
+  #future-profile .profile-header {
+    box-sizing: border-box !important;
+    width: var(--page-standard, var(--page-wide)) !important;
+    max-width: var(--page-standard, var(--page-wide)) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  #visual-tone .xiaomi-color-stage__title,
+  #commercial-photo .portfolio-reality-fusion__panel > .portfolio-section__intro {
+    left: var(--page-standard-left, max(48px, calc((100vw - var(--page-standard, var(--page-wide))) / 2))) !important;
+    margin: 0 !important;
+    padding-left: 0 !important;
+    border-left: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+  }
+
+  #visual-tone .xiaomi-color-stage__title {
+    width: min(920px, var(--page-standard, var(--page-wide))) !important;
+    max-width: min(920px, var(--page-standard, var(--page-wide))) !important;
+  }
+
+  #commercial-photo .portfolio-reality-fusion__panel > .portfolio-section__intro {
+    width: min(760px, var(--page-standard, var(--page-wide))) !important;
+    max-width: min(760px, var(--page-standard, var(--page-wide))) !important;
+  }
+
+  #other-works .portfolio-other-works__hero-copy {
+    left: var(--page-standard-left, max(48px, calc((100vw - var(--page-standard, var(--page-wide))) / 2))) !important;
+    width: min(620px, var(--page-standard, calc(100vw - 96px))) !important;
+    padding-top: 0 !important;
+    border-top: 0 !important;
+  }
+
+  #other-works .portfolio-other-works__scene-copy,
+  #other-works .portfolio-other-works__finale-copy {
+    width: var(--page-standard, var(--page-wide)) !important;
+    max-width: var(--page-standard, var(--page-wide)) !important;
+  }
+
+  #commercial-photo .portfolio-fusion-device,
+  #commercial-photo .portfolio-fusion-disc,
+  #commercial-photo .portfolio-fusion-symbol {
+    box-shadow: none !important;
+  }
+
+  #commercial-photo .portfolio-fusion-device,
+  #commercial-photo .portfolio-fusion-symbol {
+    background: transparent !important;
+  }
+
+  #commercial-photo .portfolio-fusion-device::before {
+    content: none !important;
+    display: none !important;
+  }
+
+  #commercial-photo .portfolio-fusion-disc {
+    background:
+      radial-gradient(circle at 50% 50%, rgba(232, 211, 169, 0.07), transparent 58%),
+      #060504 !important;
+    border-radius: 50% !important;
+    clip-path: circle(50% at 50% 50%) !important;
+    overflow: hidden !important;
+    border: 1px solid rgba(232, 211, 169, 0.2) !important;
+    filter: none !important;
+  }
+
+  #commercial-photo .portfolio-fusion-symbol {
+    border-radius: 50% !important;
+    clip-path: circle(50% at 50% 50%) !important;
+    overflow: hidden !important;
+  }
+
+  #commercial-photo .portfolio-fusion-svg-source-field {
+    fill: #171410 !important;
+  }
+}
+
+/*
+  T-206: design-taste frontend closeout.
+  Keep the preserved black-gold system, but make the base rules explicit:
+  card/media radius = 8px, controls = pill, product discs = circle.
+*/
+:root {
+  --type-display: var(--type-display-hero);
+  --weight-display: var(--main-title-weight, 500);
+  --shape-card: 8px;
+  --shape-media: 8px;
+  --shape-control: 999px;
+}
+
+.portfolio-card,
+.portfolio-image-card,
+#other-works .portfolio-other-works__poster-card,
+#other-works .portfolio-other-works__light-media,
+#other-works .portfolio-other-works__strip-media {
+  border-radius: var(--shape-card) !important;
+}
+
+.portfolio-nav-submenu,
+.portfolio-bgm-toggle,
+.portfolio-foreword-tags span,
+#other-works .portfolio-other-works__poster-control,
+#other-works .portfolio-other-works__light-controls,
+#other-works .portfolio-other-works__light-controls button,
+#other-works .portfolio-other-works__light-controls output {
+  border-radius: var(--shape-control) !important;
+}
+
+.portfolio-titleline {
+  max-width: min(720px, 100%) !important;
+  text-wrap: balance;
+}
+
+#other-works .portfolio-other-works__ai-wall > .portfolio-other-works__finale-copy > p.portfolio-titleline,
+#other-works .portfolio-other-works__hero-copy > p.portfolio-titleline,
+#future-profile .profile-header__subtitle {
+  max-width: min(760px, 100%) !important;
+}
+
+#support .portfolio-support-slant,
+#support .portfolio-support-slice__media {
+  border-radius: var(--shape-card) !important;
+}
+
+.portfolio-section__intro > .portfolio-kicker,
+.portfolio-work__copy > .portfolio-kicker,
+.portfolio-video-feature__copy > .portfolio-kicker,
+.xiaomi-color-stage__title > .portfolio-kicker,
+.xiaomi-carousel__intro > .portfolio-kicker,
+.xiaomi-detail-carousel__intro > .portfolio-kicker,
+.xiaomi-dual-gallery__copy > .portfolio-kicker,
+.xiaomi-accordion-stage__copy > .portfolio-kicker,
+#other-works .portfolio-other-works__hero-copy .portfolio-kicker,
+#other-works .portfolio-other-works__scene-copy .portfolio-kicker,
+#other-works .portfolio-other-works__finale-copy .portfolio-kicker {
+  color: rgba(205, 171, 111, 0.64) !important;
+  font-weight: 520 !important;
+}
+
+@media (min-width: 901px) {
+  .portfolio-nav-submenu {
+    max-height: 44px !important;
+    overflow: hidden !important;
+  }
+}
+
+/*
+  T-207: design-taste preflight cleanup.
+  Remove decorative image badges/dots and close the last radius mismatch.
+*/
+#aigc-design .xiaomi-accordion-stage__image,
+#aigc-design .xiaomi-accordion-stage__image img,
+#film-storyboard .portfolio-storyboard-card__media,
+#film-storyboard .portfolio-storyboard-card__media img,
+#film-storyboard .portfolio-storyboard-card__media video,
+#reality-imagination .portfolio-product-card__media {
+  border-radius: var(--shape-media) !important;
+}
+
+#film-storyboard .portfolio-storyboard-card__state,
+#reality-imagination .portfolio-product-card__stage,
+#reality-imagination .portfolio-product-card--hover-fusion .portfolio-product-card__media::before {
+  display: none !important;
+}
+
+#film-storyboard .portfolio-prompt-console__bar span {
+  display: none !important;
+}
+
+#film-storyboard .portfolio-prompt-console__bar strong {
+  margin-left: 0 !important;
+}
+
+/*
+  T-208: eyebrow rhythm cleanup.
+  Keep top-level chapter markers; remove repeated submodule micro-labels.
+*/
+#visual-system .xiaomi-carousel__intro > .portfolio-kicker,
+#film-storyboard .portfolio-section__intro > .portfolio-kicker,
+#reality-imagination .portfolio-section__intro > .portfolio-kicker,
+#photo-scenes .xiaomi-dual-gallery__copy > .portfolio-kicker,
+#support .portfolio-section__intro > .portfolio-kicker,
+#other-works .portfolio-other-works__scene-copy .portfolio-kicker,
+#other-works .portfolio-other-works__finale-copy .portfolio-kicker {
+  display: none !important;
+}
+
+/*
+  T-209: responsive closeout for the same design rules.
+  The no-rail, no-image-badge, and compact-nav rules must hold below desktop too.
+*/
+.portfolio-section__intro,
+.portfolio-video-feature__copy,
+#aigc-design .xiaomi-accordion-stage__heading,
+#visual-tone .xiaomi-color-stage__title,
+#visual-system .xiaomi-carousel__intro,
+#film-storyboard .portfolio-section__intro,
+#reality-imagination .portfolio-section__intro,
+#support .portfolio-support-panel .portfolio-section__intro,
+#other-works .portfolio-other-works__hero-copy,
+#other-works .portfolio-other-works__scene-copy,
+#other-works .portfolio-other-works__finale-copy,
+#future-profile .profile-header {
+  border-left: 0 !important;
+  padding-left: 0 !important;
+}
+
+.portfolio-section__intro::before,
+.portfolio-section__intro::after,
+.portfolio-video-feature__copy::before,
+.portfolio-video-feature__copy::after,
+#aigc-design .xiaomi-accordion-stage__heading::before,
+#aigc-design .xiaomi-accordion-stage__heading::after,
+#visual-tone .xiaomi-color-stage__title::before,
+#visual-tone .xiaomi-color-stage__title::after,
+#visual-system .xiaomi-carousel__intro::before,
+#visual-system .xiaomi-carousel__intro::after,
+#other-works .portfolio-other-works__hero-copy::before,
+#other-works .portfolio-other-works__hero-copy::after,
+#other-works .portfolio-other-works__scene-copy::before,
+#other-works .portfolio-other-works__scene-copy::after,
+#other-works .portfolio-other-works__finale-copy::before,
+#other-works .portfolio-other-works__finale-copy::after {
+  content: none !important;
+  display: none !important;
+}
+
+@media (max-width: 900px) {
+  #support .portfolio-support-slice__copy,
+  #support .portfolio-support-slice__active-copy {
+    display: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .portfolio-quick-nav {
+    gap: 6px !important;
+    padding-inline: 8px !important;
+  }
+
+  .portfolio-nav-links {
+    flex: 1 1 auto !important;
+    max-width: none !important;
+    justify-content: space-between !important;
+    gap: clamp(6px, 1.8vw, 9px) !important;
+    overflow: visible !important;
+  }
+
+  .portfolio-nav-links a {
+    flex: 0 1 auto !important;
+    font-size: clamp(9px, 2.55vw, 10px) !important;
+    line-height: 1.12 !important;
+    letter-spacing: 0 !important;
+  }
+
+  .portfolio-bgm-toggle {
+    width: 28px !important;
+    height: 28px !important;
+  }
+}
+
+/*
+  T-210: 04A taiji mask scale lock.
+  Keep the existing rotor path/motion, but make every visible layer share one
+  circular 100% coordinate box across desktop, tablet, and mobile widths.
+*/
+#commercial-photo .portfolio-fusion-device,
+#commercial-photo .portfolio-fusion-disc,
+#commercial-photo .portfolio-fusion-symbol {
+  box-sizing: border-box !important;
+}
+
+#commercial-photo .portfolio-fusion-device {
+  background: transparent !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+}
+
+#commercial-photo .portfolio-fusion-device::before,
+#commercial-photo .portfolio-fusion-float-shadow,
+#commercial-photo .portfolio-fusion-ring {
+  content: none !important;
+  display: none !important;
+  opacity: 0 !important;
+}
+
+#commercial-photo .portfolio-fusion-disc {
+  width: 100% !important;
+  height: 100% !important;
+  aspect-ratio: 1 / 1 !important;
+  border-radius: 50% !important;
+  clip-path: none !important;
+  overflow: hidden !important;
+  isolation: isolate !important;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(232, 211, 169, 0.07), transparent 58%),
+    #060504 !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+#commercial-photo .portfolio-fusion-symbol {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 50% !important;
+  clip-path: none !important;
+  overflow: hidden !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+#commercial-photo .portfolio-fusion-mask-rotor {
+  transform-box: view-box !important;
+  transform-origin: 50% 50% !important;
+}
+
+#commercial-photo .portfolio-fusion-svg-source-field {
+  fill: #171410 !important;
+}
+
+/*
+  T-211: 01B mobile creed line wrap.
+  ReactBits BlurText splits the sentence into character spans; keep desktop as
+  a single line, but let narrow screens wrap inside the visible frame.
+*/
+@media (max-width: 560px) {
+  #before-visuals .portfolio-design-creed__inner,
+  #before-visuals .portfolio-ai-judgment__inner {
+    width: min(100%, calc(100vw - 48px)) !important;
+    max-width: calc(100vw - 48px) !important;
+  }
+
+  #before-visuals .portfolio-design-creed__statement {
+    display: flex !important;
+    width: min(100%, calc(100vw - 48px)) !important;
+    max-width: min(15em, calc(100vw - 48px)) !important;
+    overflow: visible !important;
+    color: rgba(250, 242, 226, 0.9) !important;
+    font-size: clamp(1.22rem, 5.7vw, 1.58rem) !important;
+    line-height: 1.32 !important;
+    text-align: center !important;
+    white-space: normal !important;
+    text-wrap: balance;
+  }
+
+  #before-visuals .portfolio-design-creed__blur-text {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    white-space: normal !important;
+  }
+
+  #before-visuals .portfolio-design-creed__blur-text span {
+    flex: 0 0 auto !important;
+    white-space: pre-wrap !important;
+  }
+}
+
+/* T-213: final PC frame lock after title-system archive overrides. */
+@media (min-width: 901px) {
+  #other-works .portfolio-other-works__ai-wall > .portfolio-other-works__finale-copy {
+    width: var(--page-standard) !important;
+    max-width: var(--page-standard) !important;
+  }
+}
+
+/*
+  T-214: support slant deck caption and equal folded slices.
+  The deck is conceptually one expanded image plus four equal folded images.
+*/
+@media (min-width: 901px) {
+  #support .portfolio-support-slant {
+    --support-active-fr: 64fr;
+    --support-fold-fr: 9fr;
+    --support-bleed-x: clamp(52px, 3.2vw, 86px);
+    --support-media-overscan-x: clamp(36px, 2.6vw, 72px);
+    --support-media-overscan-y: 30px;
+  }
+
+  #support .portfolio-support-track {
+    inset: 0 !important;
+  }
+
+  #support .portfolio-support-slant.has-active[data-active-index="1"] .portfolio-support-track {
+    grid-template-columns:
+      var(--support-active-fr)
+      var(--support-fold-fr)
+      var(--support-fold-fr)
+      var(--support-fold-fr)
+      var(--support-fold-fr) !important;
+  }
+
+  #support .portfolio-support-slant.has-active[data-active-index="2"] .portfolio-support-track {
+    grid-template-columns:
+      var(--support-fold-fr)
+      var(--support-active-fr)
+      var(--support-fold-fr)
+      var(--support-fold-fr)
+      var(--support-fold-fr) !important;
+  }
+
+  #support .portfolio-support-slant.has-active[data-active-index="3"] .portfolio-support-track {
+    grid-template-columns:
+      var(--support-fold-fr)
+      var(--support-fold-fr)
+      var(--support-active-fr)
+      var(--support-fold-fr)
+      var(--support-fold-fr) !important;
+  }
+
+  #support .portfolio-support-slant.has-active[data-active-index="4"] .portfolio-support-track {
+    grid-template-columns:
+      var(--support-fold-fr)
+      var(--support-fold-fr)
+      var(--support-fold-fr)
+      var(--support-active-fr)
+      var(--support-fold-fr) !important;
+  }
+
+  #support .portfolio-support-slant.has-active[data-active-index="5"] .portfolio-support-track {
+    grid-template-columns:
+      var(--support-fold-fr)
+      var(--support-fold-fr)
+      var(--support-fold-fr)
+      var(--support-fold-fr)
+      var(--support-active-fr) !important;
+  }
+
+  #support .portfolio-support-slice__skew {
+    inset-inline: calc(-1 * var(--support-bleed-x)) !important;
+  }
+
+  #support .portfolio-support-slice__media {
+    inset:
+      calc(-1 * var(--support-media-overscan-y))
+      calc(-1 * (var(--support-bleed-x) + var(--support-media-overscan-x))) !important;
+  }
+
+  #support .portfolio-support-slice__copy {
+    inset-inline: var(--support-bleed-x) !important;
+    z-index: 4 !important;
+    align-items: flex-end !important;
+    padding:
+      clamp(28px, 3vw, 48px)
+      clamp(28px, 3vw, 48px)
+      clamp(32px, 3.2vw, 54px) !important;
+  }
+
+  #support .portfolio-support-slice.is-active .portfolio-support-slice__shade {
+    opacity: 0.82 !important;
+    background:
+      linear-gradient(90deg, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.46) 18%, transparent 52%),
+      linear-gradient(180deg, transparent 46%, rgba(0, 0, 0, 0.58) 100%) !important;
+  }
+
+  #support .portfolio-support-slice__active-copy {
+    display: grid !important;
+    max-width: min(360px, calc(100% - 24px)) !important;
+    gap: 7px !important;
+    opacity: 0 !important;
+    transform: translate3d(0, 12px, 0) !important;
+  }
+
+  #support .portfolio-support-slice.is-active .portfolio-support-slice__active-copy {
+    opacity: 1 !important;
+    transform: translate3d(0, 0, 0) !important;
+  }
+
+  #support .portfolio-support-slice__active-title {
+    order: 1;
+    color: rgba(250, 245, 235, 0.96) !important;
+    font-size: clamp(24px, 1.55vw, 31px) !important;
+    font-weight: 560 !important;
+    line-height: 1.08 !important;
+    letter-spacing: 0 !important;
+    white-space: nowrap !important;
+    text-shadow: 0 12px 34px rgba(0, 0, 0, 0.74) !important;
+  }
+
+  #support .portfolio-support-slice__active-label {
+    order: 2;
+    color: rgba(232, 211, 169, 0.76) !important;
+    font-size: clamp(12px, 0.76vw, 15px) !important;
+    font-weight: 520 !important;
+    line-height: 1.15 !important;
+    letter-spacing: 0 !important;
+    text-transform: none !important;
+    white-space: nowrap !important;
+    text-shadow: 0 10px 28px rgba(0, 0, 0, 0.68) !important;
+  }
+}
+
+/*
+  T-215: support active caption hierarchy pass.
+  Keep the slant deck geometry from T-214; tune the caption as a gallery label.
+*/
+@media (min-width: 901px) {
+  #support .portfolio-support-slice__copy {
+    inset-inline:
+      calc(var(--support-bleed-x) + clamp(18px, 1.6vw, 34px)) !important;
+    padding:
+      0
+      0
+      clamp(56px, 5.1vw, 84px) !important;
+  }
+
+  #support .portfolio-support-slice__active-copy {
+    max-width: min(430px, calc(100% - 28px)) !important;
+    gap: 10px !important;
+    transform: translate3d(0, 10px, 0) !important;
+  }
+
+  #support .portfolio-support-slice__active-label {
+    order: 1;
+    color: rgba(232, 211, 169, 0.84) !important;
+    font-size: clamp(11px, 0.7vw, 14px) !important;
+    font-weight: 610 !important;
+    line-height: 1 !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+    white-space: nowrap !important;
+    text-shadow: 0 10px 30px rgba(0, 0, 0, 0.74) !important;
+  }
+
+  #support .portfolio-support-slice__active-title {
+    order: 2;
+    color: rgba(250, 245, 235, 0.97) !important;
+    font-size: clamp(25px, 1.68vw, 34px) !important;
+    font-weight: 540 !important;
+    line-height: 1.04 !important;
+    letter-spacing: 0 !important;
+    white-space: nowrap !important;
+    text-shadow: 0 14px 36px rgba(0, 0, 0, 0.78) !important;
+  }
+
+  #support .portfolio-support-slice.is-active .portfolio-support-slice__shade {
+    opacity: 0.86 !important;
+    background:
+      linear-gradient(90deg, rgba(0, 0, 0, 0.68) 0%, rgba(0, 0, 0, 0.42) 22%, transparent 56%),
+      linear-gradient(180deg, transparent 38%, rgba(0, 0, 0, 0.54) 100%) !important;
+  }
+}
+
+/*
+  T-216: support slant edge coverage.
+  Skewed tracks need horizontal overscan, otherwise the parent frame clips to
+  black triangles on the first and last visible edges.
+*/
+@media (min-width: 901px) {
+  #support .portfolio-support-slant {
+    --support-edge-cover-x: clamp(112px, 5.4vw, 168px);
+  }
+
+  #support .portfolio-support-track {
+    inset: 0 !important;
+    overflow: visible !important;
+  }
+
+  #support .portfolio-support-slice:first-child {
+    width: calc(100% + var(--support-edge-cover-x)) !important;
+    margin-inline-start: calc(-1 * var(--support-edge-cover-x)) !important;
+  }
+
+  #support .portfolio-support-slice:last-child {
+    width: calc(100% + var(--support-edge-cover-x)) !important;
+  }
+
+  #support .portfolio-support-slant[data-active-index="1"] .portfolio-support-slice:first-child .portfolio-support-slice__active-copy {
+    margin-inline-start: var(--support-edge-cover-x) !important;
+  }
+}
+
+/*
+  T-217: 04A taiji motion smoothing.
+  The mask is a continuously rotating SVG clipPath, not a stepped animation.
+  Slow the effective rotation and release stale layer hints after reveal so
+  occasional long frames read less like visible jumps.
+*/
+#commercial-photo .portfolio-fusion-mask-rotor {
+  animation-duration: 72s !important;
+  animation-timing-function: linear !important;
+  will-change: transform !important;
+}
+
+#commercial-photo .portfolio-fusion-device.reveal.is-visible,
+#commercial-photo .portfolio-fusion-device.reveal.is-visible .portfolio-fusion-disc,
+#commercial-photo .portfolio-fusion-symbol {
+  will-change: auto !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #commercial-photo .portfolio-fusion-mask-rotor {
+    animation: none !important;
+  }
+}
+
+/*
+  T-218: 01B design creed scroll cue.
+  Restore the owner-requested downward guide on the clean creed screen
+  without reusing the hidden profile-card scroll cue.
+*/
+#before-visuals.portfolio-design-creed .portfolio-design-creed__scroll-cue {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(58px, 7.2vh, 96px);
+  z-index: 4;
+  width: clamp(38px, 2.25vw, 46px);
+  height: clamp(38px, 2.25vw, 46px);
+  display: grid;
+  place-items: center;
+  color: rgba(232, 211, 169, 0.9);
+  border: 1px solid rgba(232, 211, 169, 0.32);
+  border-radius: 999px;
+  background: rgba(9, 7, 4, 0.28);
+  text-decoration: none;
+  transform: translate3d(-50%, 8px, 0);
+  opacity: 0;
+  transition:
+    opacity 180ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 180ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 180ms cubic-bezier(0.16, 1, 0.3, 1);
+  animation: portfolioCreedCueAppear 520ms cubic-bezier(0.16, 1, 0.3, 1) 900ms both;
+}
+
+#before-visuals.portfolio-design-creed .portfolio-design-creed__scroll-cue:hover,
+#before-visuals.portfolio-design-creed .portfolio-design-creed__scroll-cue:focus-visible {
+  opacity: 0.96;
+  border-color: rgba(232, 211, 169, 0.42);
+  background: rgba(18, 14, 8, 0.34);
+}
+
+#before-visuals.portfolio-design-creed .portfolio-design-creed__scroll-cue:focus-visible {
+  outline: 1px solid rgba(232, 211, 169, 0.42);
+  outline-offset: 5px;
+}
+
+#before-visuals.portfolio-design-creed .portfolio-design-creed__scroll-cue-mark {
+  width: clamp(10px, 0.64vw, 13px);
+  height: clamp(10px, 0.64vw, 13px);
+  border-right: 1.7px solid currentColor;
+  border-bottom: 1.7px solid currentColor;
+  transform: translate3d(0, -3px, 0) rotate(45deg);
+  opacity: 0.68;
+  animation: portfolioCreedCueDrift 2.25s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+@keyframes portfolioCreedCueAppear {
+  from {
+    opacity: 0;
+    transform: translate3d(-50%, 8px, 0);
+  }
+
+  to {
+    opacity: 0.82;
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes portfolioCreedCueDrift {
+  0%,
+  100% {
+    opacity: 0.62;
+    transform: translate3d(0, -3px, 0) rotate(45deg);
+  }
+
+  46% {
+    opacity: 1;
+    transform: translate3d(0, 5px, 0) rotate(45deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #before-visuals.portfolio-design-creed .portfolio-design-creed__scroll-cue {
+    animation: none !important;
+    opacity: 0.72 !important;
+    transform: translate3d(-50%, 0, 0) !important;
+  }
+
+#before-visuals.portfolio-design-creed .portfolio-design-creed__scroll-cue-mark {
+    animation: none !important;
+    opacity: 0.72 !important;
+    transform: rotate(45deg) !important;
+  }
+}
+
+/*
+  T-244: restyle the 01B guide as a larger three-step gradient arrow.
+  It should read as a quiet directional motif, not a circular button.
+*/
+#before-visuals.portfolio-design-creed .portfolio-design-creed__scroll-cue {
+  width: clamp(96px, 5.8vw, 142px);
+  height: clamp(108px, 6.4vw, 156px);
+  color: rgba(238, 220, 177, 0.92);
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  transition:
+    opacity 180ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 180ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#before-visuals.portfolio-design-creed .portfolio-design-creed__scroll-cue:hover,
+#before-visuals.portfolio-design-creed .portfolio-design-creed__scroll-cue:focus-visible {
+  border-color: transparent;
+  background: transparent;
+  filter: drop-shadow(0 0 18px rgba(232, 211, 169, 0.18));
+}
+
+#before-visuals.portfolio-design-creed .portfolio-design-creed__scroll-cue:focus-visible {
+  outline: 1px solid rgba(232, 211, 169, 0.38);
+  outline-offset: 9px;
+  border-radius: 10px;
+}
+
+#before-visuals.portfolio-design-creed .portfolio-design-creed__scroll-cue-mark {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  opacity: 0.86;
+  transform: none;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 128' fill='none'%3E%3Cpath d='M21 20L48 47L75 20' stroke='%23A88946' stroke-opacity='.32' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M18 49L48 79L78 49' stroke='%23CFB46E' stroke-opacity='.58' stroke-width='3.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M15 81L48 114L81 81' stroke='%23F2E4BE' stroke-opacity='.9' stroke-width='4.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+    center / contain no-repeat;
+  animation: portfolioCreedCueGradientDrift 2.4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+@keyframes portfolioCreedCueGradientDrift {
+  0%,
+  100% {
+    opacity: 0.58;
+    transform: translate3d(0, -8px, 0);
+  }
+
+  46% {
+    opacity: 1;
+    transform: translate3d(0, 8px, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #before-visuals.portfolio-design-creed .portfolio-design-creed__scroll-cue-mark {
+    animation: none !important;
+    opacity: 0.82 !important;
+    transform: none !important;
+  }
+}
+
+/*
+  T-246: refine the 01B guide arrow after owner review.
+  Keep the three-step cue, but make it smaller, white, thinner, and more open.
+*/
+#before-visuals.portfolio-design-creed .portfolio-design-creed__scroll-cue {
+  width: clamp(58px, 3.25vw, 82px);
+  height: clamp(70px, 4vw, 96px);
+  color: rgba(255, 255, 255, 0.84);
+  filter: none;
+}
+
+#before-visuals.portfolio-design-creed .portfolio-design-creed__scroll-cue:hover,
+#before-visuals.portfolio-design-creed .portfolio-design-creed__scroll-cue:focus-visible {
+  filter: none;
+}
+
+#before-visuals.portfolio-design-creed .portfolio-design-creed__scroll-cue:focus-visible {
+  outline-color: rgba(255, 255, 255, 0.32);
+  outline-offset: 7px;
+}
+
+#before-visuals.portfolio-design-creed .portfolio-design-creed__scroll-cue-mark {
+  opacity: 0.78;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 104' fill='none'%3E%3Cpath d='M14 20L40 38L66 20' stroke='%23FFFFFF' stroke-opacity='.24' stroke-width='2.15' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M12 44L40 63L68 44' stroke='%23FFFFFF' stroke-opacity='.48' stroke-width='2.15' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M10 69L40 90L70 69' stroke='%23FFFFFF' stroke-opacity='.78' stroke-width='2.15' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+    center / contain no-repeat;
+  animation-duration: 2.2s;
+}
+
+/*
+  T-247: reduce the 01B guide to two equal white arrows.
+  The pair should feel like a scroll hint, not a decorative stack.
+*/
+#before-visuals.portfolio-design-creed .portfolio-design-creed__scroll-cue {
+  width: clamp(52px, 2.8vw, 72px);
+  height: clamp(54px, 3.1vw, 76px);
+}
+
+#before-visuals.portfolio-design-creed .portfolio-design-creed__scroll-cue-mark {
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 76' fill='none'%3E%3Cpath d='M10 17L40 38L70 17' stroke='%23FFFFFF' stroke-opacity='.38' stroke-width='2.05' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M10 43L40 64L70 43' stroke='%23FFFFFF' stroke-opacity='.78' stroke-width='2.05' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+      center / contain no-repeat;
+}
+
+/*
+  T-261: turn the 01B guide arrow into a non-interactive soft cue.
+  The arrow no longer scrolls to the next section; keep only a quiet visual
+  hint with low-amplitude transform and opacity motion.
+*/
+#before-visuals.portfolio-design-creed .portfolio-design-creed__scroll-cue {
+  width: clamp(44px, 2.15vw, 58px);
+  height: clamp(44px, 2.15vw, 58px);
+  pointer-events: none;
+  cursor: default;
+  color: rgba(255, 255, 255, 0.66);
+  opacity: 0;
+  filter: none;
+  outline: 0;
+  animation: portfolioCreedCueSoftAppear 720ms cubic-bezier(0.16, 1, 0.3, 1) 980ms both;
+}
+
+#before-visuals.portfolio-design-creed .portfolio-design-creed__scroll-cue:hover,
+#before-visuals.portfolio-design-creed .portfolio-design-creed__scroll-cue:focus-visible {
+  opacity: 0.62;
+  filter: none;
+  outline: 0;
+}
+
+#before-visuals.portfolio-design-creed .portfolio-design-creed__scroll-cue-mark {
+  opacity: 0.7;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 64' fill='none'%3E%3Cpath d='M14 17L40 34L66 17' stroke='%23FFFFFF' stroke-opacity='.32' stroke-width='1.65' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M14 38L40 55L66 38' stroke='%23FFFFFF' stroke-opacity='.62' stroke-width='1.65' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+      center / contain no-repeat;
+  animation: portfolioCreedCueSoftDrift 3.8s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+@keyframes portfolioCreedCueSoftAppear {
+  from {
+    opacity: 0;
+    transform: translate3d(-50%, 5px, 0);
+  }
+
+  to {
+    opacity: 0.58;
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes portfolioCreedCueSoftDrift {
+  0%,
+  100% {
+    opacity: 0.48;
+    transform: translate3d(0, -2px, 0);
+  }
+
+  50% {
+    opacity: 0.72;
+    transform: translate3d(0, 3px, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #before-visuals.portfolio-design-creed .portfolio-design-creed__scroll-cue,
+  #before-visuals.portfolio-design-creed .portfolio-design-creed__scroll-cue-mark {
+    animation: none !important;
+    opacity: 0.58 !important;
+    transform: none !important;
+  }
+}
+
+/*
+  T-249: support active caption polish.
+  Treat the text inside the image as a quiet gallery mark, not a second hero
+  title. The English line steps back; the Chinese title sits lower and lighter.
+*/
+@media (min-width: 901px) {
+  #support .portfolio-support-slice__copy {
+    padding: 0 0 clamp(30px, 2.35vw, 42px) !important;
+  }
+
+  #support .portfolio-support-slice__active-copy {
+    max-width: min(330px, calc(100% - 28px)) !important;
+    gap: clamp(4px, 0.34vw, 6px) !important;
+    transform: translate3d(0, 8px, 0) !important;
+  }
+
+  #support .portfolio-support-slice.is-active .portfolio-support-slice__active-copy {
+    transform: translate3d(0, 0, 0) !important;
+  }
+
+  #support .portfolio-support-slice__active-label {
+    color: rgba(232, 211, 169, 0.72) !important;
+    font-size: clamp(9.5px, 0.52vw, 11.5px) !important;
+    font-weight: 520 !important;
+    line-height: 1 !important;
+    letter-spacing: 0.075em !important;
+    text-transform: uppercase !important;
+    text-shadow: 0 8px 22px rgba(0, 0, 0, 0.62) !important;
+  }
+
+  #support .portfolio-support-slice__active-title {
+    color: rgba(250, 245, 235, 0.93) !important;
+    font-size: clamp(21px, 1.33vw, 28px) !important;
+    font-weight: 500 !important;
+    line-height: 1.06 !important;
+    letter-spacing: 0 !important;
+    text-shadow: 0 10px 28px rgba(0, 0, 0, 0.68) !important;
+  }
+
+  #support .portfolio-support-slant[data-active-index="1"] .portfolio-support-slice:first-child .portfolio-support-slice__active-copy {
+    margin-inline-start:
+      calc(var(--support-edge-cover-x) + clamp(24px, 1.1vw, 30px)) !important;
+  }
+}
+
+/*
+  T-219: home intro/title handoff.
+  The opening title now waits for the intro lifecycle event; keep the motion
+  light and text-led so the first readable frame feels intentional.
+*/
+#visual-files .motion-hero-frame {
+  opacity: 1;
+}
+
+#visual-files .portfolio-kicker.motion-content {
+  transition-delay: 40ms;
+}
+
+#visual-files .portfolio-main-title.motion-split .motion-char {
+  transition-duration: 860ms;
+  transition-delay: calc(180ms + var(--motion-index, 0) * 18ms);
+}
+
+#visual-files .motion-hero-frame.is-motion-visible .portfolio-main-title.motion-split .motion-char {
+  opacity: 1 !important;
+  transform: translate3d(0, 0, 0) !important;
+  filter: blur(0) !important;
+  will-change: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #visual-files .portfolio-main-title.motion-split .motion-char,
+  #visual-files .motion-content {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+}
+
+/* T-219 final cascade guard: main title groups are two-line only. */
+.portfolio-titleline.portfolio-titleline--main,
+#aigc-design .xiaomi-accordion-stage__heading > p.portfolio-titleline.portfolio-titleline--main,
+#visual-tone .xiaomi-color-stage__title > p.portfolio-titleline.portfolio-titleline--main,
+#visual-system .xiaomi-carousel__intro > p.portfolio-titleline.portfolio-titleline--main,
+#commercial-film .portfolio-video-feature__copy > p.portfolio-titleline.portfolio-titleline--main,
+#film-storyboard .portfolio-section__intro > p.portfolio-titleline.portfolio-titleline--main,
+#commercial-photo .portfolio-section__intro > p.portfolio-titleline.portfolio-titleline--main,
+#reality-imagination .portfolio-section__intro > p.portfolio-titleline.portfolio-titleline--main,
+#support .portfolio-support-panel .portfolio-section__intro > p.portfolio-titleline.portfolio-titleline--main,
+#other-works .portfolio-other-works__hero-copy > p.portfolio-titleline.portfolio-titleline--main,
+#other-works .portfolio-other-works__ai-wall > .portfolio-other-works__finale-copy > p.portfolio-titleline.portfolio-titleline--main,
+#future-profile .profile-header__subtitle {
+  display: none !important;
+}
+
+/*
+  T-220: 04B photo scene edge alignment.
+  Treat each pair as one exhibition unit: the small media starts on the same
+  top edge as the hero image, and the copy plus controls land on the hero
+  image bottom edge.
+*/
+@media (min-width: 901px) {
+  #photo-scenes .xiaomi-dual-gallery__wrap {
+    align-items: stretch !important;
+  }
+
+  #photo-scenes .xiaomi-dual-gallery__big {
+    align-self: stretch !important;
+    aspect-ratio: 16 / 9 !important;
+  }
+
+  #photo-scenes .xiaomi-dual-gallery__side {
+    display: flex !important;
+    flex-direction: column !important;
+    align-self: stretch !important;
+    align-content: initial !important;
+    gap: 0 !important;
+    min-height: 0 !important;
+  }
+
+  #photo-scenes .xiaomi-dual-gallery__small {
+    flex: 0 0 auto !important;
+    aspect-ratio: 5 / 4 !important;
+    min-height: 0 !important;
+  }
+
+  #photo-scenes .xiaomi-dual-gallery__copy {
+    flex: 0 0 auto !important;
+    margin-top: auto !important;
+  }
+
+  #photo-scenes .xiaomi-dual-gallery .xiaomi-carousel__controls {
+    flex: 0 0 auto !important;
+    margin-top: clamp(16px, 1.15vw, 22px) !important;
+  }
+}
+
+/*
+  T-253: remove Content Support backdrop image.
+  The support deck images remain live; this only neutralizes the section/panel
+  background artwork that sat behind the content range module.
+*/
+#support.portfolio-support-chapter,
+#support .portfolio-support-panel {
+  background-image: none !important;
+}
+
+#support .portfolio-support-panel {
+  background:
+    radial-gradient(circle at 72% 18%, rgba(232, 211, 169, 0.08), transparent 31%),
+    radial-gradient(circle at 22% 76%, rgba(31, 116, 140, 0.06), transparent 34%),
+    linear-gradient(180deg, #050403 0%, #080604 52%, #050403 100%) !important;
+}
+
+/*
+  T-221: support caption optical anchor.
+  The first slanted slice has horizontal overscan; balance its visible left
+  inset with the bottom inset so the label reads like a deliberate image mark.
+*/
+@media (min-width: 901px) {
+  #support .portfolio-support-slice__copy {
+    padding: 0 0 clamp(42px, 3.2vw, 58px) !important;
+  }
+
+  #support .portfolio-support-slant[data-active-index="1"] .portfolio-support-slice:first-child .portfolio-support-slice__active-copy {
+    margin-inline-start:
+      calc(var(--support-edge-cover-x) + clamp(22px, 1.05vw, 28px)) !important;
+  }
+}
+
+/*
+  T-222: GAO DESIGN opening image liberation.
+  The chapter hero is a page-spanning cinema image; keep later GAO modules on
+  the standard PC frame while restoring this one frame to its original scale.
+*/
+@media (min-width: 901px) {
+  #other-works #other-works-hero .portfolio-other-works__hero-frame {
+    justify-self: center !important;
+    width: min(100vw, 2360px) !important;
+    max-width: min(100vw, 2360px) !important;
+  }
+}
+
+/*
+  T-223: GAO DESIGN exhibition width parity.
+  Poster gallery, material-story carousel, and archive wall should share one
+  wide exhibition frame. Remove only the poster-stage grid line that lands on
+  the screen center.
+*/
+@media (min-width: 901px) {
+  #other-works.portfolio-other-works {
+    --ow-gallery-wide: min(1920px, calc(100vw - clamp(72px, 5vw, 128px)));
+  }
+
+  #other-works #other-works-posters::before {
+    background:
+      linear-gradient(90deg, rgba(232, 211, 169, 0.055), transparent 18%, transparent 82%, rgba(232, 211, 169, 0.04)) !important;
+  }
+
+  #other-works #other-works-posters .portfolio-other-works__poster-viewport,
+  #other-works #other-works-posters .portfolio-other-works__poster-rail,
+  #other-works #other-works-light-table,
+  #other-works #other-works-light-table .portfolio-other-works__light-viewport,
+  #other-works #other-works-wall .portfolio-other-works__ai-grid,
+  #other-works #other-works-wall > .portfolio-other-works__finale-copy {
+    justify-self: center !important;
+    width: var(--ow-gallery-wide) !important;
+    max-width: var(--ow-gallery-wide) !important;
+  }
+
+  #other-works #other-works-wall .portfolio-other-works__ai-grid {
+    --ai-grid-width: var(--ow-gallery-wide) !important;
+  }
+}
+
+/*
+  T-224: calm image exhibition hover states.
+  Storyboard and material-story images are presentation surfaces here, not cards
+  asking to be selected. Keep real playback/carousel behavior, but remove hover
+  scale, lift, glow, and highlight feedback from the image panels themselves.
+*/
+@media (hover: hover) and (pointer: fine) {
+  #film-storyboard .portfolio-storyboard-strip figure,
+  #film-storyboard .portfolio-storyboard-strip figure:hover {
+    border-color: rgba(232, 211, 169, 0.16) !important;
+    box-shadow: none !important;
+  }
+
+  #film-storyboard .portfolio-storyboard-strip figure:hover img,
+  #film-storyboard .portfolio-storyboard-card:hover .portfolio-storyboard-card__media img,
+  #film-storyboard .portfolio-storyboard-card.motion-depth-surface.is-pointer-active img,
+  #other-works #other-works-light-table .portfolio-other-works__light-card.motion-depth-surface.is-pointer-active img {
+    transform: none !important;
+    filter: none !important;
+  }
+
+  #film-storyboard .portfolio-storyboard-card,
+  #film-storyboard .portfolio-storyboard-card:hover,
+  #film-storyboard .portfolio-storyboard-card.motion-depth-surface.is-pointer-active,
+  #other-works #other-works-light-table .portfolio-other-works__light-card,
+  #other-works #other-works-light-table .portfolio-other-works__light-card:hover,
+  #other-works #other-works-light-table .portfolio-other-works__light-card.motion-depth-surface.is-pointer-active {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  #film-storyboard .portfolio-storyboard-card:hover .portfolio-storyboard-card__media::after {
+    opacity: 0.42 !important;
+  }
+
+  #film-storyboard .portfolio-storyboard-card.border-glow-card::before,
+  #film-storyboard .portfolio-storyboard-card.border-glow-card::after,
+  #film-storyboard .portfolio-storyboard-card.border-glow-card > .edge-light {
+    opacity: 0 !important;
+  }
+
+  #film-storyboard .portfolio-storyboard-card.border-glow-card.is-border-glowing {
+    border-color: rgba(232, 211, 169, 0.16) !important;
+    box-shadow: none !important;
+  }
+}
+
+/*
+  T-225: final thanks English center lock.
+  The closing wordmark should sit exactly behind the Chinese title, not below it.
+*/
+@media (min-width: 901px) {
+  #other-works #other-works-thanks.portfolio-other-works__thanks::after {
+    display: block !important;
+    left: 50% !important;
+    top: 50% !important;
+    right: auto !important;
+    bottom: auto !important;
+    margin: 0 !important;
+    text-align: center !important;
+    transform: translate3d(-50%, -50%, 0) !important;
+    transform-origin: 50% 50% !important;
+  }
+
+  #other-works #other-works-thanks .portfolio-other-works__thanks-copy {
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate3d(-50%, -50%, 0) !important;
+  }
+}
+
+@keyframes portfolioThanksEnglishIn {
+  from {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translate3d(-50%, calc(-50% + 18px), 0);
+  }
+
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate3d(-50%, -50%, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #other-works #other-works-thanks.portfolio-other-works__thanks::after {
+    transform: translate3d(-50%, -50%, 0) !important;
+  }
+}
+
+/*
+  T-226: storyboard letterbox frame.
+  Keep each storyboard card as a 16:9 black screening frame, with the wider
+  cinematic still centered inside so the top and bottom bars match.
+*/
+@media (min-width: 901px) {
+  #film-storyboard .portfolio-storyboard-card__media {
+    display: grid !important;
+    place-items: center !important;
+    aspect-ratio: 16 / 9 !important;
+    background:
+      linear-gradient(180deg, rgba(255, 248, 232, 0.018), transparent 18%, transparent 82%, rgba(255, 248, 232, 0.012)),
+      #040302 !important;
+  }
+
+  #film-storyboard .portfolio-storyboard-card__media img,
+  #film-storyboard .portfolio-storyboard-card__media video {
+    width: 100% !important;
+    height: 100% !important;
+    aspect-ratio: auto !important;
+    object-fit: contain !important;
+    object-position: center center !important;
+    background: transparent !important;
+  }
+}
+
+/*
+  T-245: storyboard media slots follow the actual wide still ratio.
+  The six source images are about 2.33:1, so the card media should not keep the
+  older 16:9 screening frame that creates visible top/bottom bars.
+*/
+@media (min-width: 901px) {
+  #film-storyboard .portfolio-storyboard-strip {
+    gap: clamp(10px, 0.78vw, 16px) !important;
+  }
+
+  #film-storyboard .portfolio-storyboard-card__media {
+    aspect-ratio: 2.333 / 1 !important;
+    background: #050403 !important;
+  }
+
+  #film-storyboard .portfolio-storyboard-card__media img,
+  #film-storyboard .portfolio-storyboard-card__media video {
+    width: 100% !important;
+    height: 100% !important;
+    aspect-ratio: auto !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+  }
+
+  #film-storyboard .portfolio-storyboard-strip figcaption {
+    padding: clamp(8px, 0.56vw, 11px) clamp(10px, 0.72vw, 13px) clamp(8px, 0.58vw, 11px) !important;
+    line-height: 1.34 !important;
+  }
+}
+
+/*
+  T-227: visual-system carousel polish.
+  Make the "one system" carousel read as a calmer endless product rail: smaller
+  cards, one-line captions, and an invisible loop reset through clone slides.
+*/
+@media (min-width: 901px) {
+  #visual-system.xiaomi-hover-carousel {
+    --carousel-gap: clamp(30px, 2.6vw, 56px) !important;
+    --carousel-card-w: clamp(360px, 19vw, 486px) !important;
+    row-gap: clamp(18px, 2.2vh, 28px) !important;
+  }
+
+  #visual-system .xiaomi-carousel__track.is-loop-jump {
+    transition-duration: 0ms !important;
+  }
+
+  #visual-system .xiaomi-carousel__viewport {
+    padding-block: clamp(10px, 1.6vh, 22px) !important;
+  }
+
+  #visual-system .xiaomi-hover-card {
+    opacity: 0.58 !important;
+  }
+
+  #visual-system .xiaomi-hover-card.is-current {
+    opacity: 1 !important;
+  }
+
+  #visual-system .xiaomi-hover-card__media {
+    aspect-ratio: 839 / 740 !important;
+    border-radius: var(--shape-media, 8px) !important;
+  }
+
+  #visual-system .xiaomi-hover-card.is-current .xiaomi-hover-card__media {
+    box-shadow:
+      rgba(0, 0, 0, 0.46) 0 24px 82px,
+      rgba(232, 211, 169, 0.08) 0 0 30px !important;
+  }
+
+  #visual-system .xiaomi-hover-card h3 {
+    margin: 14px 0 6px !important;
+    font-size: clamp(17px, 0.86vw, 20px) !important;
+    font-weight: 500 !important;
+    line-height: 1.22 !important;
+  }
+
+  #visual-system .xiaomi-hover-card p {
+    max-width: 100% !important;
+    padding-right: 0 !important;
+    font-size: clamp(12px, 0.62vw, 14px) !important;
+    line-height: 1.45 !important;
+    color: rgba(255, 255, 255, 0.58) !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  #visual-system .xiaomi-carousel__controls {
+    width: min(1320px, calc(100% - 96px)) !important;
+    min-height: clamp(46px, 4.8vh, 58px) !important;
+    margin-top: clamp(4px, 0.8vh, 12px) !important;
+  }
+}
+
+/*
+  T-229: desktop title-to-content rhythm.
+  Keep immersive/overlay sections free, but remove stacked spacing where old
+  title margins and module grid gaps were both contributing to the same pause.
+*/
+@media (min-width: 901px) {
+  #support .portfolio-support-panel {
+    gap: clamp(44px, 3.4vh, 52px) !important;
+  }
+
+  #support .portfolio-support-panel .portfolio-section__intro {
+    margin-bottom: 0 !important;
+  }
+
+  #other-works #other-works-wall.portfolio-other-works__ai-wall {
+    gap: clamp(42px, 3.4vh, 54px) !important;
+  }
+}
+
+/*
+  T-237: unified bilingual page titles.
+  True page titles are now Chinese display title plus exact English
+  translation below. Local captions and gallery labels keep their own copy.
+*/
+:root {
+  --t237-title-size: clamp(42px, 2.72vw, 56px);
+  --t237-title-weight: 560;
+  --t237-title-line: 1.06;
+  --t237-title-en-size: clamp(12px, 0.72vw, 15px);
+  --t237-title-en-weight: 540;
+  --t237-title-en-line: 1.28;
+  --t237-title-gap: clamp(13px, 1.05vh, 18px);
+  --t237-title-en-color: rgba(229, 205, 154, 0.76);
+}
+
+#visual-files.portfolio-hero .portfolio-kicker,
+.portfolio-section__intro > .portfolio-kicker,
+.portfolio-video-feature__copy > .portfolio-kicker,
+.portfolio-work__copy > .portfolio-kicker,
+#aigc-design .xiaomi-accordion-stage__heading > .portfolio-kicker,
+#visual-tone .xiaomi-color-stage__title > .portfolio-kicker,
+#visual-system .xiaomi-carousel__intro > .portfolio-kicker,
+#support .portfolio-support-panel .portfolio-section__intro > .portfolio-kicker,
+#other-works .portfolio-other-works__hero-copy > .portfolio-kicker,
+#other-works .portfolio-other-works__scene-copy > .portfolio-kicker,
+#other-works .portfolio-other-works__ai-wall > .portfolio-other-works__finale-copy > .portfolio-kicker,
+#future-profile .profile-header__eyebrow {
+  display: none !important;
+}
+
+.portfolio-titleline.portfolio-titleline--main,
+#visual-files.portfolio-hero .portfolio-hero__titleline.portfolio-titleline--main,
+#aigc-design .xiaomi-accordion-stage__heading > p.portfolio-titleline.portfolio-titleline--main,
+#visual-tone .xiaomi-color-stage__title > p.portfolio-titleline.portfolio-titleline--main,
+#visual-system .xiaomi-carousel__intro > p.portfolio-titleline.portfolio-titleline--main,
+#commercial-film .portfolio-video-feature__copy > p.portfolio-titleline.portfolio-titleline--main,
+#film-storyboard .portfolio-section__intro > p.portfolio-titleline.portfolio-titleline--main,
+#commercial-photo .portfolio-section__intro > p.portfolio-titleline.portfolio-titleline--main,
+#reality-imagination .portfolio-section__intro > p.portfolio-titleline.portfolio-titleline--main,
+#support .portfolio-support-panel .portfolio-section__intro > p.portfolio-titleline.portfolio-titleline--main,
+#other-works .portfolio-other-works__hero-copy > p.portfolio-titleline.portfolio-titleline--main,
+#other-works .portfolio-other-works__scene-copy > p.portfolio-titleline.portfolio-titleline--main,
+#other-works .portfolio-other-works__ai-wall > .portfolio-other-works__finale-copy > p.portfolio-titleline.portfolio-titleline--main,
+#other-works .portfolio-other-works__thanks-copy > p.portfolio-titleline.portfolio-titleline--main,
+#future-profile .profile-header__subtitle {
+  display: block !important;
+  width: auto !important;
+  max-width: none !important;
+  margin: var(--t237-title-gap) 0 0 !important;
+  padding: 0 !important;
+  font-family: var(--font-sans) !important;
+  font-size: var(--t237-title-en-size) !important;
+  font-weight: var(--t237-title-en-weight) !important;
+  line-height: var(--t237-title-en-line) !important;
+  letter-spacing: 0 !important;
+  text-transform: uppercase !important;
+  color: var(--t237-title-en-color) !important;
+}
+
+@media (min-width: 901px) {
+  .portfolio-section__intro h2.portfolio-main-title,
+  .portfolio-video-feature__copy h2.portfolio-main-title,
+  .portfolio-work__copy h2.portfolio-main-title,
+  #aigc-design .xiaomi-accordion-stage__heading h2.portfolio-main-title,
+  #visual-tone .xiaomi-color-stage__title h2.portfolio-main-title,
+  #visual-system .xiaomi-carousel__intro h2.portfolio-main-title,
+  #commercial-film .portfolio-video-feature__copy h2.portfolio-main-title,
+  #film-storyboard .portfolio-section__intro h2.portfolio-main-title,
+  #commercial-photo .portfolio-reality-fusion__panel > .portfolio-section__intro h2.portfolio-main-title,
+  #reality-imagination .portfolio-section__intro h2.portfolio-main-title,
+  #support .portfolio-support-panel .portfolio-section__intro h2.portfolio-main-title,
+  #other-works .portfolio-other-works__hero-copy h2.portfolio-main-title,
+  #other-works .portfolio-other-works__scene-copy h3.portfolio-main-title,
+  #other-works .portfolio-other-works__ai-wall > .portfolio-other-works__finale-copy h3.portfolio-main-title,
+  #future-profile .profile-header__title {
+    font-family: var(--font-sans) !important;
+    font-size: var(--t237-title-size) !important;
+    font-weight: var(--t237-title-weight) !important;
+    line-height: var(--t237-title-line) !important;
+    letter-spacing: 0 !important;
+    color: var(--color-title, var(--type-color-title)) !important;
+  }
+
+  #visual-files.portfolio-hero .portfolio-hero__content {
+    gap: 0 !important;
+  }
+
+  #visual-files.portfolio-hero h1.portfolio-main-title {
+    font-family: var(--font-sans) !important;
+    font-weight: 590 !important;
+    letter-spacing: 0 !important;
+    line-height: 1.04 !important;
+  }
+
+  #visual-files.portfolio-hero .portfolio-hero__titleline.portfolio-titleline--main {
+    margin-top: clamp(18px, 1.45vh, 26px) !important;
+    text-align: center !important;
+  }
+
+  #other-works .portfolio-other-works__thanks-copy {
+    display: grid !important;
+    justify-items: center !important;
+    gap: 0 !important;
+  }
+
+  #other-works .portfolio-other-works__thanks-copy > p.portfolio-titleline.portfolio-titleline--main {
+    margin-top: clamp(18px, 1.6vh, 28px) !important;
+    text-align: center !important;
+  }
+
+  #future-profile .profile-header__subtitle {
+    margin-top: var(--t237-title-gap) !important;
+  }
+}
+
+/*
+  T-238: title subtitle gap lock.
+  Keep the bilingual title pair optically identical across all PC sections.
+*/
+:root {
+  --t238-title-gap-pc: 16px;
+}
+
+@media (min-width: 901px) {
+  .portfolio-titleline.portfolio-titleline--main,
+  #visual-files.portfolio-hero .portfolio-hero__titleline.portfolio-titleline--main,
+  #aigc-design .xiaomi-accordion-stage__heading > p.portfolio-titleline.portfolio-titleline--main,
+  #visual-tone .xiaomi-color-stage__title > p.portfolio-titleline.portfolio-titleline--main,
+  #visual-system .xiaomi-carousel__intro > p.portfolio-titleline.portfolio-titleline--main,
+  #commercial-film .portfolio-video-feature__copy > p.portfolio-titleline.portfolio-titleline--main,
+  #film-storyboard .portfolio-section__intro > p.portfolio-titleline.portfolio-titleline--main,
+  #commercial-photo .portfolio-section__intro > p.portfolio-titleline.portfolio-titleline--main,
+  #reality-imagination .portfolio-section__intro > p.portfolio-titleline.portfolio-titleline--main,
+  #support .portfolio-support-panel .portfolio-section__intro > p.portfolio-titleline.portfolio-titleline--main,
+  #other-works .portfolio-other-works__hero-copy > p.portfolio-titleline.portfolio-titleline--main,
+  #other-works .portfolio-other-works__scene-copy > p.portfolio-titleline.portfolio-titleline--main,
+  #other-works .portfolio-other-works__ai-wall > .portfolio-other-works__finale-copy > p.portfolio-titleline.portfolio-titleline--main,
+  #other-works .portfolio-other-works__thanks-copy > p.portfolio-titleline.portfolio-titleline--main,
+  #future-profile .profile-header__subtitle {
+    margin-top: var(--t238-title-gap-pc) !important;
+  }
+
+  #commercial-film .portfolio-video-feature__copy--cinema {
+    gap: 0 !important;
+  }
+
+  #visual-files.portfolio-hero .portfolio-hero__titleline.portfolio-titleline--main {
+    margin-top: 6px !important;
+  }
+}
+
+/*
+  T-239: bilingual title hierarchy refinement.
+  English now acts as a quiet exhibition eyebrow above the Chinese title.
+  Keep the page-frame alignment stable while rebuilding the title pair rhythm.
+*/
+:root {
+  --t239-title-eyebrow-gap: 9px;
+  --t239-title-eyebrow-size: clamp(10.5px, 0.58vw, 13px);
+  --t239-title-eyebrow-weight: 380;
+  --t239-title-eyebrow-line: 1.12;
+  --t239-title-eyebrow-color: rgba(229, 205, 154, 0.58);
+  --t239-title-to-content-gap: clamp(40px, 3.3vh, 54px);
+}
+
+.portfolio-titleline.portfolio-titleline--main,
+#visual-files.portfolio-hero .portfolio-hero__titleline.portfolio-titleline--main,
+#aigc-design .xiaomi-accordion-stage__heading > p.portfolio-titleline.portfolio-titleline--main,
+#visual-tone .xiaomi-color-stage__title > p.portfolio-titleline.portfolio-titleline--main,
+#visual-system .xiaomi-carousel__intro > p.portfolio-titleline.portfolio-titleline--main,
+#commercial-film .portfolio-video-feature__copy > p.portfolio-titleline.portfolio-titleline--main,
+#film-storyboard .portfolio-section__intro > p.portfolio-titleline.portfolio-titleline--main,
+#commercial-photo .portfolio-section__intro > p.portfolio-titleline.portfolio-titleline--main,
+#reality-imagination .portfolio-section__intro > p.portfolio-titleline.portfolio-titleline--main,
+#support .portfolio-support-panel .portfolio-section__intro > p.portfolio-titleline.portfolio-titleline--main,
+#other-works .portfolio-other-works__hero-copy > p.portfolio-titleline.portfolio-titleline--main,
+#other-works .portfolio-other-works__scene-copy > p.portfolio-titleline.portfolio-titleline--main,
+#other-works .portfolio-other-works__ai-wall > .portfolio-other-works__finale-copy > p.portfolio-titleline.portfolio-titleline--main,
+#other-works .portfolio-other-works__thanks-copy > p.portfolio-titleline.portfolio-titleline--main,
+#future-profile .profile-header__subtitle {
+  display: block !important;
+  order: 0 !important;
+  width: auto !important;
+  max-width: none !important;
+  margin: 0 0 var(--t239-title-eyebrow-gap) !important;
+  padding: 0 !important;
+  color: var(--t239-title-eyebrow-color) !important;
+  font-family: var(--font-sans) !important;
+  font-size: var(--t239-title-eyebrow-size) !important;
+  font-weight: var(--t239-title-eyebrow-weight) !important;
+  line-height: var(--t239-title-eyebrow-line) !important;
+  letter-spacing: 0.01em !important;
+  text-transform: uppercase !important;
+  text-wrap: balance !important;
+}
+
+@media (min-width: 901px) {
+  .portfolio-titleline.portfolio-titleline--main + .portfolio-main-title,
+  #future-profile .profile-header__subtitle + .profile-header__title {
+    margin: 0 !important;
+  }
+
+  #visual-files.portfolio-hero .portfolio-hero__titleline.portfolio-titleline--main + h1.portfolio-main-title,
+  #aigc-design .xiaomi-accordion-stage__heading > p.portfolio-titleline.portfolio-titleline--main + h2.portfolio-main-title,
+  #visual-tone .xiaomi-color-stage__title > p.portfolio-titleline.portfolio-titleline--main + h2.portfolio-main-title,
+  #visual-system .xiaomi-carousel__intro > p.portfolio-titleline.portfolio-titleline--main + h2.portfolio-main-title,
+  #commercial-film .portfolio-video-feature__copy > p.portfolio-titleline.portfolio-titleline--main + h2.portfolio-main-title,
+  #film-storyboard .portfolio-section__intro > p.portfolio-titleline.portfolio-titleline--main + h2.portfolio-main-title,
+  #commercial-photo .portfolio-section__intro > p.portfolio-titleline.portfolio-titleline--main + h2.portfolio-main-title,
+  #reality-imagination .portfolio-section__intro > p.portfolio-titleline.portfolio-titleline--main + h2.portfolio-main-title,
+  #support .portfolio-support-panel .portfolio-section__intro > p.portfolio-titleline.portfolio-titleline--main + h2.portfolio-main-title,
+  #other-works .portfolio-other-works__hero-copy > p.portfolio-titleline.portfolio-titleline--main + h2.portfolio-main-title,
+  #other-works .portfolio-other-works__scene-copy > p.portfolio-titleline.portfolio-titleline--main + h3.portfolio-main-title,
+  #other-works .portfolio-other-works__ai-wall > .portfolio-other-works__finale-copy > p.portfolio-titleline.portfolio-titleline--main + h3.portfolio-main-title,
+  #other-works .portfolio-other-works__thanks-copy > p.portfolio-titleline.portfolio-titleline--main + h3.portfolio-main-title,
+  #future-profile .profile-header__subtitle + .profile-header__title {
+    margin: 0 !important;
+  }
+
+  .portfolio-section__intro,
+  .portfolio-video-feature__copy,
+  #aigc-design .xiaomi-accordion-stage__heading,
+  #visual-tone .xiaomi-color-stage__title,
+  #visual-system .xiaomi-carousel__intro,
+  #commercial-film .portfolio-video-feature__copy--cinema,
+  #film-storyboard .portfolio-section__intro,
+  #commercial-photo .portfolio-reality-fusion__panel > .portfolio-section__intro,
+  #reality-imagination .portfolio-section__intro,
+  #support .portfolio-support-panel .portfolio-section__intro,
+  #other-works .portfolio-other-works__hero-copy,
+  #other-works .portfolio-other-works__scene-copy,
+  #other-works .portfolio-other-works__ai-wall > .portfolio-other-works__finale-copy,
+  #future-profile .profile-header {
+    display: block !important;
+  }
+
+  #visual-files.portfolio-hero .portfolio-hero__content,
+  #other-works .portfolio-other-works__thanks-copy {
+    display: grid !important;
+    grid-template-rows: none !important;
+    grid-auto-rows: max-content !important;
+    align-content: center !important;
+    justify-items: center !important;
+    gap: 0 !important;
+  }
+
+  #visual-files.portfolio-hero .portfolio-hero__titleline.portfolio-titleline--main,
+  #other-works .portfolio-other-works__thanks-copy > p.portfolio-titleline.portfolio-titleline--main {
+    margin: 0 0 clamp(10px, 0.9vh, 14px) !important;
+    text-align: center !important;
+  }
+
+  #visual-files.portfolio-hero .portfolio-hero__titleline.portfolio-titleline--main {
+    margin-bottom: clamp(16px, 1.32vh, 19px) !important;
+  }
+
+  body.is-intro-complete #visual-files.portfolio-hero .portfolio-hero__titleline.motion-content,
+  body.is-intro-complete #visual-files.portfolio-hero .portfolio-hero__titleline.motion-content.is-motion-visible {
+    opacity: 1 !important;
+    transform: translate3d(0, 0, 0) !important;
+    filter: blur(0) !important;
+    transition: none !important;
+    animation: none !important;
+    will-change: auto !important;
+  }
+
+  #visual-files.portfolio-hero h1.portfolio-main-title {
+    margin: 0 !important;
+  }
+
+  #other-works .portfolio-other-works__thanks-copy h3.portfolio-main-title {
+    margin: 0 !important;
+  }
+
+  #aigc-design .xiaomi-accordion-stage__heading,
+  #visual-system .xiaomi-carousel__intro,
+  #film-storyboard .portfolio-section__intro,
+  #reality-imagination .portfolio-section__intro,
+  #support .portfolio-support-panel .portfolio-section__intro,
+  #future-profile .profile-header {
+    width: var(--page-standard, var(--page-wide)) !important;
+    max-width: var(--page-standard, var(--page-wide)) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  #visual-tone .xiaomi-color-stage__title,
+  #commercial-photo .portfolio-reality-fusion__panel > .portfolio-section__intro,
+  #other-works .portfolio-other-works__hero-copy {
+    left: var(--page-standard-left, max(48px, calc((100vw - var(--page-standard, var(--page-wide))) / 2))) !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  #visual-tone .xiaomi-color-stage__picker {
+    margin-top: clamp(22px, 2vh, 32px) !important;
+  }
+
+  #visual-system .xiaomi-carousel__viewport,
+  #film-storyboard .portfolio-storyboard-strip,
+  #reality-imagination .portfolio-product-grid {
+    margin-top: clamp(44px, 3.4vh, 54px) !important;
+  }
+}
+
+/*
+  T-250: widescreen hero stage consolidation.
+  Commercial film and GAO DESIGN opening use a 16:9 page stage with a
+  2.35:1 image nested inside, so the black bars belong to the page instead
+  of being faked by cropping the image.
+*/
+@media (min-width: 901px) {
+  #commercial-film .portfolio-video-feature--cinema,
+  #other-works .portfolio-other-works__hero {
+    width: 100vw !important;
+    min-height: min(var(--screen-h), calc(100vw * 9 / 16)) !important;
+    height: min(var(--screen-h), calc(100vw * 9 / 16)) !important;
+    max-height: var(--screen-h) !important;
+    padding: 0 !important;
+    margin-inline: calc(50% - 50vw) !important;
+    overflow: hidden !important;
+    background: #000 !important;
+  }
+
+  #commercial-film .portfolio-video-feature--cinema {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  #commercial-film .portfolio-video-feature__media--cinema {
+    width: 100vw !important;
+    max-width: none !important;
+    height: var(--screen-h) !important;
+    max-height: var(--screen-h) !important;
+    min-height: 0 !important;
+    flex: 0 0 100vw !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 !important;
+    aspect-ratio: auto !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+
+  #commercial-film .portfolio-video-stage--cinema,
+  #other-works .portfolio-other-works__hero-frame {
+    width: 100vw !important;
+    max-width: none !important;
+    min-height: 0 !important;
+    height: auto !important;
+    margin: 0 !important;
+    border-left: 0 !important;
+    border-right: 0 !important;
+    border-radius: 0 !important;
+  }
+
+  #commercial-film .portfolio-video-stage--cinema {
+    aspect-ratio: 21 / 9 !important;
+  }
+
+  #other-works .portfolio-other-works__hero-frame {
+    aspect-ratio: 2.35 / 1 !important;
+  }
+
+  #commercial-film .portfolio-video-stage--cinema .portfolio-video-stage__film,
+  #other-works .portfolio-other-works__hero-frame img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+
+  #commercial-film .portfolio-video-feature__copy--cinema {
+    top: clamp(86px, 12.4vh, 178px) !important;
+    left: var(--page-standard-left, max(48px, calc((100vw - var(--page-standard, var(--page-wide))) / 2))) !important;
+    width: min(780px, 42vw) !important;
+    max-width: min(780px, 42vw) !important;
+  }
+
+  #other-works .portfolio-other-works__hero {
+    display: grid !important;
+    align-content: center !important;
+    justify-items: center !important;
+  }
+
+  #other-works .portfolio-other-works__hero-frame {
+    justify-self: center !important;
+    box-shadow:
+      0 34px 120px rgba(0, 0, 0, 0.54),
+      inset 0 1px 0 rgba(255, 248, 232, 0.05) !important;
+  }
+
+  #other-works #other-works-hero .portfolio-other-works__hero-frame {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    width: 100vw !important;
+    max-width: none !important;
+    transform: translate3d(-50%, -50%, 0) !important;
+  }
+
+  #other-works .portfolio-other-works__hero-copy {
+    left: var(--page-standard-left, max(48px, calc((100vw - var(--page-standard, var(--page-wide))) / 2))) !important;
+    bottom: clamp(54px, 7vh, 104px) !important;
+    width: min(720px, calc(100vw - 96px)) !important;
+    max-width: min(720px, calc(100vw - 96px)) !important;
+    padding-top: clamp(12px, 1.2vh, 18px) !important;
+    border-top-color: rgba(232, 211, 169, 0.24) !important;
+  }
+
+  #other-works .portfolio-other-works__hero-copy > p.portfolio-titleline.portfolio-titleline--main {
+    max-width: 40em !important;
+    margin-bottom: clamp(8px, 0.72vh, 11px) !important;
+    color: rgba(232, 211, 169, 0.68) !important;
+    font-size: clamp(12px, 0.66vw, 15px) !important;
+    font-weight: 380 !important;
+    line-height: 1.44 !important;
+    letter-spacing: 0 !important;
+    text-transform: none !important;
+  }
+
+  #other-works .portfolio-other-works__hero-copy h2.portfolio-main-title {
+    font-size: clamp(48px, 3.7vw, 76px) !important;
+    font-weight: 560 !important;
+    line-height: 0.95 !important;
+  }
+}
+
+/*
+  T-252: 04B source-image gallery structure.
+  Each panel now owns three source images only; the small media is a 1:1 detail
+  crop from the active source image, so future image generation does not need
+  separate small-picture slots.
+*/
+@media (min-width: 901px) {
+  #photo-scenes .xiaomi-dual-gallery__wrap {
+    grid-template-columns: minmax(0, 18fr) minmax(300px, 5.2fr) !important;
+    gap: clamp(30px, 2.2vw, 48px) !important;
+    align-items: stretch !important;
+  }
+
+  #photo-scenes .xiaomi-dual-gallery.is-reverse .xiaomi-dual-gallery__wrap {
+    grid-template-columns: minmax(300px, 5.2fr) minmax(0, 18fr) !important;
+  }
+
+  #photo-scenes .xiaomi-dual-gallery__big {
+    align-self: stretch !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    aspect-ratio: 16 / 9 !important;
+  }
+
+  #photo-scenes .xiaomi-dual-gallery__side {
+    display: flex !important;
+    flex-direction: column !important;
+    align-self: stretch !important;
+    min-height: 0 !important;
+    gap: 0 !important;
+  }
+
+  #photo-scenes .xiaomi-dual-gallery__small {
+    flex: 0 0 auto !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    height: auto !important;
+    aspect-ratio: 1 / 1 !important;
+  }
+
+  #photo-scenes .xiaomi-dual-gallery__small img {
+    object-fit: cover !important;
+    object-position: var(--gallery-detail-position, 50% 50%) !important;
+  }
+
+  #photo-scenes .xiaomi-dual-gallery__copy {
+    flex: 0 0 auto !important;
+    margin-top: auto !important;
+  }
+
+  #photo-scenes .xiaomi-dual-gallery .xiaomi-carousel__controls {
+    flex: 0 0 auto !important;
+    margin-top: clamp(16px, 1.15vw, 22px) !important;
+  }
+}
+
+/*
+  T-262: 02C carousel caption typography.
+  Treat each caption as a gallery label: compact title, calmer body copy, and
+  a tighter line rhythm so the image remains the lead.
+*/
+@media (min-width: 901px) {
+  #visual-system.xiaomi-hover-carousel .xiaomi-hover-card__caption {
+    gap: clamp(5px, 0.32vw, 8px) !important;
+    padding: clamp(20px, 1.24vw, 30px) clamp(22px, 1.42vw, 34px) !important;
+    background:
+      linear-gradient(
+        180deg,
+        rgba(5, 4, 3, 0) 0%,
+        rgba(5, 4, 3, 0.58) 58%,
+        rgba(5, 4, 3, 0.9) 100%
+      ) !important;
+  }
+
+  #visual-system.xiaomi-hover-carousel .xiaomi-hover-card__caption h3 {
+    margin: 0 !important;
+    color: rgba(250, 244, 234, 0.95) !important;
+    font-size: clamp(18px, 0.96vw, 23px) !important;
+    font-weight: 520 !important;
+    line-height: 1.08 !important;
+    letter-spacing: 0 !important;
+    text-wrap: balance !important;
+  }
+
+  #visual-system.xiaomi-hover-carousel .xiaomi-hover-card__caption p {
+    max-width: min(34em, 94%) !important;
+    margin: 0 !important;
+    padding-right: 0 !important;
+    color: rgba(238, 225, 199, 0.68) !important;
+    font-size: clamp(12px, 0.62vw, 14px) !important;
+    font-weight: 360 !important;
+    line-height: 1.32 !important;
+    letter-spacing: 0 !important;
+    white-space: normal !important;
+    overflow: hidden !important;
+    display: -webkit-box !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-line-clamp: 2 !important;
+    text-overflow: clip !important;
+  }
+}
+
+/*
+  T-263: 04A taiji source-side haze removal.
+  The white source half was still being dimmed by an old blending filter; keep
+  the rotating mask, but remove the gray veil over the source image layer.
+*/
+#commercial-photo .portfolio-fusion-svg-image--source {
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+/*
+  T-267: GAO DESIGN hero title overlap.
+  Move the title group back onto the lower image edge while preserving its
+  existing left alignment and text width.
+*/
+@media (min-width: 901px) {
+  #other-works #other-works-hero .portfolio-other-works__hero-copy {
+    bottom: clamp(176px, 15.2vh, 226px) !important;
+  }
+}
+
+/*
+  T-273: 04A fusion cards reduced to two image states.
+  Default card shows the source image. Press-dragging the scrubber reveals the
+  scene image; the old hover-only third layer is no longer part of the live DOM.
+*/
+#reality-imagination .portfolio-product-card--hover-fusion .portfolio-product-card__media {
+  cursor: grab !important;
+  touch-action: none !important;
+}
+
+#reality-imagination .portfolio-product-card--hover-fusion.is-scrubbing .portfolio-product-card__media {
+  cursor: grabbing !important;
+}
+
+#reality-imagination .portfolio-product-card--hover-fusion .portfolio-product-card__base,
+#reality-imagination .portfolio-product-card--hover-fusion .portfolio-product-card__scene {
+  position: absolute !important;
+  inset: 0 !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  background-position: var(--crop) !important;
+  pointer-events: none !important;
+  transition:
+    opacity 160ms ease,
+    filter 180ms ease,
+    clip-path 0ms linear !important;
+}
+
+#reality-imagination .portfolio-product-card--hover-fusion .portfolio-product-card__base,
+#reality-imagination .portfolio-product-card--hover-fusion:is(:hover, :focus-within, .is-scrubbing) .portfolio-product-card__base {
+  opacity: 1 !important;
+  filter: saturate(0.96) contrast(1.03) brightness(0.96) !important;
+}
+
+#reality-imagination .portfolio-product-card--hover-fusion .portfolio-product-card__scene,
+#reality-imagination .portfolio-product-card--hover-fusion:is(:hover, :focus-within) .portfolio-product-card__scene {
+  opacity: 0 !important;
+  clip-path: polygon(0 0, var(--fusion-x, 50%) 0, var(--fusion-x, 50%) 100%, 0 100%) !important;
+  filter: saturate(1) contrast(1.06) brightness(0.96) !important;
+}
+
+#reality-imagination .portfolio-product-card--hover-fusion.is-scrubbing .portfolio-product-card__scene {
+  opacity: 1 !important;
+}
+
+#reality-imagination .portfolio-product-card--hover-fusion .portfolio-product-card__refined,
+#reality-imagination .portfolio-product-card--hover-fusion .portfolio-product-card__stage--retouch {
+  display: none !important;
+}
+
+#reality-imagination .portfolio-product-card--hover-fusion .portfolio-product-card__scrub {
+  left: var(--fusion-x, 50%) !important;
+  opacity: 0 !important;
+}
+
+#reality-imagination .portfolio-product-card--hover-fusion.is-scrubbing .portfolio-product-card__scrub {
+  opacity: 1 !important;
+}
+
+#reality-imagination .portfolio-product-card--hover-fusion .portfolio-product-card__stage--raw {
+  opacity: 1 !important;
+}
+
+#reality-imagination .portfolio-product-card--hover-fusion .portfolio-product-card__stage--scene {
+  opacity: 0 !important;
+}
+
+#reality-imagination .portfolio-product-card--hover-fusion.is-scrubbing .portfolio-product-card__stage--raw {
+  opacity: 0 !important;
+}
+
+#reality-imagination .portfolio-product-card--hover-fusion.is-scrubbing .portfolio-product-card__stage--scene {
+  opacity: 1 !important;
+}
+
+/*
+  T-276: 02B visual tone separation and calmer image switching.
+  Remove the title shadow plate, move the product-series picker lower, and keep
+  tab changes as a simple crossfade without the old zoom-in / zoom-back motion.
+*/
+#visual-tone .xiaomi-color-stage__image,
+#visual-tone .xiaomi-color-stage__image.is-active,
+#visual-tone .xiaomi-color-stage__image--next,
+#visual-tone .xiaomi-color-stage__image--next.is-active {
+  transform: none !important;
+  transition: opacity 360ms cubic-bezier(0.16, 1, 0.3, 1) !important;
+  animation: none !important;
+}
+
+#visual-tone .xiaomi-color-stage__title,
+#visual-tone .xiaomi-color-stage__title h2.portfolio-main-title,
+#visual-tone .xiaomi-color-stage__title > .portfolio-kicker,
+#visual-tone .xiaomi-color-stage__title > p.portfolio-titleline,
+#visual-tone .xiaomi-color-stage__title > p.portfolio-titleline.portfolio-titleline--main {
+  text-shadow: none !important;
+  filter: none !important;
+}
+
+#visual-tone .xiaomi-color-stage__title {
+  background: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+#visual-tone .xiaomi-color-stage__title::before,
+#visual-tone .xiaomi-color-stage__title::after {
+  content: none !important;
+  display: none !important;
+  background: none !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+@media (min-width: 901px) {
+#visual-tone .xiaomi-color-stage__picker {
+  margin-top: clamp(64px, 5.8vh, 96px) !important;
+}
+
+/*
+  T-281: remove the 02B dimming veil.
+  The full-stage pseudo overlay was darkening the new visual-tone images; keep the
+  title and picker layers intact, but let the selected artwork render at source brightness.
+*/
+#visual-tone .xiaomi-color-stage::after {
+  content: none !important;
+  display: none !important;
+  background: none !important;
+  opacity: 0 !important;
+}
+}
+
+/*
+  T-277: 04A fusion hover scrub and single-screen vertical balance.
+  Hover now drives the mask directly, so the cards should read as an immediate
+  before/after comparison instead of a press-drag control.
+*/
+#reality-imagination .portfolio-product-card--hover-fusion .portfolio-product-card__media {
+  cursor: ew-resize !important;
+  touch-action: none !important;
+}
+
+#reality-imagination .portfolio-product-card--hover-fusion.is-scrubbing .portfolio-product-card__media {
+  cursor: ew-resize !important;
+}
+
+#reality-imagination .portfolio-product-card--hover-fusion::after {
+  content: none !important;
+  display: none !important;
+  opacity: 0 !important;
+  background: none !important;
+  transition: none !important;
+}
+
+#reality-imagination .portfolio-product-card--hover-fusion .portfolio-product-card__scene,
+#reality-imagination .portfolio-product-card--hover-fusion:is(:hover, :focus-within) .portfolio-product-card__scene,
+#reality-imagination .portfolio-product-card--hover-fusion.is-scrubbing .portfolio-product-card__scene {
+  clip-path: polygon(0 0, var(--fusion-x, 50%) 0, var(--fusion-x, 50%) 100%, 0 100%) !important;
+}
+
+@media (min-width: 901px) {
+  #reality-imagination .portfolio-ai-grid-panel {
+    display: grid !important;
+    grid-template-rows: auto auto !important;
+    align-content: center !important;
+    justify-content: stretch !important;
+    min-height: var(--screen-h) !important;
+    height: var(--screen-h) !important;
+    gap: clamp(56px, 5.2vh, 76px) !important;
+    padding-top: clamp(168px, 13.4vh, 206px) !important;
+    padding-bottom: clamp(108px, 9vh, 148px) !important;
+  }
+
+  #reality-imagination .portfolio-section__intro {
+    align-self: end !important;
+    margin-bottom: 0 !important;
+  }
+
+  #reality-imagination .portfolio-product-grid {
+    align-self: start !important;
+    margin-top: 0 !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #reality-imagination .portfolio-product-card--hover-fusion::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/*
+  T-283: desktop density adaptation.
+  Keep the approved 2560x1440 composition as the baseline, but make smaller
+  desktop viewports read less oversized. This deliberately avoids body-level
+  transform scaling so anchors, fixed navigation, scroll height, and pointer
+  hit targets stay correct.
+  Density targets are documented here instead of exposed as non-numeric CSS
+  variables: 1366~1920 tightens toward 0.84~0.90, 1921~2559 returns to 1.00.
+*/
+@media (min-width: 901px) and (max-width: 1920px) {
+  :root {
+    --desktop-page-standard: min(
+      clamp(1310px, calc(1079.6px + 16.9vw), 1404px),
+      calc(100vw - clamp(96px, 8vw, 320px))
+    );
+    --desktop-gallery-wide: min(
+      clamp(1613px, calc(1329.9px + 20.73vw), 1728px),
+      calc(100vw - clamp(96px, 8vw, 256px))
+    );
+  }
+}
+
+@media (min-width: 1921px) and (max-width: 2559px) {
+  :root {
+    --desktop-page-standard: min(
+      clamp(1404px, calc(936px + 24.375vw), 1560px),
+      calc(100vw - clamp(96px, 8vw, 320px))
+    );
+    --desktop-gallery-wide: min(
+      clamp(1728px, calc(1152px + 30vw), 1920px),
+      calc(100vw - clamp(96px, 8vw, 256px))
+    );
+  }
+}
+
+@media (min-width: 901px) and (max-width: 2559px) {
+  :root {
+    --page-standard: var(--desktop-page-standard);
+    --page-standard-left: max(48px, calc((100vw - var(--page-standard)) / 2));
+    --page-wide: var(--page-standard);
+    --portfolio-profile-wide: var(--page-standard);
+    --portfolio-profile-left: var(--page-standard-left);
+
+    --screen-pad-top: clamp(78px, 8.6vh, 118px);
+    --screen-pad-bottom: clamp(34px, 4.8vh, 64px);
+
+    --type-hero: clamp(3.25rem, 3.4vw, 4.5rem);
+    --type-section: clamp(2.55rem, 2.65vw, 3.25rem);
+    --type-panel: clamp(2.15rem, 2.22vw, 2.75rem);
+    --type-title: clamp(1.12rem, 1.08vw, 1.375rem);
+    --type-titleline: clamp(0.86rem, 0.82vw, 1rem);
+    --type-title-copy: clamp(0.82rem, 0.77vw, 0.9375rem);
+    --type-body: clamp(0.875rem, 0.82vw, 1rem);
+    --type-caption: clamp(0.72rem, 0.66vw, 0.8125rem);
+    --type-micro: clamp(0.68rem, 0.58vw, 0.75rem);
+    --type-display-hero: clamp(3rem, 2.9vw, 5.45rem);
+    --type-section-title: var(--type-section);
+    --type-panel-title: var(--type-panel);
+    --type-closing-display: clamp(6.6rem, 5.1vw, 9rem);
+    --type-card-title: var(--type-title);
+    --type-body-standard: var(--type-body);
+    --type-body-small: var(--type-caption);
+    --type-kicker: var(--type-caption);
+    --type-micro-label: var(--type-micro);
+    --type-nav-label: var(--type-caption);
+    --title-rhythm-kicker-to-title: clamp(9px, 0.68vh, 12px);
+    --title-rhythm-main-to-line: clamp(9px, 0.68vh, 12px);
+    --title-rhythm-line-to-copy: clamp(7px, 0.56vh, 10px);
+    --main-title-size: var(--type-display-hero);
+    --main-title-kicker-size: var(--type-kicker);
+    --main-titleline-size: var(--type-titleline);
+  }
+
+  #other-works.portfolio-other-works {
+    --ow-gallery-wide: var(--desktop-gallery-wide);
+  }
+
+  #visual-system.xiaomi-hover-carousel {
+    --carousel-gap: clamp(24px, 2.2vw, 46px) !important;
+    --carousel-card-w: clamp(320px, 17.1vw, 438px) !important;
+    row-gap: clamp(16px, 1.8vh, 24px) !important;
+  }
+
+  #visual-system .xiaomi-carousel__viewport {
+    padding-block: clamp(8px, 1.3vh, 18px) !important;
+  }
+
+  #visual-system .xiaomi-carousel__controls {
+    width: min(var(--page-standard), calc(100% - 96px)) !important;
+    min-height: clamp(42px, 4.2vh, 54px) !important;
+  }
+
+  #reality-imagination .portfolio-ai-grid-panel {
+    gap: clamp(44px, 4.4vh, 68px) !important;
+  }
+
+  #reality-imagination .portfolio-product-grid {
+    gap: clamp(14px, 1.15vw, 22px) !important;
+  }
+
+  #photo-scenes .xiaomi-dual-gallery__wrap {
+    gap: clamp(26px, 1.9vw, 42px) !important;
+  }
+
+  #support .portfolio-support-panel {
+    gap: clamp(26px, 3.2vh, 56px) !important;
+  }
+
+  #support .portfolio-support-slant {
+    --support-bleed-x: clamp(68px, 4vw, 136px) !important;
+    --support-media-overscan-x: clamp(60px, 3.4vw, 132px) !important;
+  }
+
+  #about-thanks .portfolio-other-works__thanks-copy h3.portfolio-main-title {
+    font-size: clamp(4.7rem, 8.4vw, 12.6rem) !important;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 2399px) and (min-height: 921px) {
+  #other-works #other-works-posters .portfolio-other-works__poster-card {
+    width: clamp(232px, 17.7vw, 350px) !important;
+  }
+
+  #other-works #other-works-posters .portfolio-other-works__poster-card[data-poster-state="outer"],
+  #other-works #other-works-posters .portfolio-other-works__poster-card[data-poster-state="far"],
+  #other-works #other-works-posters .portfolio-other-works__poster-card[data-poster-state="near"] {
+    transform:
+      translate3d(-50%, -50%, 0)
+      translateX(calc(var(--poster-offset) * clamp(116px, 13.2vw, 236px)))
+      scale(var(--poster-scale, 0.84))
+      rotateY(calc(var(--poster-offset) * -1.4deg)) !important;
+  }
+
+  #other-works #other-works-posters .portfolio-other-works__poster-card[data-poster-state="outer"] {
+    --poster-scale: 0.66;
+  }
+
+  #other-works #other-works-posters .portfolio-other-works__poster-card[data-poster-state="far"] {
+    --poster-scale: 0.75;
+  }
+
+  #other-works #other-works-posters .portfolio-other-works__poster-card[data-poster-state="near"] {
+    --poster-scale: 0.86;
+  }
+
+  #other-works #other-works-posters .portfolio-other-works__poster-card.is-active {
+    transform:
+      translate3d(-50%, -50%, 0)
+      scale(1)
+      rotateY(0deg) !important;
+  }
+
+  #other-works #other-works-light-table .portfolio-other-works__light-card {
+    flex-basis: clamp(420px, 35vw, 680px) !important;
+  }
+}
+
+/*
+  T-285: pre-publish text color audit.
+  Pull remaining legacy pure-white text back into the warm ivory / gold type
+  palette. Keep image brightness, backgrounds, and motion untouched.
+*/
+:root {
+  --publish-text-title: var(--type-color-title, rgba(250, 242, 226, 0.92));
+  --publish-text-title-soft: var(--type-color-title-soft, rgba(244, 234, 216, 0.86));
+  --publish-text-line: var(--type-color-line, rgba(226, 202, 156, 0.72));
+  --publish-text-body: var(--type-color-body, rgba(239, 229, 211, 0.68));
+  --publish-text-muted: var(--type-color-muted, rgba(239, 229, 211, 0.52));
+  --publish-text-nav: var(--type-color-nav, rgba(239, 229, 211, 0.66));
+}
+
+#visual-system .xiaomi-carousel__intro h2.portfolio-main-title,
+#photo-scenes .xiaomi-dual-gallery__copy h2.portfolio-main-title,
+.xiaomi-accordion-stage__copy h2,
+.xiaomi-detail-carousel__caption h3,
+.xiaomi-dual-gallery__copy h3,
+#reality-imagination .portfolio-product-card__label span {
+  color: var(--publish-text-title-soft) !important;
+}
+
+#reality-imagination .portfolio-product-card__label em,
+#reality-imagination .portfolio-product-card__stage,
+.xiaomi-accordion__item::before {
+  color: var(--publish-text-line) !important;
+}
+
+.xiaomi-carousel__intro p:not(.portfolio-kicker),
+.xiaomi-detail-carousel__caption p,
+.xiaomi-dual-gallery__copy p,
+#reality-imagination .portfolio-product-card > p,
+.xiaomi-accordion__item em {
+  color: var(--publish-text-body) !important;
+}
+
+.xiaomi-accordion__item,
+.xiaomi-accordion__item.is-active,
+.xiaomi-hover-card,
+.portfolio-panel.xiaomi-dual-gallery,
+.portfolio-panel.xiaomi-accordion-stage {
+  color: var(--publish-text-body) !important;
+}
+
+.xiaomi-hover-card h3 {
+  color: var(--publish-text-title-soft) !important;
+}
+
+.xiaomi-hover-card p {
+  color: var(--publish-text-body) !important;
+}
+
+.xiaomi-carousel__arrows button {
+  color: var(--publish-text-line) !important;
+  border-color: rgba(232, 211, 169, 0.34) !important;
+}
+
+.xiaomi-carousel__arrows button:hover {
+  color: rgba(232, 211, 169, 0.9) !important;
+  border-color: rgba(232, 211, 169, 0.68) !important;
+}
+
+/*
+  T-296: 02B visual tone block vertical balance.
+  Treat the page title, active series copy, and material swatches as one module
+  and lower the whole group into a calmer optical center. Keep artwork, picker
+  spacing, and image switching untouched.
+*/
+@media (min-width: 901px) {
+  #visual-tone .xiaomi-color-stage__title {
+    top: clamp(230px, 17.8vh, 360px) !important;
+  }
+}
+
+/*
+  T-301: 1080P desktop density.
+  Emulate the calmer feel of a 75% browser zoom on 1920-wide desktop screens
+  without scaling the full document. Keep 2560x1440 and 4K outside this range.
+*/
+@media (min-width: 1700px) and (max-width: 1999px) and (max-height: 1180px) {
+  :root {
+    --desktop-page-standard: min(1170px, calc(100vw - clamp(180px, 14vw, 360px)));
+    --desktop-gallery-wide: min(1440px, calc(100vw - clamp(160px, 12vw, 320px)));
+    --page-standard: var(--desktop-page-standard);
+    --page-standard-left: max(64px, calc((100vw - var(--page-standard)) / 2));
+    --page-wide: var(--page-standard);
+    --portfolio-profile-wide: var(--page-standard);
+    --portfolio-profile-left: var(--page-standard-left);
+
+    --screen-pad-top: clamp(56px, 6.2vh, 82px);
+    --screen-pad-bottom: clamp(28px, 4vh, 52px);
+
+    --type-hero: clamp(2.7rem, 2.36vw, 3.45rem);
+    --type-section: clamp(2.02rem, 2.04vw, 2.55rem);
+    --type-panel: clamp(1.72rem, 1.72vw, 2.15rem);
+    --type-title: clamp(0.96rem, 0.9vw, 1.12rem);
+    --type-titleline: clamp(0.72rem, 0.68vw, 0.84rem);
+    --type-title-copy: clamp(0.7rem, 0.66vw, 0.82rem);
+    --type-body: clamp(0.76rem, 0.7vw, 0.88rem);
+    --type-caption: clamp(0.62rem, 0.58vw, 0.72rem);
+    --type-micro: clamp(0.58rem, 0.5vw, 0.66rem);
+    --type-display-hero: clamp(2.48rem, 2.35vw, 4.08rem);
+    --type-section-title: var(--type-section);
+    --type-panel-title: var(--type-panel);
+    --type-closing-display: clamp(4.8rem, 7.5vw, 10.9rem);
+    --type-card-title: var(--type-title);
+    --type-body-standard: var(--type-body);
+    --type-body-small: var(--type-caption);
+    --type-kicker: var(--type-caption);
+    --type-micro-label: var(--type-micro);
+    --type-nav-label: var(--type-caption);
+    --title-rhythm-kicker-to-title: clamp(7px, 0.58vh, 10px);
+    --title-rhythm-main-to-line: clamp(7px, 0.58vh, 10px);
+    --title-rhythm-line-to-copy: clamp(6px, 0.5vh, 8px);
+    --main-title-size: var(--type-display-hero);
+    --main-title-kicker-size: var(--type-kicker);
+    --main-titleline-size: var(--type-titleline);
+  }
+
+  #other-works.portfolio-other-works {
+    --ow-gallery-wide: var(--desktop-gallery-wide);
+  }
+
+  .portfolio-panel {
+    padding-top: var(--screen-pad-top) !important;
+    padding-bottom: var(--screen-pad-bottom) !important;
+  }
+
+  .portfolio-section__intro {
+    max-width: min(760px, var(--page-standard)) !important;
+    margin-bottom: clamp(24px, 2.6vh, 38px) !important;
+  }
+
+  .portfolio-section__intro > p:last-child,
+  .portfolio-work__copy > p {
+    max-width: 540px !important;
+    margin-top: clamp(12px, 1.4vh, 16px) !important;
+  }
+
+  #visual-tone .xiaomi-color-stage__title {
+    top: clamp(178px, 18vh, 220px) !important;
+    width: min(700px, var(--page-standard)) !important;
+    max-width: min(700px, var(--page-standard)) !important;
+  }
+
+  #visual-tone .xiaomi-color-stage__picker {
+    margin-top: clamp(26px, 3.1vh, 42px) !important;
+  }
+
+  #visual-tone .xiaomi-color-stage__swatches {
+    gap: clamp(8px, 0.72vw, 14px) !important;
+    margin-top: clamp(18px, 2vh, 28px) !important;
+  }
+
+  #visual-tone .xiaomi-color-stage__swatches button {
+    width: clamp(44px, 3vw, 58px) !important;
+    height: clamp(44px, 3vw, 58px) !important;
+  }
+
+  #visual-system.xiaomi-hover-carousel {
+    --carousel-gap: clamp(18px, 1.7vw, 32px) !important;
+    --carousel-card-w: clamp(260px, 14vw, 328px) !important;
+    row-gap: clamp(10px, 1.3vh, 18px) !important;
+  }
+
+  #visual-system .xiaomi-carousel__viewport {
+    padding-block: clamp(4px, 0.9vh, 10px) !important;
+  }
+
+  #visual-system .xiaomi-carousel__controls {
+    width: min(var(--page-standard), calc(100% - 96px)) !important;
+    min-height: clamp(36px, 3.7vh, 46px) !important;
+  }
+
+  #reality-imagination .portfolio-ai-grid-panel {
+    gap: clamp(30px, 3.3vh, 46px) !important;
+    padding-top: clamp(118px, 12.2vh, 152px) !important;
+    padding-bottom: clamp(72px, 7vh, 104px) !important;
+  }
+
+  #reality-imagination .portfolio-product-grid {
+    gap: clamp(12px, 0.92vw, 16px) !important;
+  }
+
+  #reality-imagination .portfolio-product-card__label {
+    padding: 9px 12px 5px !important;
+  }
+
+  #reality-imagination .portfolio-product-card > p {
+    padding: 0 12px 10px !important;
+  }
+
+  #photo-scenes .xiaomi-dual-gallery {
+    padding-block: clamp(56px, 7vh, 82px) !important;
+  }
+
+  #photo-scenes .xiaomi-dual-gallery__wrap,
+  #photo-scenes .xiaomi-dual-gallery.is-reverse .xiaomi-dual-gallery__wrap {
+    grid-template-columns: minmax(0, 1.28fr) minmax(300px, 0.62fr) !important;
+    gap: clamp(22px, 2.2vw, 36px) !important;
+  }
+
+  #photo-scenes .xiaomi-dual-gallery__big {
+    height: min(48vh, 510px) !important;
+  }
+
+  #photo-scenes .xiaomi-dual-gallery__side {
+    grid-template-rows: minmax(0, 29vh) auto auto !important;
+    gap: clamp(14px, 1.6vh, 20px) !important;
+  }
+
+  #photo-scenes .xiaomi-dual-gallery__small {
+    min-height: 210px !important;
+  }
+
+  #support .portfolio-support-panel {
+    gap: clamp(20px, 2.4vh, 38px) !important;
+  }
+
+  #support .portfolio-support-slant {
+    width: min(var(--page-standard), calc(100vw - 180px)) !important;
+    max-width: min(var(--page-standard), calc(100vw - 180px)) !important;
+    --support-bleed-x: clamp(48px, 3vw, 86px) !important;
+    --support-media-overscan-x: clamp(42px, 2.6vw, 78px) !important;
+  }
+
+  #other-works #other-works-posters .portfolio-other-works__poster-card {
+    width: clamp(218px, 14.6vw, 280px) !important;
+  }
+
+  #other-works #other-works-posters .portfolio-other-works__poster-card[data-poster-state="outer"],
+  #other-works #other-works-posters .portfolio-other-works__poster-card[data-poster-state="far"],
+  #other-works #other-works-posters .portfolio-other-works__poster-card[data-poster-state="near"] {
+    transform:
+      translate3d(-50%, -50%, 0)
+      translateX(calc(var(--poster-offset) * clamp(92px, 10.2vw, 188px)))
+      scale(var(--poster-scale, 0.84))
+      rotateY(calc(var(--poster-offset) * -1.4deg)) !important;
+  }
+
+  #other-works #other-works-posters .portfolio-other-works__poster-card[data-poster-state="outer"] {
+    --poster-scale: 0.64;
+  }
+
+  #other-works #other-works-posters .portfolio-other-works__poster-card[data-poster-state="far"] {
+    --poster-scale: 0.74;
+  }
+
+  #other-works #other-works-posters .portfolio-other-works__poster-card[data-poster-state="near"] {
+    --poster-scale: 0.84;
+  }
+
+  #other-works #other-works-posters .portfolio-other-works__poster-card.is-active {
+    transform:
+      translate3d(-50%, -50%, 0)
+      scale(1)
+      rotateY(0deg) !important;
+  }
+
+  #other-works #other-works-light-table .portfolio-other-works__light-card {
+    flex-basis: clamp(360px, 27vw, 520px) !important;
+  }
+
+  #about-thanks .portfolio-other-works__thanks-copy h3.portfolio-main-title {
+    font-size: clamp(4.2rem, 7.1vw, 9.3rem) !important;
+  }
+}
+
+/*
+  T-303: commercial film hero click-to-play video prewire.
+  T-307 supersedes the former poster surface with a video-only stage.
+*/
+#commercial-film .portfolio-video-stage--cinema {
+  cursor: default;
+  border: 0 !important;
+  box-shadow: none !important;
+  background: #000 !important;
+}
+
+#commercial-film .portfolio-video-stage--cinema:has(.portfolio-video-stage__film-video[data-src]) {
+  cursor: pointer;
+}
+
+#commercial-film .portfolio-video-stage--cinema .portfolio-video-stage__film,
+#commercial-film .portfolio-video-stage--cinema .portfolio-video-stage__film-video {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+#commercial-film .portfolio-video-stage--cinema .portfolio-video-stage__film-video {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0;
+  pointer-events: none;
+  border: 0;
+  border-radius: 0;
+  background: #000;
+  transition: opacity 220ms ease;
+}
+
+#commercial-film .portfolio-video-stage--cinema.is-video-active .portfolio-video-stage__film-video {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#commercial-film .portfolio-video-stage--cinema.is-video-active .portfolio-video-stage__film-video:not([controls]) {
+  pointer-events: none;
+}
+
+#commercial-film .portfolio-video-stage--cinema.is-video-active .portfolio-video-stage__film-video[controls] {
+  pointer-events: auto;
+}
+
+#commercial-film .portfolio-video-stage--cinema .portfolio-video-stage__film-video:not([controls])::-webkit-media-controls {
+  display: none !important;
+}
+
+/*
+  T-306: keep the six storyboard frames stable while scrolling.
+  The old scroll-velocity offset read as a horizontal wobble in this section.
+*/
+#film-storyboard.motion-scroll-accent .portfolio-storyboard-strip {
+  transform: none !important;
+  transition: none !important;
+}
+
+/*
+  T-307: commercial film uses only the inline video surface.
+  The MP4 path stays stable so the final file can replace the placeholder by name.
+*/
+#commercial-film .portfolio-video-stage--cinema .portfolio-video-stage__film {
+  display: none !important;
+}
+
+#commercial-film .portfolio-video-stage--cinema .portfolio-video-stage__film-video {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+#commercial-film .portfolio-video-stage--cinema:not(.is-video-active) .portfolio-video-stage__film-video {
+  pointer-events: none !important;
+}
+
+/*
+  T-308: keep the 21:9 ad film proportional in native fullscreen.
+  Inline playback still fills the designed stage; fullscreen must show the whole frame.
+*/
+#commercial-film .portfolio-video-stage--cinema .portfolio-video-stage__film-video:fullscreen,
+#commercial-film .portfolio-video-stage--cinema .portfolio-video-stage__film-video:-webkit-full-screen {
+  width: 100vw !important;
+  height: 100vh !important;
+  max-width: none !important;
+  max-height: none !important;
+  object-fit: contain !important;
+  background: #000 !important;
+}
+
+#commercial-film .portfolio-video-stage--cinema:fullscreen,
+#commercial-film .portfolio-video-stage--cinema:-webkit-full-screen {
+  background: #000 !important;
+}
+
+#commercial-film .portfolio-video-stage--cinema:fullscreen .portfolio-video-stage__film-video,
+#commercial-film .portfolio-video-stage--cinema:-webkit-full-screen .portfolio-video-stage__film-video {
+  object-fit: contain !important;
+}
+
+/*
+  T-308: final thanks scale after owner review.
+  Keep the closing title centered, but reduce its desktop scale across all PC widths.
+*/
+@media (min-width: 901px) {
+  #about-thanks .portfolio-other-works__thanks-copy h3.portfolio-main-title {
+    font-size: clamp(4.8rem, 8.2vw, 12.6rem) !important;
+  }
+}
+
+/*
+  T-309: hide the commercial film title while the inline video is playing.
+  The existing video-active class already clears when playback stops or ends.
+*/
+#commercial-film .portfolio-video-stage--cinema .portfolio-video-stage__title {
+  transition: opacity 220ms ease, visibility 220ms ease;
+}
+
+#commercial-film .portfolio-video-stage--cinema.is-video-active .portfolio-video-stage__title {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
