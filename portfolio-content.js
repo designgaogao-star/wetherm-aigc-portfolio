@@ -105,7 +105,11 @@
       scenes: refreshAssets.fusionCoreLuxuryScene,
     },
     video: {
-      brandFilmVideo: "03-commercial-film/video/03A-black-gold-skincare-3840-t311.mp4",
+      brandFilmVideo: [
+        { src: "03-commercial-film/video/03A-black-gold-skincare-3840-t311.mp4", width: 3840 },
+        { src: "03-commercial-film/video/03A-black-gold-skincare-2560-t311.mp4", width: 2560 },
+        { src: "03-commercial-film/video/03A-black-gold-skincare-1920-t311.mp4", width: 1920 },
+      ],
       brandFilmPoster: "03-commercial-film/video/03A-black-gold-skincare-first-frame-t311.webp",
       mainFrames: [
         refreshAssets.storyboardHook,

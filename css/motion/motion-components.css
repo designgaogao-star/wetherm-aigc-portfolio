@@ -1,0 +1,255 @@
+﻿/* 
+  Motion Components — judgment cards, accordion, visual-tone, commercial film
+  Split from portfolio-motion-system.css (lines 175-423)
+  DO NOT change order — cascade depends on original sequence.
+*/
+
+/* 2026-06-08 future judgment: aligned card triptych with restrained hover selection. */
+@media (min-width: 901px) {}
+
+@keyframes portfolioFutureCardGoldSweep {
+  0% {
+    opacity: 0;
+    transform: translate3d(-120%, 0, 0) skewX(-14deg);
+  }
+
+  24% {
+    opacity: 0.74;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(120%, 0, 0) skewX(-14deg);
+  }
+}
+
+/* 2026-06-08 AIGC accordion: remove terminal divider and keep detail copy equally luminous. */
+#aigc-design .xiaomi-accordion {
+  border-bottom: 0 !important;
+}
+
+#aigc-design .xiaomi-accordion__item em,
+#aigc-design .xiaomi-accordion__item.is-active em {
+  color: rgba(255, 248, 232, 0.82) !important;
+}
+
+@media (min-width: 901px) {
+  #aigc-design .xiaomi-accordion-stage__copy {
+    transform: none !important;
+  }
+
+  #aigc-design .xiaomi-accordion {
+    --aigc-accordion-track-height: clamp(468px, 28.2vh, 636px) !important;
+  }
+
+  #aigc-design .xiaomi-accordion__item,
+  #aigc-design .xiaomi-accordion__item.is-active {
+    flex: 1 1 0 !important;
+    flex-grow: 1 !important;
+    align-content: start !important;
+    padding-top: clamp(15px, 1.25vh, 18px) !important;
+    padding-bottom: clamp(12px, 1.05vh, 16px) !important;
+    transition:
+      border-color 160ms var(--motion-ease-ui),
+      color 160ms var(--motion-ease-ui),
+      background 160ms var(--motion-ease-ui) !important;
+  }
+
+  #aigc-design .xiaomi-accordion__item span,
+  #aigc-design .xiaomi-accordion__item.is-active span,
+  #aigc-design .xiaomi-accordion__item:not(.is-active) span {
+    color: rgba(255, 248, 232, 0.82) !important;
+    font-size: clamp(18px, 1.06vw, 23px) !important;
+    font-weight: 430 !important;
+    line-height: 1.22 !important;
+    transform: none !important;
+    transition: color 160ms var(--motion-ease-ui) !important;
+    will-change: auto !important;
+  }
+
+  #aigc-design .xiaomi-accordion__item em {
+    transform: none !important;
+    margin-top: clamp(5px, 0.48vh, 7px) !important;
+    opacity: 0 !important;
+    max-height: 34px !important;
+    transition:
+      opacity 140ms var(--motion-ease-ui) !important;
+    will-change: opacity;
+  }
+
+  #aigc-design .xiaomi-accordion__item.is-active em {
+    line-height: 1.6 !important;
+    margin-top: clamp(5px, 0.48vh, 7px) !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+    max-height: 34px !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  #aigc-design .xiaomi-accordion__item::after,
+  #aigc-design .xiaomi-accordion__item.is-active::after {
+    top: clamp(24px, 1.85vh, 28px) !important;
+  }
+}
+
+/* 2026-06-08 visual tone: standalone material swatches and slightly lower picker rhythm. */
+@media (min-width: 901px) {
+  #visual-tone .xiaomi-color-stage__picker {
+    margin-top: clamp(24px, 2.05vh, 34px) !important;
+  }
+
+  #visual-tone .xiaomi-color-stage__swatches {
+    margin-top: clamp(16px, 1.35vh, 24px) !important;
+  }
+}
+
+#visual-tone .xiaomi-color-stage__image {
+  object-fit: contain !important;
+  object-position: center !important;
+  background: #050403;
+}
+
+@media (min-width: 901px) {
+  #visual-tone .xiaomi-color-stage__image {
+    inset: 0 0 0 auto !important;
+    width: min(78vw, calc(100svh * 1.777));
+    height: 100%;
+  }
+}
+
+#visual-tone .xiaomi-color-stage__swatches {
+  align-items: center;
+}
+
+#visual-tone .xiaomi-color-stage__swatches button {
+  width: clamp(54px, 3.15vw, 66px);
+  height: clamp(54px, 3.15vw, 66px);
+  padding: 3px;
+  overflow: hidden;
+  border-color: rgba(255, 255, 255, 0.28);
+  background: rgba(5, 4, 3, 0.5);
+  box-shadow:
+    0 10px 28px rgba(0, 0, 0, 0.24),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+}
+
+#visual-tone .xiaomi-color-stage__swatches button:hover,
+#visual-tone .xiaomi-color-stage__swatches button.is-active {
+  border-color: rgba(232, 211, 169, 0.9);
+  box-shadow:
+    0 14px 34px rgba(0, 0, 0, 0.28),
+    0 0 0 3px rgba(232, 211, 169, 0.13),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+}
+
+#visual-tone .xiaomi-color-stage__swatches img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 999px;
+  object-fit: cover;
+  object-position: center;
+  opacity: 1;
+  filter: saturate(1.04) contrast(1.04);
+}
+
+@media (max-width: 900px) {
+  #visual-tone .xiaomi-color-stage__image {
+    object-position: center 42% !important;
+  }
+
+  #visual-tone .xiaomi-color-stage__swatches button {
+    flex-basis: 50px;
+    width: 50px;
+    height: 50px;
+  }
+}
+
+/* 2026-06-12 browser comments: make visual-tone switches read as material-image chips. */
+#visual-tone .xiaomi-color-stage__swatches {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: clamp(8px, 0.72vw, 14px) !important;
+}
+
+#visual-tone .xiaomi-color-stage__swatches button {
+  position: relative !important;
+  flex: 0 0 auto !important;
+  width: clamp(66px, 4.2vw, 88px) !important;
+  height: clamp(44px, 2.62vw, 58px) !important;
+  padding: 3px !important;
+  border-radius: 999px !important;
+  border: 1px solid rgba(255, 248, 232, 0.28) !important;
+  background:
+    linear-gradient(180deg, rgba(255, 248, 232, 0.12), rgba(255, 248, 232, 0.02)),
+    rgba(5, 4, 3, 0.72) !important;
+  box-shadow:
+    0 14px 34px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 248, 232, 0.12) !important;
+}
+
+#visual-tone .xiaomi-color-stage__swatches button::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 4px !important;
+  pointer-events: none !important;
+  border-radius: 999px !important;
+  background:
+    linear-gradient(110deg, rgba(255, 255, 255, 0.28), transparent 28%, transparent 68%, rgba(255, 248, 232, 0.18)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.12), transparent 42%, rgba(0, 0, 0, 0.18)) !important;
+  mix-blend-mode: screen !important;
+  opacity: 0.56 !important;
+}
+
+#visual-tone .xiaomi-color-stage__swatches button:hover,
+#visual-tone .xiaomi-color-stage__swatches button.is-active {
+  transform: translateY(-2px) !important;
+  border-color: rgba(232, 211, 169, 0.92) !important;
+  box-shadow:
+    0 18px 44px rgba(0, 0, 0, 0.36),
+    0 0 0 3px rgba(232, 211, 169, 0.16),
+    0 0 42px rgba(226, 202, 156, 0.16),
+    inset 0 1px 0 rgba(255, 248, 232, 0.18) !important;
+}
+
+#visual-tone .xiaomi-color-stage__swatches img {
+  border-radius: 999px !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  filter: saturate(1.08) contrast(1.08) brightness(0.96) !important;
+}
+
+/* 2026-06-15 browser comments: restore circular tone switches and full-stage image alignment. */
+#visual-tone .xiaomi-color-stage__image {
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+}
+
+#visual-tone .xiaomi-color-stage__swatches button {
+  width: clamp(48px, 3.1vw, 62px) !important;
+  height: clamp(48px, 3.1vw, 62px) !important;
+  aspect-ratio: 1 / 1 !important;
+  border-radius: 50% !important;
+}
+
+#visual-tone .xiaomi-color-stage__swatches button::after,
+#visual-tone .xiaomi-color-stage__swatches img {
+  border-radius: 50% !important;
+}
+
+/* 2026-06-12 browser comments: unify future judgment cards as one clean triptych. */
+@media (max-width: 1180px) {}
+
+/* 2026-06-08 commercial film: remove the video-stage gradient overlay and bottom caption. */
+#commercial-film .portfolio-video-stage--cinema::after,
+#commercial-film .portfolio-video-stage--cinema .portfolio-video-stage__caption {
+  content: none !important;
+  display: none !important;
+  background: none !important;
+}
+
+/* 2026-06-09 future delivery: 35mm film reels with Academy-ratio frames. */

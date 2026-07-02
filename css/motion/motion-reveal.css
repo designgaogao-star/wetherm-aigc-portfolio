@@ -1,0 +1,53 @@
+﻿/* 
+  Motion Reveal — CSS variables and base reveal animation
+  Split from portfolio-motion-system.css (lines 1-47)
+  DO NOT change order — cascade depends on original sequence.
+*/
+
+/*
+  Portfolio Motion System
+  Purposeful motion polish for ordinary reveals and repeated interactions.
+  Protected: intro animation and the commercial-photo fusion / taiji motion.
+*/
+
+:root {
+  --motion-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --motion-ease-ui: cubic-bezier(0.2, 0, 0, 1);
+  --motion-fast: 180ms;
+  --motion-base: 280ms;
+  --motion-reveal: 460ms;
+  --motion-reveal-y: 14px;
+  --motion-reveal-blur: 6px;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translate3d(0, var(--motion-reveal-y), 0);
+  filter: blur(var(--motion-reveal-blur));
+  transition:
+    opacity var(--motion-reveal) var(--motion-ease-out),
+    transform var(--motion-reveal) var(--motion-ease-out),
+    filter var(--motion-reveal) var(--motion-ease-out);
+  transition-delay: 0ms;
+  will-change: opacity, transform, filter;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  filter: none;
+  will-change: auto;
+}
+
+#commercial-photo .portfolio-fusion-device.reveal {
+  transform: none;
+  filter: none;
+  transition: opacity 320ms ease-out;
+  will-change: opacity;
+}
+
+#commercial-photo .portfolio-fusion-device.reveal.is-visible {
+  transform: none;
+  filter: none;
+}
+

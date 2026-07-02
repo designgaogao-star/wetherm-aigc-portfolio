@@ -346,13 +346,13 @@
 
 .xiaomi-carousel__arrows { display: flex; gap: 12px; }
 
-.xiaomi-carousel__arrows button { position: relative; display: grid; place-items: center; width: 54px; height: 54px; border: 1px solid rgba(255, 255, 255, 0.42); border-radius: 999px; background: transparent; color: rgb(255, 255, 255); font-size: 0px; cursor: pointer; transition: border-color 180ms, background 180ms; }
+.xiaomi-carousel__arrows button { position: relative; display: grid; place-items: center; width: 54px; height: 54px; border: 1px solid rgba(255, 255, 255, 0.42); border-radius: 999px; background: transparent; color: rgb(255, 255, 255); font-size: 0px; cursor: pointer; transition: transform 180ms; }
 
 .xiaomi-carousel__arrows button::before { content: ""; position: absolute; left: 50%; top: 50%; width: 12.5px; height: 12.5px; border-top: 2.25px solid; border-left: 2.25px solid; border-radius: 1px; transform: translate(calc(-50% + 2px), -50%) rotate(-45deg); }
 
 .xiaomi-carousel__arrows button[data-next]::before { transform: translate(calc(-50% - 2px), -50%) rotate(135deg); }
 
-.xiaomi-carousel__arrows button:hover { border-color: rgba(226, 195, 135, 0.82); background: rgba(226, 195, 135, 0.08); }
+.xiaomi-carousel__arrows button:hover { border-color: rgba(255, 255, 255, 0.42); background: transparent; }
 
 .portfolio-panel.xiaomi-detail-carousel { display: grid; grid-template-rows: auto minmax(0px, 1fr) auto; gap: clamp(18px, 2.4vh, 34px); justify-content: initial; }
 

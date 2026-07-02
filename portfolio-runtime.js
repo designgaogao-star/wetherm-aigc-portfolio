@@ -180,6 +180,38 @@
     window.setTimeout(hideIntro, 8720);
   }
 
+  function scheduleDeferredGalaxyHomeLoad() {
+    const scriptSrc = "portfolio-galaxy-home.js?v=20260701-load-priority-t312";
+    let requested = false;
+
+    const loadGalaxyHome = () => {
+      if (requested || window.PortfolioGalaxyHome) return;
+      requested = true;
+      const script = document.createElement("script");
+      script.src = scriptSrc;
+      script.async = true;
+      script.dataset.deferredGalaxyHome = "";
+      if ("fetchPriority" in script) script.fetchPriority = "low";
+      document.body.appendChild(script);
+    };
+
+    const requestWhenIdle = () => {
+      if ("requestIdleCallback" in window) {
+        window.requestIdleCallback(loadGalaxyHome, { timeout: 1800 });
+        return;
+      }
+      window.setTimeout(loadGalaxyHome, 600);
+    };
+
+    window.setTimeout(requestWhenIdle, 900);
+    window.addEventListener("portfolio:intro-complete", requestWhenIdle, { once: true });
+    window.addEventListener("load", () => {
+      window.setTimeout(() => {
+        if (document.documentElement.classList.contains("is-intro-complete")) requestWhenIdle();
+      }, 9600);
+    }, { once: true });
+  }
+
   // Bootstrap
   function boot() {
     const renderers = window.portfolioRenderers.create(content);
@@ -188,6 +220,7 @@
     document.body.insertAdjacentHTML("afterbegin", renderers.buildPortfolioPage(buildIntroOverlay()));
     document.body.classList.add("portfolio-shell-ready");
     interactions.createQuickNav();
+    scheduleDeferredGalaxyHomeLoad();
     initIntroOverlay();
     interactions.initAll();
   }

@@ -186,7 +186,7 @@
         <div class="portfolio-storyboard-card__media">
           <img src="${img(item.poster)}" alt="${accessibilityCopy.storyboardImage(index)}" loading="lazy" />
           ${clip ? `
-            <video data-storyboard-video muted loop playsinline preload="metadata" poster="${img(item.poster)}" aria-label="${accessibilityCopy.storyboardPreview(index)}">
+            <video data-storyboard-video muted loop playsinline preload="none" poster="${img(item.poster)}" aria-label="${accessibilityCopy.storyboardPreview(index)}">
               <source src="${clip}" type="${clip.endsWith(".mp4") ? "video/mp4" : "video/webm"}" />
             </video>
           ` : ""}
@@ -319,6 +319,10 @@
             <div class="xiaomi-carousel__controls">
               <div class="xiaomi-carousel__progress" data-carousel-progress>
                 ${wheelCards.map((_, index) => `<button class="${index === 0 ? "is-active" : ""}" type="button" data-go="${index}" aria-label="${accessibilityCopy.carouselGoto(index)}"><span></span></button>`).join("")}
+              </div>
+              <div class="xiaomi-carousel__arrows">
+                <button type="button" data-prev aria-label="${accessibilityCopy.previousItem}">‹</button>
+                <button type="button" data-next aria-label="${accessibilityCopy.nextItem}">›</button>
               </div>
             </div>
           </div>
@@ -510,8 +514,20 @@
   }
 
   function brandFilmHeroMedia() {
-    const videoSource = videoAssets.brandFilmVideo ? img(videoAssets.brandFilmVideo) : "";
     const videoPoster = videoAssets.brandFilmPoster ? img(videoAssets.brandFilmPoster) : "";
+
+    // Select the best video version based on screen width
+    let videoSource = "";
+    if (Array.isArray(videoAssets.brandFilmVideo) && videoAssets.brandFilmVideo.length > 0) {
+      const viewportWidth = window.innerWidth || screen.width || 1920;
+      // Pick the smallest version that is >= viewport width, otherwise the largest available
+      const sorted = [...videoAssets.brandFilmVideo].sort((a, b) => a.width - b.width);
+      const match = sorted.find((v) => v.width >= viewportWidth) || sorted[sorted.length - 1];
+      videoSource = img(match.src);
+    } else if (typeof videoAssets.brandFilmVideo === "string" && videoAssets.brandFilmVideo) {
+      videoSource = img(videoAssets.brandFilmVideo);
+    }
+
     const videoType = videoSource.endsWith(".webm") ? "video/webm" : "video/mp4";
     return `
       <video
@@ -523,7 +539,7 @@
         preload="metadata"
         aria-label="点击播放横版品牌广告片"
       >
-        ${videoSource ? `<source data-video-source src="${videoSource}" type="${videoType}" />` : ""}
+        ${videoSource ? `<source data-video-source data-src="${videoSource}" type="${videoType}" />` : ""}
       </video>
     `;
   }
@@ -571,8 +587,9 @@
         <img
           src="${originalImage(item.image)}"
           alt="${accessibilityCopy.otherWorkImage(item)}"
-          loading="${index <= 12 ? "eager" : "lazy"}"
+          loading="lazy"
           decoding="async"
+          fetchpriority="low"
         />
       `;
     }
@@ -589,8 +606,9 @@
         <img
           src="${originalImage(item.image)}"
           alt="${accessibilityCopy.campaignWallImage(item)}"
-          loading="${index < 3 ? "eager" : "lazy"}"
+          loading="lazy"
           decoding="async"
+          fetchpriority="low"
         />
       `;
     }

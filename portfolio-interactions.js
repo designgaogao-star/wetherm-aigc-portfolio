@@ -480,35 +480,16 @@
     stage.addEventListener("pointerleave", () => {
       updateControls(false);
     });
-    stage.addEventListener("mouseenter", () => {
-      revealControls();
-    });
-    stage.addEventListener("mousemove", () => {
-      revealControls();
-    });
-    stage.addEventListener("mouseleave", () => {
-      updateControls(false);
-    });
     video.addEventListener("pointerenter", () => {
       revealControls();
     });
     video.addEventListener("pointermove", () => {
       revealControls();
     });
-    video.addEventListener("mouseenter", () => {
-      revealControls();
-    });
-    video.addEventListener("mousemove", () => {
-      revealControls();
-    });
     video.addEventListener("pointerleave", () => {
       updateControls(false);
     });
-    video.addEventListener("mouseleave", () => {
-      updateControls(false);
-    });
     document.addEventListener("pointermove", updateControlsFromPointer, { passive: true });
-    document.addEventListener("mousemove", updateControlsFromPointer, { passive: true });
     stage.addEventListener("focusin", () => {
       revealControls();
     });
@@ -521,6 +502,28 @@
       if (!internalStop) resumeBgmIfNeeded();
       if (!stage.matches(":hover") && !stage.contains(document.activeElement)) updateControls(false);
     });
+
+    /* Preload video when it approaches the viewport so playback starts instantly on click */
+    if ("IntersectionObserver" in window) {
+      const preloadObserver = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            ensureVideoSource();
+            video.preload = "auto";
+            preloadObserver.disconnect();
+          }
+        }
+      }, { rootMargin: "300px 0px" });
+      preloadObserver.observe(stage);
+    } else {
+      /* Fallback: load after intro completes + short delay */
+      window.addEventListener("portfolio:intro-complete", () => {
+        window.setTimeout(() => {
+          ensureVideoSource();
+          video.preload = "auto";
+        }, 2000);
+      }, { once: true });
+    }
   }
 
   function scrollToSection(id, behavior) {
@@ -2057,9 +2060,13 @@
     if (initialHash) {
       window.requestAnimationFrame(scrollToInitialHash);
       window.setTimeout(scrollToInitialHash, 180);
-      window.setTimeout(scrollToInitialHash, 8900);
-      window.setTimeout(scrollToInitialHash, 9300);
-      window.setTimeout(scrollToInitialHash, 10400);
+      // After intro completes, reposition to the hash target once
+      window.addEventListener("portfolio:intro-complete", () => {
+        window.requestAnimationFrame(scrollToInitialHash);
+        window.setTimeout(scrollToInitialHash, 200);
+      }, { once: true });
+      // Fallback in case intro-complete has already fired or is skipped
+      window.setTimeout(scrollToInitialHash, 9200);
       return;
     }
 

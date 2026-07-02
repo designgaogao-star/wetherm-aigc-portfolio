@@ -1,0 +1,133 @@
+﻿/* 
+  Motion Taiji & Fusion — direction depth and keyframes
+  Split from portfolio-motion-system.css (lines 48-174)
+  DO NOT change order — cascade depends on original sequence.
+*/
+
+/* 2026-06-08 taiji direction and floating depth. */
+#commercial-photo .portfolio-fusion-mask-rotor {
+  animation-direction: reverse;
+}
+
+#commercial-photo .portfolio-fusion-device.reveal,
+#commercial-photo .portfolio-fusion-device.reveal.is-visible {
+  filter:
+    drop-shadow(0 0 clamp(18px, 1.5vw, 32px) rgba(232, 211, 169, 0.16))
+    drop-shadow(0 0 clamp(48px, 4.5vw, 96px) rgba(232, 211, 169, 0.08))
+    drop-shadow(0 clamp(34px, 3.7vw, 72px) clamp(38px, 4.2vw, 84px) rgba(0, 0, 0, 0.58));
+}
+
+#commercial-photo .portfolio-fusion-float-shadow {
+  position: absolute;
+  z-index: 0;
+  left: 50%;
+  bottom: clamp(-74px, -4vw, -42px);
+  width: min(78%, 520px);
+  height: clamp(50px, 6vw, 92px);
+  border-radius: 999px;
+  background:
+    radial-gradient(ellipse at 50% 48%, rgba(255, 248, 232, 0.24), rgba(232, 211, 169, 0.14) 24%, rgba(78, 54, 24, 0.12) 45%, rgba(0, 0, 0, 0.58) 72%, transparent 100%);
+  opacity: 0;
+  filter: blur(clamp(16px, 1.6vw, 28px));
+  transform: translate3d(-50%, 0, 0) scaleX(1.04) scaleY(0.78);
+  transform-origin: 50% 50%;
+  pointer-events: none;
+  will-change: opacity;
+}
+
+#commercial-photo .portfolio-fusion-device.reveal.is-visible .portfolio-fusion-float-shadow {
+  opacity: 0.78;
+  animation: none;
+}
+
+#commercial-photo .portfolio-fusion-device.reveal.is-visible .portfolio-fusion-disc {
+  animation: portfolioFusionTaijiPop 360ms cubic-bezier(0.12, 0.82, 0.18, 1) 720ms both;
+  filter:
+    drop-shadow(0 clamp(42px, 4.4vw, 84px) clamp(30px, 3.5vw, 70px) rgba(0, 0, 0, 0.74))
+    drop-shadow(0 clamp(78px, 7.4vw, 144px) clamp(76px, 8vw, 164px) rgba(0, 0, 0, 0.48))
+    drop-shadow(0 clamp(16px, 1.7vw, 32px) clamp(30px, 3.4vw, 66px) rgba(232, 211, 169, 0.18))
+    drop-shadow(0 0 clamp(38px, 4vw, 82px) rgba(53, 133, 156, 0.09));
+}
+
+/* T-192: restore 04A fusion keyframes after dormant CSS cleanup. */
+@keyframes portfolioFusionTaijiPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+
+  1% {
+    opacity: 1;
+  }
+
+  68% {
+    opacity: 1;
+    transform: scale(1.012);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes portfolioFusionRingCollapse {
+  0% {
+    opacity: 0;
+    transform: scale(6.45);
+  }
+
+  10% {
+    opacity: 0.86;
+  }
+
+  40% {
+    opacity: 0.94;
+    transform: scale(1.18);
+  }
+
+  68% {
+    opacity: 1;
+    transform: scale(0.08);
+  }
+
+  80%,
+  100% {
+    opacity: 0;
+    transform: scale(0.02);
+  }
+}
+
+@keyframes portfolioFusionSingularity {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.12);
+  }
+
+  40% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.18);
+  }
+
+  68% {
+    opacity: 0.98;
+    transform: translate(-50%, -50%) scale(1.35);
+  }
+
+  76% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0.42);
+  }
+
+  79% {
+    opacity: 0.92;
+    transform: translate(-50%, -50%) scale(0.22);
+  }
+
+  80%,
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.16);
+  }
+}
+

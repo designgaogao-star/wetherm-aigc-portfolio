@@ -1,4 +1,4 @@
-/*
+﻿/*
   Portfolio Other Works Exhibition
   Source order preserved from the final override region.
 */
@@ -319,7 +319,7 @@
 #other-works .portfolio-other-works__poster-card[data-poster-state="near"] {
   z-index: 2;
   opacity: 0.76;
-  filter: brightness(0.94) saturate(0.96) blur(0);
+  filter: brightness(0.94) saturate(0.96);
   transform:
     translate3d(-50%, -50%, 0)
     translateX(calc(var(--poster-offset) * clamp(132px, 15vw, 268px)))
@@ -331,7 +331,7 @@
   z-index: 4;
   opacity: 1;
   border-color: rgba(232, 211, 169, 0.34);
-  filter: brightness(1) saturate(0.98) blur(0);
+  filter: brightness(1) saturate(0.98);
   transform: translate3d(-50%, -50%, 0) translateX(0) scale(1) rotateY(0);
   box-shadow:
     0 44px 130px rgba(0, 0, 0, 0.62),
@@ -1405,7 +1405,7 @@
 
   to {
     opacity: 1;
-    filter: blur(0);
+    filter: none;
     transform: translate3d(0, 0, 0);
   }
 }
@@ -1419,7 +1419,7 @@
 
   to {
     opacity: 1;
-    filter: blur(0);
+    filter: none;
     transform: translate3d(-50%, 0, 0);
   }
 }
@@ -1433,7 +1433,7 @@
 
   to {
     opacity: 1;
-    filter: blur(0);
+    filter: none;
     transform: translate3d(0, 0, 0);
   }
 }
@@ -1559,7 +1559,7 @@
 
   to {
     opacity: 1;
-    filter: blur(0);
+    filter: none;
     transform: translate3d(-50%, -50%, 0);
   }
 }
@@ -1705,7 +1705,7 @@
   #other-works .portfolio-other-works__poster-card.is-active {
     z-index: 5;
     opacity: 1;
-    filter: brightness(1) saturate(0.98) blur(0);
+    filter: brightness(1) saturate(0.98);
     transform: translate3d(-50%, -50%, 0) translateX(0) scale(1) rotateY(0);
   }
 
@@ -1791,7 +1791,7 @@
   #other-works .portfolio-other-works__poster-card.is-active {
     z-index: 5;
     opacity: 1;
-    filter: brightness(1) saturate(0.98) blur(0);
+    filter: brightness(1) saturate(0.98);
     transform: translate3d(-50%, -50%, 0) translateX(0) scale(1) rotateY(0);
   }
 

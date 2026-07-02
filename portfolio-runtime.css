@@ -377,7 +377,7 @@ body {
   }
   to {
     opacity: 1;
-    filter: blur(0);
+    filter: none;
   }
 }
 
@@ -522,5 +522,43 @@ body {
   }
   to {
     filter: saturate(1) brightness(1);
+  }
+}
+
+/* ==========================================================================
+   Galaxy Home container rules (merged from portfolio-galaxy-home.css)
+   ========================================================================== */
+
+.galaxy-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+[data-reactbits-galaxy-home] .galaxy-container,
+[data-reactbits-galaxy-home] canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+/* ==========================================================================
+   Reduced-motion guardrail (early fallback before portfolio-responsive.css loads)
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+
+  .portfolio-intro {
+    display: none !important;
   }
 }

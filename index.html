@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
   <head>
     <meta charset="utf-8" />
@@ -21,24 +21,47 @@
     <meta property="og:image" content="images/02-visual-design/tone/02B-02-burst-hydration-surface-splash-t280.webp" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 fill=%27%23050403%27/%3E%3Cpath d=%27M18 20h6l5 20 6-20h5l6 20 5-20h6l-9 28h-6l-6-19-6 19h-6z%27 fill=%27%23e8d3a9%27/%3E%3C/svg%3E" />
-    <link rel="stylesheet" href="portfolio-runtime.css?v=20260701-font-subset-t310" />
+    <!-- Critical CSS: tokens, intro animation, hero layout, galaxy-home container (blocks render) -->
+    <link rel="stylesheet" href="portfolio-runtime.css?v=20260702-blur0-cleanup-t315" />
     <link rel="stylesheet" href="portfolio-layout.css?v=20260630-performance-slim-t299" />
-    <link rel="stylesheet" href="portfolio-galaxy-home.css?v=20260623-visual-tone-01b-reactbits-t173b" />
-    <link rel="stylesheet" href="portfolio-components.css?v=20260623-css-dormant-cleanup-t178" />
-    <link rel="stylesheet" href="portfolio-chapters.css?v=20260630-performance-slim-t299" />
-    <link rel="stylesheet" href="portfolio-profile-nav.css?v=20260630-performance-slim-t299" />
-    <link rel="stylesheet" href="portfolio-responsive.css?v=20260629-predeploy-responsive-t278" />
-    <link rel="stylesheet" href="portfolio-profile-ledger.css?v=20260623-css-dormant-cleanup-t178" />
-    <link rel="stylesheet" href="portfolio-profile-card.css?v=20260630-performance-slim-t299" />
-    <link rel="stylesheet" href="portfolio-other-works.css?v=20260701-gao-poster-t310" />
-    <link rel="stylesheet" href="portfolio-title-system.css?v=20260626-title-reduce-t219" />
-    <link rel="stylesheet" href="portfolio-motion-system.css?v=20260701-video-storyboard-t309" />
+
+    <!-- Non-critical CSS: load async to avoid render-blocking -->
+    <link rel="preload" href="portfolio-components.css?v=20260623-css-dormant-cleanup-t178" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="portfolio-components.css?v=20260623-css-dormant-cleanup-t178" /></noscript>
+
+    <link rel="preload" href="portfolio-chapters.css?v=20260630-performance-slim-t299" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="portfolio-chapters.css?v=20260630-performance-slim-t299" /></noscript>
+
+    <link rel="preload" href="portfolio-profile-nav.css?v=20260630-performance-slim-t299" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="portfolio-profile-nav.css?v=20260630-performance-slim-t299" /></noscript>
+
+    <link rel="preload" href="portfolio-responsive.css?v=20260702-arrows-no-color-shift-t314" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="portfolio-responsive.css?v=20260702-arrows-no-color-shift-t314" /></noscript>
+
+    <link rel="preload" href="portfolio-profile-card.css?v=20260630-performance-slim-t299" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="portfolio-profile-card.css?v=20260630-performance-slim-t299" /></noscript>
+
+    <link rel="preload" href="portfolio-other-works.css?v=20260702-blur0-cleanup-t315" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="portfolio-other-works.css?v=20260702-blur0-cleanup-t315" /></noscript>
+
+    <link rel="preload" href="portfolio-title-system.css?v=20260626-title-reduce-t219" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="portfolio-title-system.css?v=20260626-title-reduce-t219" /></noscript>
+
+    <link rel="preload" href="css/motion/motion-reveal.css?v=20260702-blur0-cleanup-t315" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="css/motion/motion-reveal.css?v=20260702-blur0-cleanup-t315" /></noscript>
+    <link rel="preload" href="css/motion/motion-taiji-fusion.css?v=20260701-split-t312" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="css/motion/motion-taiji-fusion.css?v=20260701-split-t312" /></noscript>
+    <link rel="preload" href="css/motion/motion-components.css?v=20260701-split-t312" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="css/motion/motion-components.css?v=20260701-split-t312" /></noscript>
+    <link rel="preload" href="css/motion/motion-effects.css?v=20260702-blur0-cleanup-t315" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="css/motion/motion-effects.css?v=20260702-blur0-cleanup-t315" /></noscript>
+    <link rel="preload" href="css/motion/motion-typography.css?v=20260702-blur0-cleanup-t315" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="css/motion/motion-typography.css?v=20260702-blur0-cleanup-t315" /></noscript>
   </head>
   <body>
-    <script src="portfolio-content.js?v=20260701-video-poster-assets-t311"></script>
-    <script src="portfolio-renderers.js?v=20260701-video-poster-assets-t311"></script>
-    <script src="portfolio-interactions.js?v=20260701-film-video-only-t307"></script>
-    <script src="portfolio-runtime.js?v=20260629-prepublish-surgical-t286"></script>
-    <script src="portfolio-galaxy-home.js?v=20260623-visual-tone-01b-reactbits-t173b"></script>
+    <script defer src="portfolio-content.js?v=20260701-video-multires-t312"></script>
+    <script defer src="portfolio-renderers.js?v=20260702-visual-system-arrows-t314"></script>
+    <script defer src="portfolio-interactions.js?v=20260701-cleanup-scroll-t312"></script>
+    <script defer src="portfolio-runtime.js?v=20260701-perf-defer-t313"></script>
   </body>
 </html>
