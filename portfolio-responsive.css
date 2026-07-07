@@ -308,9 +308,11 @@
 
 .xiaomi-carousel__viewport { width: 100vw; margin-inline: auto; overflow: hidden; min-height: 0px; padding-block: clamp(16px, 2vh, 28px); }
 
-.xiaomi-carousel__track { display: flex; gap: var(--carousel-gap); padding-left: var(--carousel-gutter); padding-right: var(--carousel-gutter); transition: transform 520ms cubic-bezier(0.22, 0.61, 0.36, 1); will-change: transform; }
+.xiaomi-carousel__track { display: flex; gap: var(--carousel-gap); padding-left: var(--carousel-gutter); padding-right: var(--carousel-gutter); transition: transform 520ms cubic-bezier(0.22, 0.61, 0.36, 1); }
+.xiaomi-carousel__track.is-animating { will-change: transform; }
 
-.xiaomi-hover-card { flex: 0 0 var(--carousel-card-w); width: var(--carousel-card-w); min-width: 0px; color: rgb(255, 255, 255); opacity: 0.66; transform: none; transform-origin: center center; transition: opacity 180ms, transform 180ms; will-change: transform; }
+.xiaomi-hover-card { flex: 0 0 var(--carousel-card-w); width: var(--carousel-card-w); min-width: 0px; color: rgb(255, 255, 255); opacity: 0.66; transform: none; transform-origin: center center; transition: opacity 180ms, transform 180ms; }
+.xiaomi-hover-card.is-animating { will-change: transform; }
 
 .xiaomi-hover-card.is-current { z-index: 2; opacity: 1; transform: none; }
 
@@ -736,6 +738,13 @@
   transform: skewX(var(--support-angle));
   transform-origin: center;
   transition: grid-template-columns 640ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+#support .portfolio-support-track.is-animating {
+  will-change: grid-template-columns;
+}
+
+#support .portfolio-support-slant.has-active .portfolio-support-track {
   will-change: grid-template-columns;
 }
 
@@ -1043,7 +1052,6 @@
     left: 50%;
     top: 50%;
     transform: translate3d(-50%, -50%, 0);
-    will-change: transform;
     contain: layout paint;
     filter:
       drop-shadow(0 40px 70px rgba(0, 0, 0, 0.48))
@@ -1053,7 +1061,7 @@
   #commercial-photo .portfolio-fusion-mask-rotor,
   #commercial-photo .portfolio-fusion-seam,
   #commercial-photo .portfolio-fusion-ring {
-    will-change: transform;
+    /* will-change managed by motion-typography.css + JS IntersectionObserver */
   }
 
   #reality-imagination .portfolio-product-card--hover-fusion .portfolio-product-card__media {

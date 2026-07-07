@@ -62,6 +62,11 @@
   --title-group-subtitle-width: 760px;
   --hero-subtitle-width: 720px;
   --screen-h: 100svh;
+  /* Intro animation timing — read by runtime.js to compute the JS fallback timeout.
+     If you change these, the JS will pick them up automatically via getComputedStyle. */
+  --intro-exit-delay: 7820ms;
+  --intro-exit-duration: 760ms;
+  --intro-exit-buffer: 140ms;
   --screen-pad-top: clamp(96px, 10.4vh, 132px);
   --screen-pad-bottom: clamp(44px, 5.4vh, 72px);
   /*
@@ -149,7 +154,7 @@ body {
   background: #030302;
   color: #fff;
   pointer-events: none;
-  animation: portfolioIntroExit 760ms ease 7820ms forwards;
+  animation: portfolioIntroExit var(--intro-exit-duration) ease var(--intro-exit-delay) forwards;
 }
 
 .portfolio-intro.is-hidden {
@@ -310,12 +315,20 @@ body {
     portfolioLineOut 620ms ease 2920ms forwards;
 }
 
+/* One continuous sweep: flash in, then sweep from edge to center (50%) arriving at 3360ms
+   when portfolioBlackIn starts — black at z-index 4 covers the lines naturally, no explicit fade */
 .portfolio-intro__frame span:first-child {
   top: 0;
+  animation:
+    portfolioLineFlash 140ms ease 1100ms forwards,
+    portfolioLineCollapseTop 2140ms cubic-bezier(0.76, 0, 0.24, 1) 1220ms forwards;
 }
 
 .portfolio-intro__frame span:last-child {
   bottom: 0;
+  animation:
+    portfolioLineFlash 140ms ease 1100ms forwards,
+    portfolioLineCollapseBottom 2140ms cubic-bezier(0.76, 0, 0.24, 1) 1220ms forwards;
 }
 
 .portfolio-intro__black {
@@ -436,37 +449,17 @@ body {
   }
 }
 
-.portfolio-intro__frame span:first-child {
-  animation-name: portfolioLineFlash, portfolioLineSettleTop, portfolioLineOut;
+
+/* Lines sweep from screen edge (0) to center (50%), arriving at 3360ms when
+   portfolioBlackIn starts — covered naturally, no explicit fade needed. */
+@keyframes portfolioLineCollapseTop {
+  from { top: 0; }
+  to   { top: 50%; }
 }
 
-.portfolio-intro__frame span:last-child {
-  animation-name: portfolioLineFlash, portfolioLineSettleBottom, portfolioLineOut;
-}
-
-@keyframes portfolioLineSettleTop {
-  from {
-    top: 0;
-  }
-  to {
-    top: 33.333vh;
-  }
-}
-
-@keyframes portfolioLineSettleBottom {
-  from {
-    bottom: 0;
-  }
-  to {
-    bottom: 33.333vh;
-  }
-}
-
-@keyframes portfolioLineOut {
-  to {
-    opacity: 0;
-    transform: scaleX(0.72);
-  }
+@keyframes portfolioLineCollapseBottom {
+  from { bottom: 0; }
+  to   { bottom: 50%; }
 }
 
 @keyframes portfolioBlackIn {

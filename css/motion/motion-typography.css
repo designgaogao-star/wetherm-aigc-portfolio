@@ -1296,7 +1296,7 @@
 #commercial-photo .portfolio-fusion-mask-rotor {
   animation-duration: 72s !important;
   animation-timing-function: linear !important;
-  will-change: transform !important;
+  /* will-change managed by JS — added when fusion device is in viewport */
 }
 
 #commercial-photo .portfolio-fusion-device.reveal.is-visible,

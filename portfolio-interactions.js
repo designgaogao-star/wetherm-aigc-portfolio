@@ -1268,6 +1268,8 @@
         if (!animate) {
           isJumping = true;
           track.classList.add("is-loop-jump");
+        } else {
+          track.classList.add("is-animating");
         }
 
         centerSlide(slide);
@@ -1300,7 +1302,12 @@
       next?.addEventListener("click", () => goBy(1));
 
       track.addEventListener("transitionend", (event) => {
-        if (event.target !== track || event.propertyName !== "transform" || isJumping || !canLoop) return;
+        if (event.target !== track || event.propertyName !== "transform") {
+          if (event.target === track) track.classList.remove("is-animating");
+          return;
+        }
+        track.classList.remove("is-animating");
+        if (isJumping || !canLoop) return;
         const currentSlide = slides[visualIndex];
         if (!currentSlide || currentSlide.dataset.slide === "real") return;
         setVisualIndex(loopStart + realIndex, { animate: false });

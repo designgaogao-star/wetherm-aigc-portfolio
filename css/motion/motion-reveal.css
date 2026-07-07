@@ -49,5 +49,6 @@
 #commercial-photo .portfolio-fusion-device.reveal.is-visible {
   transform: none;
   filter: none;
+  will-change: auto;
 }
 

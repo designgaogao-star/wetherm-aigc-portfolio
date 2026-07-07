@@ -26,6 +26,84 @@
 
   const imageDimensions = new Map([
     [heroAssets.home, { width: 1672, height: 941 }],
+
+    // AIGC design — method accordion (quietItems)
+    ["02-visual-design/method/02A-01-direction-definition-v1.webp",          { width: 1667, height: 945  }],
+    ["02-visual-design/method/02A-02-product-anchor-v1.webp",                { width: 1673, height: 942  }],
+    ["02-visual-design/method/02A-03-direction-testing-v1.webp",             { width: 1673, height: 942  }],
+    ["02-visual-design/method/02A-04-visual-language-equal-panels-v1.webp",  { width: 1673, height: 942  }],
+    ["02-visual-design/method/02A-05-system-extension-context-fit-v3.webp",  { width: 1455, height: 1083 }],
+
+    // Visual tone — main color stage images
+    ["02-visual-design/tone/02B-01-core-luxury-t272.webp",                   { width: 2049, height: 1153 }],
+    ["02-visual-design/tone/02B-02-burst-hydration-surface-splash-t280.webp",{ width: 3840, height: 2160 }],
+    ["02-visual-design/tone/02B-03-sculpting-renewal-t272.webp",             { width: 2049, height: 1153 }],
+    ["02-visual-design/tone/02B-04-primal-renewal-t272.webp",                { width: 2049, height: 1153 }],
+    ["02-visual-design/tone/02B-05-eight-glasses-water-t272.webp",           { width: 2049, height: 1153 }],
+    ["02-visual-design/tone/02B-06-double-elastic-t272.webp",                { width: 2049, height: 1153 }],
+
+    // Visual tone — swatches (all 513×513)
+    ["02-visual-design/tone-swatches/tone-swatch-core-skin-luxury-material-v4-512.webp", { width: 513, height: 513 }],
+    ["02-visual-design/tone-swatches/tone-swatch-burst-hydration-glass-v4-512.webp",     { width: 513, height: 513 }],
+    ["02-visual-design/tone-swatches/tone-swatch-skin-source-metal-v4-512.webp",         { width: 513, height: 513 }],
+    ["02-visual-design/tone-swatches/tone-swatch-primal-renewal-water-v4-512.webp",      { width: 513, height: 513 }],
+    ["02-visual-design/tone-swatches/tone-swatch-eight-glasses-ripple-v4-512.webp",      { width: 513, height: 513 }],
+    ["02-visual-design/tone-swatches/tone-swatch-double-elastic-champagne-v4-512.webp",  { width: 513, height: 513 }],
+
+    // Visual system — wheel carousel cards (all 2049×2049)
+    ["02-visual-design/system/02c-01-gift-box-t258.webp",         { width: 2049, height: 2049 }],
+    ["02-visual-design/system/02c-02-shopping-bag-t258.webp",     { width: 2049, height: 2049 }],
+    ["02-visual-design/system/02c-03-counter-display-t258.webp",  { width: 2049, height: 2049 }],
+    ["02-visual-design/system/02c-04-membership-card-t258.webp",  { width: 2049, height: 2049 }],
+    ["02-visual-design/system/02c-05-tester-bar-t258.webp",       { width: 2049, height: 2049 }],
+    ["02-visual-design/system/02c-06-counter-brochure-t258.webp", { width: 2049, height: 2049 }],
+    ["02-visual-design/system/02c-07-launch-invitation-t258.webp",{ width: 2049, height: 2049 }],
+    ["02-visual-design/system/02c-08-brand-lookbook-t258.webp",   { width: 2049, height: 2049 }],
+
+    // Commercial film — storyboard posters (all 2520×1080)
+    ["03-commercial-film/storyboard/T-309-final-film-storyboard/03B-01-golden-light-hook-t309.webp",      { width: 2520, height: 1080 }],
+    ["03-commercial-film/storyboard/T-309-final-film-storyboard/03B-02-product-reveal-water-t309.webp",   { width: 2520, height: 1080 }],
+    ["03-commercial-film/storyboard/T-309-final-film-storyboard/03B-03-metal-logo-macro-t309.webp",       { width: 2520, height: 1080 }],
+    ["03-commercial-film/storyboard/T-309-final-film-storyboard/03B-04-cream-texture-proof-t309.webp",    { width: 2520, height: 1080 }],
+    ["03-commercial-film/storyboard/T-309-final-film-storyboard/03B-05-golden-energy-activation-t309.webp",{ width: 2520, height: 1080 }],
+    ["03-commercial-film/storyboard/T-309-final-film-storyboard/03B-06-final-packshot-hold-t309.webp",    { width: 2520, height: 1080 }],
+
+    // Commercial film — brand film poster
+    ["03-commercial-film/video/03A-black-gold-skincare-first-frame-t311.webp", { width: 3841, height: 1647 }],
+
+    // Commercial photography — fusion device (taiji, 1249×1249)
+    ["04-commercial-photography/fusion-device/04-taiji-emulsion-white-platinum-v1.webp", { width: 1249, height: 1249 }],
+    ["04-commercial-photography/fusion-device/04-taiji-emulsion-black-gold-v1.webp",     { width: 1249, height: 1249 }],
+
+    // Commercial photography — fusion cards T-294 (all 2049×1153)
+    ["04-commercial-photography/fusion-cards/T-294-fusion-12/04A-fusion-01-core-luxury-raw-t294.webp",       { width: 2049, height: 1153 }],
+    ["04-commercial-photography/fusion-cards/T-294-fusion-12/04A-fusion-01-core-luxury-scene-t294.webp",     { width: 2049, height: 1153 }],
+    ["04-commercial-photography/fusion-cards/T-294-fusion-12/04A-fusion-02-burst-hydration-raw-t294.webp",   { width: 2049, height: 1153 }],
+    ["04-commercial-photography/fusion-cards/T-294-fusion-12/04A-fusion-02-burst-hydration-scene-t294.webp", { width: 2049, height: 1153 }],
+    ["04-commercial-photography/fusion-cards/T-294-fusion-12/04A-fusion-03-sculpting-renewal-raw-t294.webp",  { width: 2049, height: 1153 }],
+    ["04-commercial-photography/fusion-cards/T-294-fusion-12/04A-fusion-03-sculpting-renewal-scene-t294.webp",{ width: 2049, height: 1153 }],
+    ["04-commercial-photography/fusion-cards/T-294-fusion-12/04A-fusion-04-primal-renewal-raw-t294.webp",    { width: 2049, height: 1153 }],
+    ["04-commercial-photography/fusion-cards/T-294-fusion-12/04A-fusion-04-primal-renewal-scene-t294.webp",  { width: 2049, height: 1153 }],
+    ["04-commercial-photography/fusion-cards/T-294-fusion-12/04A-fusion-06-double-elastic-raw-t294.webp",    { width: 2049, height: 1153 }],
+    ["04-commercial-photography/fusion-cards/T-294-fusion-12/04A-fusion-06-double-elastic-scene-t294.webp",  { width: 2049, height: 1153 }],
+
+    // Commercial photography — fusion cards T-308 (eight glasses water, slightly different size)
+    ["04-commercial-photography/fusion-cards/T-308-eight-glasses-water/04A-fusion-05-eight-glasses-water-raw-t308.webp",  { width: 1452, height: 817 }],
+    ["04-commercial-photography/fusion-cards/T-308-eight-glasses-water/04A-fusion-05-eight-glasses-water-scene-t308.webp",{ width: 1457, height: 817 }],
+
+    // Photo gallery T-300 — big (2049×1153), small (1153×1153)
+    ["04-commercial-photography/photo-galleries/T-300-04B-eco-4k-final-12/big-01-04B-imagined-composition-judgment-t300.webp",  { width: 2049, height: 1153 }],
+    ["04-commercial-photography/photo-galleries/T-300-04B-eco-4k-final-12/big-02-04B-imagined-material-control-t300.webp",      { width: 2049, height: 1153 }],
+    ["04-commercial-photography/photo-galleries/T-300-04B-eco-4k-final-12/big-03-04B-imagined-page-ready-campaign-t300.webp",   { width: 2049, height: 1153 }],
+    ["04-commercial-photography/photo-galleries/T-300-04B-eco-4k-final-12/big-04-04B-multiscene-private-ritual-t300.webp",      { width: 2049, height: 1153 }],
+    ["04-commercial-photography/photo-galleries/T-300-04B-eco-4k-final-12/big-05-04B-multiscene-boutique-display-t300.webp",    { width: 2049, height: 1153 }],
+    ["04-commercial-photography/photo-galleries/T-300-04B-eco-4k-final-12/big-06-04B-multiscene-spring-source-stage-t300.webp", { width: 2049, height: 1153 }],
+    ["04-commercial-photography/photo-galleries/T-300-04B-eco-4k-final-12/small-01-04B-imagined-composition-judgment-t300.webp",  { width: 1153, height: 1153 }],
+    ["04-commercial-photography/photo-galleries/T-300-04B-eco-4k-final-12/small-02-04B-imagined-material-control-t300.webp",      { width: 1153, height: 1153 }],
+    ["04-commercial-photography/photo-galleries/T-300-04B-eco-4k-final-12/small-03-04B-imagined-page-ready-campaign-t300.webp",   { width: 1153, height: 1153 }],
+    ["04-commercial-photography/photo-galleries/T-300-04B-eco-4k-final-12/small-04-04B-multiscene-private-ritual-t300.webp",      { width: 1153, height: 1153 }],
+    ["04-commercial-photography/photo-galleries/T-300-04B-eco-4k-final-12/small-05-04B-multiscene-boutique-display-t300.webp",    { width: 1153, height: 1153 }],
+    ["04-commercial-photography/photo-galleries/T-300-04B-eco-4k-final-12/small-06-04B-multiscene-spring-source-stage-t300.webp", { width: 1153, height: 1153 }],
   ]);
 
   function imageAttrs(src, alt, options = {}) {
@@ -54,10 +132,10 @@
   function card(title, text, meta, icon = "") {
     return `
       <article class="portfolio-card reveal">
-        <p class="portfolio-card__meta">${meta}</p>
-        ${icon ? `<span class="portfolio-card__icon" data-icon="${icon}" aria-hidden="true"></span>` : ""}
-        <h3>${title}</h3>
-        <p>${text}</p>
+        <p class="portfolio-card__meta">${escapeHtml(meta)}</p>
+        ${icon ? `<span class="portfolio-card__icon" data-icon="${escapeAttr(icon)}" aria-hidden="true"></span>` : ""}
+        <h3>${escapeHtml(title)}</h3>
+        <p>${escapeHtml(text)}</p>
       </article>
     `;
   }
@@ -100,7 +178,7 @@
   function bulletList(items) {
     return `
               <ul class="portfolio-list">
-                ${items.map((item) => `<li>${item}</li>`).join("")}
+                ${items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
               </ul>
     `;
   }
@@ -108,10 +186,10 @@
   function imageCard(src, title, text, modifier = "") {
     return `
       <article class="portfolio-image-card ${modifier} reveal">
-        <img src="${img(src)}" alt="${title}" loading="lazy" />
+        <img ${imageAttrs(src, title)} />
         <div>
-          <h3>${title}</h3>
-          <p>${text}</p>
+          <h3>${escapeHtml(title)}</h3>
+          <p>${escapeHtml(text)}</p>
         </div>
       </article>
     `;
@@ -120,11 +198,11 @@
   function timelineFrame(src, time, title, text) {
     return `
       <article class="portfolio-timeline-card reveal">
-        <img src="${img(src)}" alt="${title}" loading="lazy" />
+        <img ${imageAttrs(src, title)} />
         <div>
-          <span>${time}</span>
-          <h3>${title}</h3>
-          <p>${text}</p>
+          <span>${escapeHtml(time)}</span>
+          <h3>${escapeHtml(title)}</h3>
+          <p>${escapeHtml(text)}</p>
         </div>
       </article>
     `;
@@ -184,7 +262,7 @@
     return `
       <figure class="portfolio-storyboard-card ${clip ? "has-video" : "is-poster-only"}" data-storyboard-card>
         <div class="portfolio-storyboard-card__media">
-          <img src="${img(item.poster)}" alt="${accessibilityCopy.storyboardImage(index)}" loading="lazy" />
+          <img ${imageAttrs(item.poster, accessibilityCopy.storyboardImage(index))} />
           ${clip ? `
             <video data-storyboard-video muted loop playsinline preload="none" poster="${img(item.poster)}" aria-label="${accessibilityCopy.storyboardPreview(index)}">
               <source src="${clip}" type="${clip.endsWith(".mp4") ? "video/mp4" : "video/webm"}" />
@@ -222,11 +300,11 @@
   function portfolioGallerySlide(src, index, title, text) {
     return `
       <article class="portfolio-reference-slide reveal">
-        <img src="${img(src)}" alt="${title}" loading="lazy" />
+        <img ${imageAttrs(src, title)} />
         <div>
           <span>${String(index).padStart(2, "0")}</span>
-          <h3>${title}</h3>
-          <p>${text}</p>
+          <h3>${escapeHtml(title)}</h3>
+          <p>${escapeHtml(text)}</p>
         </div>
       </article>
     `;
@@ -259,7 +337,7 @@
               ${titleBlock(sectionHeadings.aigcDesign, "h2", { main: true })}
             </div>
             <div class="xiaomi-accordion-stage__image reveal">
-              ${quietItems.map((item, index) => `<img class="${index === 0 ? "is-active" : ""}" data-accordion-image src="${originalImage(item.image)}" alt="${item.title}" loading="lazy" />`).join("")}
+              ${quietItems.map((item, index) => `<img ${imageAttrs(item.image, item.title, { className: index === 0 ? "is-active" : "", data: "data-accordion-image", fetchPriority: index === 0 ? "high" : "" })} />`).join("")}
             </div>
             <div class="xiaomi-accordion-stage__copy reveal">
               <div class="xiaomi-accordion">
@@ -280,8 +358,8 @@
     return `
         <section id="visual-tone" class="portfolio-chapter portfolio-chapter--light portfolio-chapter--design">
           <div class="portfolio-panel xiaomi-color-stage portfolio-chapter__screen portfolio-chapter__screen--first" data-xiaomi-color-stage>
-            <img class="xiaomi-color-stage__image is-active" data-color-image src="${originalImage(designToneOptions[0].main)}" alt="${designToneOptions[0].title}" loading="lazy" />
-            <img class="xiaomi-color-stage__image xiaomi-color-stage__image--next" data-color-image-next src="${originalImage(designToneOptions[0].main)}" alt="" aria-hidden="true" loading="lazy" />
+            <img ${imageAttrs(designToneOptions[0].main, designToneOptions[0].title, { className: "xiaomi-color-stage__image is-active", data: "data-color-image", fetchPriority: "high" })} />
+            <img ${imageAttrs(designToneOptions[0].main, "", { className: "xiaomi-color-stage__image xiaomi-color-stage__image--next", data: "data-color-image-next", hidden: true })} />
             <div class="xiaomi-color-stage__title reveal" data-reversible-title>
               ${titleBlock(sectionHeadings.visualTone, "h2", { main: true })}
               <div class="xiaomi-color-stage__picker" id="visual-tone-active" role="tabpanel" aria-live="polite" aria-labelledby="visual-tone-tab-0">
@@ -291,7 +369,7 @@
               <div class="xiaomi-color-stage__swatches" role="tablist" aria-label="${escapeHtml(accessibilityCopy.colorTabs)}">
                 ${designToneOptions.map((item, index) => `
                   <button id="visual-tone-tab-${index}" class="${index === 0 ? "is-active" : ""}" type="button" role="tab" data-color-option data-index="${index}" aria-selected="${index === 0 ? "true" : "false"}" tabindex="${index === 0 ? "0" : "-1"}" aria-controls="visual-tone-active" aria-label="${escapeAttr(item.title)}">
-                    <img src="${originalImage(item.swatch)}" alt="" loading="lazy" />
+                    <img ${imageAttrs(item.swatch, "", { hidden: true, loading: "lazy" })} />
                   </button>
                 `).join("")}
               </div>
@@ -306,7 +384,7 @@
                 ${loopedWheelCards.map((item) => `
                   <article class="xiaomi-hover-card" data-slide="${item.loopType}" data-real-index="${item.realIndex}">
                     <div class="xiaomi-hover-card__media">
-                      <img src="${originalImage(item.image)}" alt="${item.title}" loading="lazy" />
+                      <img ${imageAttrs(item.image, item.title)} />
                       <div class="xiaomi-hover-card__caption">
                         <h3>${item.title}</h3>
                         <p>${item.text}</p>
@@ -341,14 +419,14 @@
           <div id="${panel.id}" class="portfolio-panel xiaomi-dual-gallery ${panel.reverse ? "is-reverse" : ""} portfolio-chapter__screen ${galleryIndex === 0 ? "portfolio-chapter__screen--first" : "portfolio-chapter__screen--continue"}" data-xiaomi-dual-gallery>
             <div class="xiaomi-dual-gallery__wrap">
               <div class="xiaomi-dual-gallery__big">
-                ${bigImages.map((src, index) => `<img class="${index === 0 ? "is-active" : ""}" data-gallery-big src="${originalImage(src)}" alt="" loading="lazy" />`).join("")}
+                ${bigImages.map((src, index) => `<img ${imageAttrs(src, "", { className: index === 0 ? "is-active" : "", data: "data-gallery-big" })} />`).join("")}
               </div>
               <div class="xiaomi-dual-gallery__side">
                 <div class="xiaomi-dual-gallery__small">
                   ${detailImages.map((src, index) => {
                     const crop = Array.isArray(panel.detailCrops) ? panel.detailCrops[index] : "";
                     const style = crop ? ` style="--gallery-detail-position:${escapeAttr(crop)}"` : "";
-                    return `<img class="${index === 0 ? "is-active" : ""}" data-gallery-small src="${originalImage(src)}" alt="" loading="lazy"${style} />`;
+                    return `<img ${imageAttrs(src, "", { className: index === 0 ? "is-active" : "", data: "data-gallery-small" })}${style} />`;
                   }).join("")}
                 </div>
                 <div class="xiaomi-dual-gallery__copy reveal">
@@ -584,13 +662,7 @@
   function otherWorkMedia(item, index) {
     if (item.image) {
       return `
-        <img
-          src="${originalImage(item.image)}"
-          alt="${accessibilityCopy.otherWorkImage(item)}"
-          loading="lazy"
-          decoding="async"
-          fetchpriority="low"
-        />
+        <img ${imageAttrs(item.image, accessibilityCopy.otherWorkImage(item), { fetchPriority: "low" })} />
       `;
     }
 
@@ -603,13 +675,7 @@
   function campaignWallMedia(item, index) {
     if (item.image) {
       return `
-        <img
-          src="${originalImage(item.image)}"
-          alt="${accessibilityCopy.campaignWallImage(item)}"
-          loading="lazy"
-          decoding="async"
-          fetchpriority="low"
-        />
+        <img ${imageAttrs(item.image, accessibilityCopy.campaignWallImage(item), { fetchPriority: "low" })} />
       `;
     }
 

@@ -1,6 +1,0 @@
-/*
-  T-178 CSS cleanup.
-  The legacy 01B profile-ledger module no longer participates in the live page.
-  Current 01B design creed styles live in portfolio-profile-card.css.
-  Keep this file as a tiny compatibility stub while the stylesheet link is retired later.
-*/

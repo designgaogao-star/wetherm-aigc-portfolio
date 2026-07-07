@@ -32,7 +32,7 @@
   transform: translate3d(-50%, 0, 0) scaleX(1.04) scaleY(0.78);
   transform-origin: 50% 50%;
   pointer-events: none;
-  will-change: opacity;
+  /* will-change managed by JS — added when in viewport, removed when out */
 }
 
 #commercial-photo .portfolio-fusion-device.reveal.is-visible .portfolio-fusion-float-shadow {

@@ -312,8 +312,11 @@
     filter 560ms cubic-bezier(0.22, 1, 0.36, 1),
     transform 720ms cubic-bezier(0.22, 1, 0.36, 1),
     border-color 300ms cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: transform, filter, opacity;
   pointer-events: none;
+}
+
+#other-works .portfolio-other-works__poster-stage.is-in-view .portfolio-other-works__poster-card {
+  will-change: transform, filter, opacity;
 }
 
 #other-works .portfolio-other-works__poster-card[data-poster-state="near"] {
@@ -597,6 +600,9 @@
   width: max-content;
   max-width: none;
   transform: translate3d(0, 0, 0);
+}
+
+#other-works .portfolio-other-works__light-deck.is-running {
   will-change: transform;
 }
 
@@ -708,6 +714,9 @@
   transition:
     transform 520ms cubic-bezier(0.22, 1, 0.36, 1),
     filter 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+#other-works .portfolio-other-works__cinema-strips.is-in-view .portfolio-other-works__strip {
   will-change: transform;
 }
 
@@ -820,11 +829,14 @@
     translate3d(var(--masonry-x), var(--masonry-y), 0)
     rotate(var(--masonry-rotate))
     scale(calc(var(--masonry-scale) * var(--masonry-hover-scale)));
-  will-change: transform, opacity, filter;
   transition:
     opacity var(--masonry-duration) cubic-bezier(0.16, 1, 0.3, 1) var(--masonry-delay),
     filter var(--masonry-duration) cubic-bezier(0.16, 1, 0.3, 1) var(--masonry-delay),
     transform var(--masonry-duration) cubic-bezier(0.16, 1, 0.3, 1) var(--masonry-delay);
+}
+
+#other-works .portfolio-other-works__ai-wall.is-in-view .portfolio-other-works__ai-card {
+  will-change: transform, opacity, filter;
 }
 
 #other-works .portfolio-other-works__ai-card.is-featured {
@@ -1376,11 +1388,16 @@
 
 #other-works .portfolio-other-works__thanks::after {
   opacity: 1;
-  will-change: opacity, transform, filter;
 }
 
 #other-works .portfolio-other-works__thanks-copy h3,
 #other-works .portfolio-other-works__thanks-signature {
+  /* will-change moved to .is-in-view scope */
+}
+
+#other-works .portfolio-other-works__thanks.is-in-view::after,
+#other-works .portfolio-other-works__thanks.is-in-view .portfolio-other-works__thanks-copy h3,
+#other-works .portfolio-other-works__thanks.is-in-view .portfolio-other-works__thanks-signature {
   will-change: opacity, transform, filter;
 }
 
@@ -1485,7 +1502,6 @@
   opacity: 1;
   transform: translate3d(-50%, -50%, 0);
   pointer-events: none;
-  will-change: opacity, transform, filter;
 }
 
 #about-thanks .portfolio-other-works__thanks-copy {
@@ -1505,7 +1521,6 @@
   font-size: clamp(4.6rem, 9vw, 10.8rem);
   font-weight: 560;
   line-height: 0.92;
-  will-change: opacity, transform, filter;
 }
 
 #about-thanks .portfolio-other-works__thanks-signature {
@@ -1522,6 +1537,11 @@
   line-height: 1.18;
   letter-spacing: 0;
   text-align: right;
+}
+
+#about-thanks.portfolio-about-thanks.is-in-view::after,
+#about-thanks.portfolio-about-thanks.is-in-view .portfolio-other-works__thanks-copy h3,
+#about-thanks.portfolio-about-thanks.is-in-view .portfolio-other-works__thanks-signature {
   will-change: opacity, transform, filter;
 }
 

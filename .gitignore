@@ -1,3 +1,15 @@
-.DS_Store
+﻿# Backups
+BACKUP*/
+_trash/
+
+# OS
 Thumbs.db
-*.log
+.DS_Store
+
+# Editor
+.vscode/
+.idea/
+
+# Node (future)
+node_modules/
+dist/

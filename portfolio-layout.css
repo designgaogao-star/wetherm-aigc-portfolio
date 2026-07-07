@@ -15,7 +15,6 @@
   opacity: 0;
   transition: opacity 320ms ease-out;
   transition-delay: 0ms;
-  will-change: opacity;
 }
 
 .reveal.is-visible {

@@ -136,10 +136,34 @@
 
     const settleInitialHash = () => {
       if (!window.location.hash || window.location.hash === "#visual-files") return;
+
+      // Immediate attempt in case layout is already stable
       window.requestAnimationFrame(scrollToInitialHash);
-      [120, 360, 680, 940].forEach((delay) => {
-        window.setTimeout(scrollToInitialHash, delay);
+
+      if (!("ResizeObserver" in window)) {
+        // Fallback for browsers without ResizeObserver
+        window.setTimeout(scrollToInitialHash, 900);
+        return;
+      }
+
+      // Debounced ResizeObserver: fires once after body height stops changing,
+      // replacing the previous 5-call polling pattern. 120ms silence = stable layout.
+      let debounceTimer = 0;
+      const observer = new ResizeObserver(() => {
+        window.clearTimeout(debounceTimer);
+        debounceTimer = window.setTimeout(() => {
+          observer.disconnect();
+          scrollToInitialHash();
+        }, 120);
       });
+      observer.observe(document.body);
+
+      // Safety: always disconnect and attempt within 1200ms
+      window.setTimeout(() => {
+        observer.disconnect();
+        window.clearTimeout(debounceTimer);
+        scrollToInitialHash();
+      }, 1200);
     };
 
     root.classList.add(lockClass);
@@ -177,7 +201,15 @@
     intro.addEventListener("animationend", (event) => {
       if (event.animationName === "portfolioIntroExit") hideIntro();
     });
-    window.setTimeout(hideIntro, 8720);
+    // Fallback: read timing from CSS variables (--intro-exit-delay, --intro-exit-duration, --intro-exit-buffer)
+    // so this stays in sync with the animation automatically. animationend normally fires first; the timeout is a no-op.
+    const introStyle = getComputedStyle(root);
+    const parseCssMs = (val, fallback) => { const n = parseFloat(val); return isNaN(n) ? fallback : n; };
+    const introTimeout =
+      parseCssMs(introStyle.getPropertyValue("--intro-exit-delay"),    7820) +
+      parseCssMs(introStyle.getPropertyValue("--intro-exit-duration"), 760)  +
+      parseCssMs(introStyle.getPropertyValue("--intro-exit-buffer"),   140);
+    window.setTimeout(hideIntro, introTimeout);
   }
 
   function scheduleDeferredGalaxyHomeLoad() {

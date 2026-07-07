@@ -34,6 +34,7 @@
   opacity: 1;
   transform: translate3d(0, 0, 0);
   filter: none;
+  will-change: auto;
 }
 
 #visual-files .motion-split {
