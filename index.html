@@ -26,7 +26,7 @@
     <!-- Font preload: must come before the stylesheet that declares @font-face to avoid FOUT -->
     <link rel="preload" href="fonts/MiSans/MiSansVF-subset-t310.woff2" as="font" type="font/woff2" crossorigin />
     <!-- Critical CSS: tokens, intro animation, hero layout, galaxy-home container (blocks render) -->
-    <link rel="stylesheet" href="portfolio-runtime.css?v=20260707-intro-matte-close-t322" />
+    <link rel="stylesheet" href="portfolio-runtime.css?v=20260707-mobile-gate-t323" />
     <link rel="stylesheet" href="portfolio-layout.css?v=20260630-performance-slim-t299" />
 
     <!-- Non-critical CSS: load async to avoid render-blocking -->
@@ -63,6 +63,14 @@
     <noscript><link rel="stylesheet" href="css/motion/motion-typography.css?v=20260702-blur0-cleanup-t315" /></noscript>
   </head>
   <body>
+    <aside class="portfolio-mobile-gate" role="dialog" aria-modal="true" aria-labelledby="portfolio-mobile-gate-title">
+      <div class="portfolio-mobile-gate__inner">
+        <p class="portfolio-mobile-gate__kicker">DESKTOP VIEWING REQUIRED</p>
+        <h1 id="portfolio-mobile-gate-title">请使用电脑浏览器打开</h1>
+        <p>本作品集包含大幅视觉、视频与鼠标交互。为了获得完整体验，建议使用桌面端浏览器查看。</p>
+        <p class="portfolio-mobile-gate__note">推荐视口宽度 1440px 以上</p>
+      </div>
+    </aside>
     <script defer src="portfolio-content.js?v=20260701-video-multires-t312"></script>
     <script defer src="portfolio-renderers.js?v=20260702-visual-system-arrows-t314"></script>
     <script defer src="portfolio-interactions.js?v=20260702-willchange-dynamic-t316"></script>
