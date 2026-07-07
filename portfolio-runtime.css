@@ -279,7 +279,9 @@ body {
   right: 0;
   height: 0;
   background: #030302;
-  animation: portfolioMatteIn 640ms cubic-bezier(0.76, 0, 0.24, 1) 1220ms forwards;
+  animation:
+    portfolioMatteIn 640ms cubic-bezier(0.76, 0, 0.24, 1) 1220ms forwards,
+    portfolioMatteClose 620ms ease 2920ms forwards;
 }
 
 .portfolio-intro__mattes span:first-child {
@@ -315,19 +317,20 @@ body {
     portfolioLineOut 620ms ease 2920ms forwards;
 }
 
-/* One continuous sweep: flash in, then sweep from edge to center (50%) arriving with the word wall fade. */
 .portfolio-intro__frame span:first-child {
   top: 0;
   animation:
     portfolioLineFlash 140ms ease 1100ms forwards,
-    portfolioLineCollapseTop 2320ms cubic-bezier(0.76, 0, 0.24, 1) 1220ms forwards;
+    portfolioLineSettleTop 640ms cubic-bezier(0.76, 0, 0.24, 1) 1220ms forwards,
+    portfolioLineCloseTop 620ms ease 2920ms forwards;
 }
 
 .portfolio-intro__frame span:last-child {
   bottom: 0;
   animation:
     portfolioLineFlash 140ms ease 1100ms forwards,
-    portfolioLineCollapseBottom 2320ms cubic-bezier(0.76, 0, 0.24, 1) 1220ms forwards;
+    portfolioLineSettleBottom 640ms cubic-bezier(0.76, 0, 0.24, 1) 1220ms forwards,
+    portfolioLineCloseBottom 620ms ease 2920ms forwards;
 }
 
 .portfolio-intro__black {
@@ -424,6 +427,15 @@ body {
   }
 }
 
+@keyframes portfolioMatteClose {
+  from {
+    height: 33.333vh;
+  }
+  to {
+    height: 50vh;
+  }
+}
+
 @keyframes portfolioMatteOut {
   to {
     opacity: 0;
@@ -449,16 +461,56 @@ body {
 }
 
 
-/* Lines sweep from screen edge (0) to center (50%), arriving at 3360ms when
-   portfolioBlackIn starts — covered naturally, no explicit fade needed. */
-@keyframes portfolioLineCollapseTop {
-  from { top: 0; }
-  to   { top: 50%; }
+@keyframes portfolioLineSettleTop {
+  from {
+    top: 0;
+    opacity: 1;
+    transform: scaleX(1);
+  }
+  to {
+    top: 33.333vh;
+    opacity: 1;
+    transform: scaleX(1);
+  }
 }
 
-@keyframes portfolioLineCollapseBottom {
-  from { bottom: 0; }
-  to   { bottom: 50%; }
+@keyframes portfolioLineSettleBottom {
+  from {
+    bottom: 0;
+    opacity: 1;
+    transform: scaleX(1);
+  }
+  to {
+    bottom: 33.333vh;
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+@keyframes portfolioLineCloseTop {
+  from {
+    top: 33.333vh;
+    opacity: 1;
+    transform: scaleX(1);
+  }
+  to {
+    top: 50%;
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+@keyframes portfolioLineCloseBottom {
+  from {
+    bottom: 33.333vh;
+    opacity: 1;
+    transform: scaleX(1);
+  }
+  to {
+    bottom: 50%;
+    opacity: 1;
+    transform: scaleX(1);
+  }
 }
 
 @keyframes portfolioBlackIn {
