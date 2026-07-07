@@ -315,20 +315,19 @@ body {
     portfolioLineOut 620ms ease 2920ms forwards;
 }
 
-/* One continuous sweep: flash in, then sweep from edge to center (50%) arriving at 3360ms
-   when portfolioBlackIn starts — black at z-index 4 covers the lines naturally, no explicit fade */
+/* One continuous sweep: flash in, then sweep from edge to center (50%) arriving with the word wall fade. */
 .portfolio-intro__frame span:first-child {
   top: 0;
   animation:
     portfolioLineFlash 140ms ease 1100ms forwards,
-    portfolioLineCollapseTop 2140ms cubic-bezier(0.76, 0, 0.24, 1) 1220ms forwards;
+    portfolioLineCollapseTop 2320ms cubic-bezier(0.76, 0, 0.24, 1) 1220ms forwards;
 }
 
 .portfolio-intro__frame span:last-child {
   bottom: 0;
   animation:
     portfolioLineFlash 140ms ease 1100ms forwards,
-    portfolioLineCollapseBottom 2140ms cubic-bezier(0.76, 0, 0.24, 1) 1220ms forwards;
+    portfolioLineCollapseBottom 2320ms cubic-bezier(0.76, 0, 0.24, 1) 1220ms forwards;
 }
 
 .portfolio-intro__black {
@@ -337,7 +336,7 @@ body {
   z-index: 4;
   background: #030302;
   opacity: 0;
-  animation: portfolioBlackIn 640ms ease 3360ms forwards;
+  animation: portfolioBlackIn 640ms ease 3540ms forwards;
 }
 
 .portfolio-intro__mark {
